@@ -1,5 +1,7 @@
 <?php
 
+use App\Hill;
+use App\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view( 'homepage' );
+})->middleware('auth');
+
+
+Route::resource('hills', 'HillController');
+
+Route::get('/profile', function () {
+    return view( 'profile', [
+        'user'  => Auth::user()
+    ] );
+})->middleware('auth');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/users', function() {
+    return view('users', [
+        'users'     => User::all()
+    ]);
 });
