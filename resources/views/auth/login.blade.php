@@ -8,6 +8,10 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
+                    <div class="text-center">
+
+                        <img src="{{ URL('images/logo.png') }}" alt="">
+                    </div>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -65,6 +69,7 @@
                             </div>
                         </div>
                     </form>
+                    <p>Don't have an account yet? <a href="/register">Register</a> </p>
                 </div>
             </div>
         </div>

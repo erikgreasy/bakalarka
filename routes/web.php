@@ -21,19 +21,18 @@ Route::get('/', function () {
 
 
 Route::resource('hills', 'HillController');
+Route::resource('trips', 'TripController');
+Route::resource('users', 'UserController');
 
-Route::get('/profile', function () {
-    return view( 'profile', [
+Route::get( 'my-profile', function() {
+    return view( 'users.show', [
         'user'  => Auth::user()
     ] );
-})->middleware('auth');
-
+} );
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/users', function() {
-    return view('users', [
-        'users'     => User::all()
-    ]);
-});
+
+
+Route::get('images', 'ImageController@index');

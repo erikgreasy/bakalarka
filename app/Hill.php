@@ -9,4 +9,13 @@ class Hill extends Model
     public function mountain() {
         return $this->belongsTo('App\Mountain');
     }
+
+
+    public function images() {
+        return $this->hasMany('App\Image');
+    }
+
+    public function trips() {
+        return $this->hasMany( 'App\Trip' );
+    }
 }

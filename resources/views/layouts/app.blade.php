@@ -49,7 +49,7 @@
                                 <a href="/users" class="nav-link">Users</a>
                             </li>
                             <li class="nav-item">
-                                <a href="/profile" class="nav-link">My profile</a>
+                                <a href="/my-profile" class="nav-link">My profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-danger" href="{{ route('logout') }}"

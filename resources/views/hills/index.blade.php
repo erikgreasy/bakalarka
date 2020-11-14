@@ -2,6 +2,8 @@
 
 @section('content')
     @foreach ($hills as $hill)
-        @include('hills.show')
+        @include('hills.article')
+        <a href="/hills/{{ $hill->id }}">Open</a>
+    
     @endforeach
 @endsection

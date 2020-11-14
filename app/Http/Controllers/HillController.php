@@ -26,4 +26,10 @@ class HillController extends Controller
             'hills' => Hill::all()
         ]);
     }
+
+    public function show( Hill $hill ) {
+        return view( 'hills.show', [
+            'hill'  => $hill
+        ] );
+    }
 }
