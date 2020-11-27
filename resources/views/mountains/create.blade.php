@@ -10,18 +10,21 @@
         </ul>
     </div>
 @endif
-    <form action="/users/{{ $user->id }}" method="POST">
-        @method('PUT')
+
+    <form action="/mountains" method="POST">
+
         @csrf
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" value="{{ $user->name }}" class="form-control">
-        </div>
 
         <div class="form-group">
-            <input type="submit" value="Update" class="btn btn-info">
+
+            <label for="tripTitle">Name:</label>
+            <input type="text" name="name" id="name" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit" class="btn btn-primary">
         </div>
 
+        
 
     </form>
     

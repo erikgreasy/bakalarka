@@ -1,7 +1,9 @@
 <?php
 
+use App\Log;
 use App\Hill;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +24,11 @@ Route::get('/', function () {
 
 Route::resource('hills', 'HillController');
 Route::resource('trips', 'TripController');
-Route::resource('users', 'UserController');
+Route::resource('users', 'UserController')->only([
+    'index', 'show', 'edit', 'store', 'update'
+]);
+Route::resource('mountains', 'MountainController');
+
 
 Route::get( 'my-profile', function() {
     return view( 'users.show', [
@@ -32,6 +38,9 @@ Route::get( 'my-profile', function() {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get( '/hills/{hill}/track', 'HillController@track' );
+
+Route::post( '/hills/{hill}/track', 'LogController@log' );
 
 
 

@@ -37272,7 +37272,56 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+var _require = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"),
+    data = _require.data;
+
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+
+var interval;
+$('#startTrip').on('click', function () {
+  getLocation();
+  interval = setInterval(function () {
+    getLocation();
+  }, 4000);
+});
+$('#stopTrip').on('click', function () {
+  console.log('trip ended');
+  clearInterval(interval);
+});
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
+}
+
+function showPosition(position) {
+  console.log("Lat: ".concat(position.coords.latitude, " Long:").concat(position.coords.longitude));
+  console.log({
+    lat: position.coords.latitude
+  });
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  $.ajax({
+    type: 'POST',
+    data: {
+      lat: position.coords.latitude,
+      "long": position.coords.longitude
+    },
+    // url:"{{ route('ajaxRequest.post') }}",
+    url: "/hills/1/track",
+    success: function success() {
+      console.log('success');
+    }
+  });
+} // getLocation()
+//  clearInterval(interval);
+// navigator.geolocation.getCurrentPosition(showPosition)
 
 /***/ }),
 

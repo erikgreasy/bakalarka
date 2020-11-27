@@ -10,11 +10,28 @@
         @endforeach
     </div>
 
-    <h3>Trips</h3>
-    @foreach ($hill->trips as $trip)
-        <a href="/trips/{{ $trip->id }}">
-            {{ $trip->title }}
-            
+
+    <div class="mt-5">
+        <a href="/trips/create" class="btn btn-info">
+            create trip
         </a>
-    @endforeach
+        <a href="/hills/{{ $hill->id }}/track" class="btn btn-danger">
+            Start Trip
+        </a>
+    </div>
+    <h3>Trips</h3>
+    <ul>
+
+        @foreach ($hill->trips as $trip)
+            <li>
+
+                <a href="/trips/{{ $trip->id }}">
+                    {{ $trip->title }}
+                    
+                </a>
+            </li>
+        @endforeach
+    </ul>
+
+    
 @endsection
