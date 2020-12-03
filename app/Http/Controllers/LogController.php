@@ -12,7 +12,7 @@ class LogController extends Controller
 
     public function log( Request $request ) {
         $log = new Log();
-        $log->trip_id = 9;
+        $log->trip_id = $request->trip_id;
         $log->latitude = $request->lat;
         $log->longtitude = $request->long;
 

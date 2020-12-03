@@ -11,7 +11,7 @@
     </div>
 @endif
 
-    <form action="/hills" method="POST">
+    <form action="/hills" method="POST" enctype="multipart/form-data">
 
         @csrf
 
@@ -48,6 +48,10 @@
         <div class="form-group">
             <label for="name">Long:</label>
             <input type="text" name="long" id="long" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <input id="image" type="file" name="images[]" class="" multiple>
         </div>
 
         <div class="form-group">

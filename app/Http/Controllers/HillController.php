@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Hill;
 use App\Mountain;
+use App\HillImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HillController extends Controller
 {
@@ -28,7 +30,8 @@ class HillController extends Controller
         ]);
     }
 
-    public function show( Hill $hill ) {
+    public function show( Request $request, Hill $hill ) {
+        $request->session()->put('hillId', $hill->id);
         return view( 'hills.show', [
             'hill'  => $hill
         ] );
@@ -49,6 +52,11 @@ class HillController extends Controller
      */
     public function store(Request $request)
     {
+
+        $images = $request->file( 'images' );
+
+
+
         $request->validate([
             'name'              => 'required',
             'description'       => 'required',
@@ -69,13 +77,27 @@ class HillController extends Controller
         $hill->longitude = $request->long;
 
         $hill->save();
+
+
+        foreach( $images as $index => $img ) {
+            $hill_image = new HillImage();
+            $hill_image->hill_id = $hill->id; 
+            $path = Storage::disk('public')->putFile('uploads', $img );
+            $hill_image->path = '/storage/' . $path;
+            $hill_image->save();
+
+            
+            
+        }
         
         return redirect('hills/' . $hill->id);
 
     }
 
 
-    public function track() {
-        return view( 'hills.track' );
+    public function track( $id ) {
+        return view( 'hills.track', [
+            'hill_id'   => $id,
+        ] );
     }
 }

@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Log extends Model
+class TripImage extends Model
 {
     
 
 
     public function trip() {
-        return $this->belongsto( 'App\Trip' );
+        return $this->belongsTo( 'App\Trip' );
     }
 }

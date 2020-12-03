@@ -1,7 +1,12 @@
 @extends( 'layouts.app' )
 
 
+<script>
+    
+    var hill_id = {!! $hill_id !!}
+</script>
 @section( 'content' )
+
     <h1>Are you ready?</h1>
     <a id="startTrip" href="#" class="btn btn-primary">
 
@@ -12,8 +17,7 @@
         Stop trip
     </a>
 
-    <form action="/hills/1/track" method="POST">
-        @csrf
-        <input type="submit">
-    </form>
+    
+
+    
 @endsection

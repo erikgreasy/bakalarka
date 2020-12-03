@@ -14,6 +14,16 @@
 
     </p>
 
+    @foreach ($trip->images as $img)
+        <img src="{{ asset( $img->path ) }}" alt="">
+    @endforeach
+
+    @foreach ($trip->logs as $log)
+        <p>
+            {{ $log }}
+        </p>
+    @endforeach
+
     @can('update', $trip)
         <div>
             <a href="/trips/{{ $trip->id }}/edit" method="POST" class="btn btn-primary">

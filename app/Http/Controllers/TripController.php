@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Hill;
 use App\Trip;
+use App\TripImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class TripController extends Controller
 {
@@ -40,25 +43,35 @@ class TripController extends Controller
     public function create()
     {
         return view( 'trips.create', [
-            'hills' => Hill::all()
+            'from_hill'     => Session::pull( 'hillId' ),
+            'hills'         => Hill::all()
         ] );
     }
+
+
+
+
+
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
+
+        
+        // print_r( $_POST );
+        // die();
+        $images = $request->file( 'image' );
+        // print_r( $images );
+
         $request->validate([
-            'date'              => 'required',
+            'date'              => 'required|before:1 minute',
             'hill'              => 'required',
             'title'             => 'required',
             'description'       => 'required'
         ]);
-
-        // print_r( $_POST );
-        // die();
-        
         $trip = new Trip();
         $trip->date = $request->date;
         $trip->title = $request->title;
@@ -66,11 +79,28 @@ class TripController extends Controller
         $trip->user_id = Auth::user()->id;
         $trip->hill_id = $request->hill;
 
+        if( isset( $images ) ) {
+
+            foreach( $images as $index => $img ) {
+                $trip_image = new TripImage();
+                $trip_image->trip_id = $trip->id; 
+                $path = Storage::disk('public')->putFile('uploads', $img );
+                $trip_image->path = '/storage/' . $path;
+                $trip_image->save();
+    
+                
+                
+            }
+        }
         $trip->save();
-        // print_r( $trip );
-        // die();
+        
+        
+        
 
 
+        if( request()->ajax() ) {
+            return [ 'trip_id'  => $trip->id ];
+        }
         return redirect('trips/' . $trip->id);
 
     }
@@ -136,5 +166,29 @@ class TripController extends Controller
         $this->authorize( 'update', $trip );
         $trip->delete();
         return redirect('/trips');
+    }
+
+
+
+
+
+
+
+    
+    /**
+     * DEVELOPMENT ONLY: please delete me later
+     * 
+     * New route in web.php that calls this function on POST request, handles buttton click on track view
+     * that makes an ajax request and just stores some shit to db
+     */
+    public function handle_tracking_trip() {
+        $trip = new Trip();
+        $trip->date = '2020-11-15';
+        $trip->title = 'abc';
+        $trip->description = 'def';
+        $trip->user_id = 1;
+        $trip->hill_id = 1;
+        $trip->save();
+
     }
 }

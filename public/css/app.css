@@ -10907,3 +10907,15 @@ img {
   max-width: 200px;
 }
 
+#stopTrip {
+  display: none;
+}
+
+.user-avatar {
+  width: 100px;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+

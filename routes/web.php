@@ -34,14 +34,16 @@ Route::get( 'my-profile', function() {
     return view( 'users.show', [
         'user'  => Auth::user()
     ] );
-} );
+} )->middleware( 'auth' );
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get( '/hills/{hill}/track', 'HillController@track' );
 
 Route::post( '/hills/{hill}/track', 'LogController@log' );
+Route::post( '/trips/tracking', 'TripController@handle_tracking_trip' );
 
+Route::resource('userhillwishlist', 'UserHillWishlistController');
 
 
 Route::get('images', 'ImageController@index');

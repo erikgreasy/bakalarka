@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -60,9 +61,29 @@ class UserController extends Controller
     {
         $this->authorize( 'update', $user );
 
+
+        // print_r( $_POST );
+        
+
         $request->validate([
             'name'  => 'required'
         ]);
+
+        if( isset( $request->avatar ) ) {
+
+            // User had profile picture before, delete that picture
+            if( $user->avatar_path != '/storage/avatars/default.png' ) {
+                $exploded_path = explode( '/', $user->avatar_path );
+                $file = $exploded_path[ count( $exploded_path ) -1 ];
+                Storage::delete( '/public/avatars/' . $file );
+            }
+            $avatar = $request->file( 'avatar' );
+            $path = Storage::disk('public')->putFile('avatars', $avatar );
+
+            $user->avatar_path = '/storage/' . $path;
+            
+        }
+
         $user->name = $request->name;
         $user->save();
 
@@ -77,4 +98,7 @@ class UserController extends Controller
     {
         //
     }
+
+
+    
 }

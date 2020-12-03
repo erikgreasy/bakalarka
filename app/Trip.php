@@ -15,11 +15,20 @@ class Trip extends Model
     ];
 
 
+
+    public function images() {
+        return $this->hasMany( 'App\TripImage' );
+    }
+
     public function hill() {
         return $this->belongsTo( 'App\Hill' );
     }
 
     public function user() {
         return $this->belongsTo('App\User');
+    }
+
+    public function logs() {
+        return $this->hasMany( 'App\Log' );
     }
 }

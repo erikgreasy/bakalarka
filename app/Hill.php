@@ -12,7 +12,7 @@ class Hill extends Model
 
 
     public function images() {
-        return $this->hasMany('App\Image');
+        return $this->hasMany('App\HillImage');
     }
 
     public function trips() {

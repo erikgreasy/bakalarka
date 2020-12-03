@@ -41,4 +41,10 @@ class User extends Authenticatable
     public function trips() {
         return $this->hasMany( 'App\Trip' );
     }
+
+    public function wishlists() {
+        return $this->hasMany( 'App\UserHillWishlist' );
+    }
+
+
 }
