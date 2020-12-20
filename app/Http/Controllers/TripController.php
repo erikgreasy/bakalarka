@@ -60,14 +60,16 @@ class TripController extends Controller
     public function store(Request $request)
     {
 
-        
+        // if( request()->ajax() ) {
+        //     $request->date = date( 'Y-m-d h:i:s' );
+        // }
         // print_r( $_POST );
         // die();
         $images = $request->file( 'image' );
         // print_r( $images );
 
         $request->validate([
-            'date'              => 'required|before:1 minute',
+            // 'date'              => 'required|before_or_equal: today',
             'hill'              => 'required',
             'title'             => 'required',
             'description'       => 'required'
