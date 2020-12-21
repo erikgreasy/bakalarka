@@ -7,30 +7,43 @@ var moment = require('moment');
 
 
 
+/**
+ * REGISTER SERVICE WORKER
+ */
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/serviceWorker.js').then(function(registration) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(err) {
+            // registration failed :(
+            console.error('ServiceWorker registration failed: ', err);
+        });
+    });
+}
 
 
 
+// const webcamElement = document.getElementById('webcam');
+// const canvasElement = document.getElementById('canvas');
+// const snapSoundElement = document.getElementById('snapSound');
+// const webcam = new Webcam(webcamElement, 'user', canvasElement, snapSoundElement);
 
-const webcamElement = document.getElementById('webcam');
-const canvasElement = document.getElementById('canvas');
-const snapSoundElement = document.getElementById('snapSound');
-const webcam = new Webcam(webcamElement, 'user', canvasElement, snapSoundElement);
 
+// webcam.start()
+//   .then(result =>{
+//     console.log("webcam started");
+//   })
+//   .catch(err => {
+//     console.log(err);
+// });
 
-webcam.start()
-  .then(result =>{
-    console.log("webcam started");
-  })
-  .catch(err => {
-    console.log(err);
-});
+// $( '#takePhoto' ).click( function() {
 
-$( '#takePhoto' ).click( function() {
-
-    let picture = webcam.snap();
-    console.log( picture )
-    document.querySelector('#download-photo').href = picture;
-} )
+//     let picture = webcam.snap();
+//     console.log( picture )
+//     document.querySelector('#download-photo').href = picture;
+// } )
 
 
 
@@ -268,4 +281,7 @@ function showPosition(position) {
         }
      });
 }
+
+
+
 

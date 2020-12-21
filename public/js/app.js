@@ -59053,21 +59053,38 @@ var id, target, options;
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/**
+ * REGISTER SERVICE WORKER
+ */
 
-var webcamElement = document.getElementById('webcam');
-var canvasElement = document.getElementById('canvas');
-var snapSoundElement = document.getElementById('snapSound');
-var webcam = new webcam_easy__WEBPACK_IMPORTED_MODULE_0__["default"](webcamElement, 'user', canvasElement, snapSoundElement);
-webcam.start().then(function (result) {
-  console.log("webcam started");
-})["catch"](function (err) {
-  console.log(err);
-});
-$('#takePhoto').click(function () {
-  var picture = webcam.snap();
-  console.log(picture);
-  document.querySelector('#download-photo').href = picture;
-}); // document.querySelector('#get-access').addEventListener('click', async function init(e) {
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/serviceWorker.js').then(function (registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function (err) {
+      // registration failed :(
+      console.error('ServiceWorker registration failed: ', err);
+    });
+  });
+} // const webcamElement = document.getElementById('webcam');
+// const canvasElement = document.getElementById('canvas');
+// const snapSoundElement = document.getElementById('snapSound');
+// const webcam = new Webcam(webcamElement, 'user', canvasElement, snapSoundElement);
+// webcam.start()
+//   .then(result =>{
+//     console.log("webcam started");
+//   })
+//   .catch(err => {
+//     console.log(err);
+// });
+// $( '#takePhoto' ).click( function() {
+//     let picture = webcam.snap();
+//     console.log( picture )
+//     document.querySelector('#download-photo').href = picture;
+// } )
+// document.querySelector('#get-access').addEventListener('click', async function init(e) {
 //     try {
 //       const stream = await navigator.mediaDevices.getUserMedia({
 //         audio: false,
@@ -59109,6 +59126,7 @@ $('#takePhoto').click(function () {
 // //     })
 // //     // console.log( navigator.mediaDevices.getSupportedConstraints() )
 // // } )
+
 
 function startTrip() {
   $.ajaxSetup({
