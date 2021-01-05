@@ -77,6 +77,13 @@ self.addEventListener('fetch', function(event) {
             .catch( err => {
                 // fallback to cache
                 return caches.match( event.request )
+                .then( (res) => {
+                    if( res == undefined ) {
+                        return new Response('undefined response - OFFLINE');
+                    }
+                    return res;
+                } )
+                
             } )
     )
 
