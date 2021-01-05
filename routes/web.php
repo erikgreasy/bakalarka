@@ -18,8 +18,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view( 'homepage' );
-})->middleware('auth');
+    // user logged in
+    if( Auth::check() ) {
+        return view( 'homepage' );
+    }
+
+    return view( 'welcome' );
+})->name( 'welcome' );
+
+Auth::routes();
 
 
 Route::resource('hills', 'HillController');
