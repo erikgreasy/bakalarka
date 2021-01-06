@@ -10915,12 +10915,69 @@ img {
   display: none;
 }
 
-.user-avatar {
-  width: 100px;
-  height: 100px;
-  -o-object-fit: cover;
-     object-fit: cover;
+body:after {
+  transition: opacity 0.4s;
+  content: "";
+  position: absolute;
+  background: #000;
+  opacity: 0;
+  top: 0;
+  z-index: 5;
+  left: 0;
+  width: 100%;
+}
+
+body.floating-options-opened {
+  overflow: hidden;
+}
+
+body.floating-options-opened:after {
+  height: 200vh;
+  opacity: 0.7;
+}
+
+.floating-btn {
+  background: blue;
+  position: fixed;
+  bottom: 100px;
+  right: 5vh;
+  height: 80px;
+  width: 80px;
   border-radius: 50%;
+  z-index: 200;
+  box-shadow: 13px 13px 33px -15px rgba(0, 0, 0, 0.75);
+  transition: transform 0.4s;
+}
+
+.logout-link {
+  color: #9A0909;
+}
+
+.floating-btn-options {
+  position: fixed;
+  background: #fff;
+  bottom: -5px;
+  transform: translateY(100%);
+  padding-bottom: 5px;
+  width: 100%;
+  display: block;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  border-radius: 6px;
+  z-index: -200;
+  transition: transform 0.4s;
+}
+
+.floating-btn-options.active {
+  transform: translateY(0);
+  z-index: 200;
+}
+
+.floating-btn-options li a {
+  display: inline-block;
+  padding: 20px 0;
+  width: 100%;
 }
 
 .btn {
@@ -11116,5 +11173,60 @@ input.form-control {
 .mobile-navigation-bar ul a {
   color: #000;
   font-size: 20px;
+}
+
+.user-profile {
+  padding-bottom: 150px;
+}
+
+.user-profile .top-section {
+  background: darkcyan;
+  height: 52vh;
+  text-align: center;
+  border-radius: 6px;
+  position: relative;
+  top: -2vh;
+  box-shadow: 0px 6px 20px -9px rgba(0, 0, 0, 0.75);
+}
+
+.user-profile .top-section .user-details {
+  position: relative;
+  top: 7vh;
+}
+
+.user-profile .top-section .user-details .user-avatar {
+  width: 150px;
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+
+.user-profile .top-section .user-details .username {
+  margin-top: 20px;
+  color: #fff;
+}
+
+.user-profile .statistics-tabs {
+  background: #fff;
+  position: relative;
+  z-index: 2;
+  transform: translateY(-90%);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
+  margin: 0 auto;
+  border-radius: 6px;
+  box-shadow: 5px 10px 33px -15px rgba(0, 0, 0, 0.75);
+}
+
+.user-profile .statistics-tabs .tab {
+  text-align: center;
+  width: 100%;
+}
+
+.user-profile .statistics-tabs .tab p {
+  margin-bottom: 0;
 }
 

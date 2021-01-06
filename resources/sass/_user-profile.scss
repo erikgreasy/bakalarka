@@ -1,0 +1,52 @@
+.user-profile {
+    padding-bottom: 150px;
+
+    .top-section {
+        background: darkcyan;
+        height: 52vh;
+        text-align: center;
+        border-radius: 6px;
+        position: relative;
+        top: -2vh;
+        -webkit-box-shadow: 0px 6px 20px -9px rgba(0,0,0,0.75);
+        -moz-box-shadow: 0px 6px 20px -9px rgba(0,0,0,0.75);
+        box-shadow: 0px 6px 20px -9px rgba(0,0,0,0.75);
+        .user-details {
+            position: relative;
+            top: 7vh;
+            .user-avatar {
+                width: 150px;
+                height: 150px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+            .username {
+                margin-top: 20px;
+                color: #fff;
+            }
+        }
+    }
+
+    .statistics-tabs {
+        background: #fff;
+        position: relative;
+        z-index: 2;
+        transform: translateY(-90%);
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        width: 85%;
+        margin: 0 auto;
+        border-radius: 6px;
+        -webkit-box-shadow: 5px 10px 33px -15px rgba(0,0,0,0.75);
+        -moz-box-shadow: 5px 10px 33px -15px rgba(0,0,0,0.75);
+        box-shadow: 5px 10px 33px -15px rgba(0,0,0,0.75);
+        .tab {
+            text-align: center;
+            width: 100%;
+            p {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

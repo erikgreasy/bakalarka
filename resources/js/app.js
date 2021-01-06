@@ -10,19 +10,38 @@ var moment = require('moment');
 /**
  * REGISTER SERVICE WORKER
  */
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/serviceWorker.js').then(function(registration) {
-            // Registration was successful
-            console.log('ServiceWorker registration successful with scope: ', registration.scope);
-        }, function(err) {
-            // registration failed :(
-            console.error('ServiceWorker registration failed: ', err);
-        });
-    });
-}
+// if ('serviceWorker' in navigator) {
+//     window.addEventListener('load', function() {
+//         navigator.serviceWorker.register('/serviceWorker.js').then(function(registration) {
+//             // Registration was successful
+//             console.log('ServiceWorker registration successful with scope: ', registration.scope);
+//         }, function(err) {
+//             // registration failed :(
+//             console.error('ServiceWorker registration failed: ', err);
+//         });
+//     });
+// }
 
 
+$( '.floating-btn' ).on( 'click', function() {
+    console.log( 'hop' )
+    console.log( $( '.floating-btn-option' ) )
+    const optionsHeight = $( '.floating-btn-options' ).height() - 62
+    console.log( optionsHeight + 'px' )
+    $( 'body' ).toggleClass( 'floating-options-opened' )
+    $( '.floating-btn-options' ).toggleClass( 'active' )
+    
+    if( $('body').hasClass('floating-options-opened') ) {
+
+        $( this ).css({
+            transform: `translateY(-${optionsHeight}px)`
+        })
+    } else {
+        $( this ).css({
+            transform: `translateY(0)`
+        })
+    }
+} )
 
 // const webcamElement = document.getElementById('webcam');
 // const canvasElement = document.getElementById('canvas');

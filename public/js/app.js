@@ -59056,19 +59056,37 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 /**
  * REGISTER SERVICE WORKER
  */
+// if ('serviceWorker' in navigator) {
+//     window.addEventListener('load', function() {
+//         navigator.serviceWorker.register('/serviceWorker.js').then(function(registration) {
+//             // Registration was successful
+//             console.log('ServiceWorker registration successful with scope: ', registration.scope);
+//         }, function(err) {
+//             // registration failed :(
+//             console.error('ServiceWorker registration failed: ', err);
+//         });
+//     });
+// }
 
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('/serviceWorker.js').then(function (registration) {
-      // Registration was successful
-      console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    }, function (err) {
-      // registration failed :(
-      console.error('ServiceWorker registration failed: ', err);
+$('.floating-btn').on('click', function () {
+  console.log('hop');
+  console.log($('.floating-btn-option'));
+  var optionsHeight = $('.floating-btn-options').height() - 62;
+  console.log(optionsHeight + 'px');
+  $('body').toggleClass('floating-options-opened');
+  $('.floating-btn-options').toggleClass('active');
+
+  if ($('body').hasClass('floating-options-opened')) {
+    $(this).css({
+      transform: "translateY(-".concat(optionsHeight, "px)")
     });
-  });
-} // const webcamElement = document.getElementById('webcam');
+  } else {
+    $(this).css({
+      transform: "translateY(0)"
+    });
+  }
+}); // const webcamElement = document.getElementById('webcam');
 // const canvasElement = document.getElementById('canvas');
 // const snapSoundElement = document.getElementById('snapSound');
 // const webcam = new Webcam(webcamElement, 'user', canvasElement, snapSoundElement);
@@ -59126,7 +59144,6 @@ if ('serviceWorker' in navigator) {
 // //     })
 // //     // console.log( navigator.mediaDevices.getSupportedConstraints() )
 // // } )
-
 
 function startTrip() {
   $.ajaxSetup({

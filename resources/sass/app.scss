@@ -19,11 +19,75 @@ img {
     display: none;
 }
 
-.user-avatar {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
+main {
+}
+
+body {
+    &:after {
+        transition: opacity .4s;
+        content: "";
+        position: absolute;
+        background: #000;
+        opacity: 0;
+        top: 0;
+        z-index: 5;
+
+        left: 0;
+        width: 100%;
+    }
+}
+body.floating-options-opened {
+    overflow: hidden;
+    &:after {
+        height: 200vh;
+        opacity: .7;
+    }
+}
+
+.floating-btn {
+    background: blue;
+    position: fixed;
+    bottom: 100px;
+    right: 5vh;
+    height: 80px;
+    width: 80px;
     border-radius: 50%;
+    z-index: 200;
+    -webkit-box-shadow: 13px 13px 33px -15px rgba(0,0,0,0.75);
+    -moz-box-shadow: 13px 13px 33px -15px rgba(0,0,0,0.75);
+    box-shadow: 13px 13px 33px -15px rgba(0,0,0,0.75);
+    transition: transform .4s;
+    
+}
+.logout-link {
+    color: #9A0909;
+}
+
+.floating-btn-options {
+    position: fixed;
+    background: #fff;
+    bottom: -5px;
+    transform: translateY(100%);
+    padding-bottom: 5px;
+    width: 100%;
+    display: block;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    border-radius: 6px;
+    z-index: -200;
+    transition: transform .4s;
+    &.active {
+        transform: translateY(0);
+        z-index: 200;
+    }
+    li {
+        a {
+            display: inline-block;
+            padding: 20px 0;
+            width: 100%;
+        }
+    }
 }
 
 .btn {
@@ -181,3 +245,4 @@ input[type=password] {
 }
 
 @import 'navigation-bar';
+@import 'user-profile';
