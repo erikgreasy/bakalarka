@@ -1,20 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('partials/explore-links')
 
+    <div class="container">
 
-    
-    <ul>
-
-        @forelse ($trips as $trip)
-            <li>
+        <div class="explore-heading">
+            <h3>Najnovšie dobrodružstvá</h3>
+            <a href="#">Filter</a>
+        </div>
+        @foreach ($trips as $trip)
+            {{-- @include('hills.article')
+            <a href="/hills/{{ $hill->id }}">Open</a> --}}
+            <article>
                 <a href="/trips/{{ $trip->id }}">
                     {{ $trip->title }}
                 </a>
-            </li>
-        @empty
-            <p>No trips yet</p>
-        @endforelse
-    </ul>
     
+            </article>
+        
+        @endforeach
+    </div>
 @endsection

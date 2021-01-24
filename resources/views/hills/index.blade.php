@@ -1,23 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
-    <div>
-        <a href="/hills">Kopce</a>
-        <a href="/trips">Dobrodružstvá</a>
-    </div>
-    <div>
-        <h3>Najpopulárnejšie kopce</h3>
-        <a href="#">Filter</a>
-    </div>
-    @foreach ($hills as $hill)
-        {{-- @include('hills.article')
-        <a href="/hills/{{ $hill->id }}">Open</a> --}}
-        <article>
-            <a href="/hills/{{ $hill->id }}">
-                {{ $hill->name }}
-            </a>
+    @include('partials/explore-links')
+    <div class="container">
+        <div class="explore-heading">
+            <h3>Najpopulárnejšie kopce</h3>
+            <a href="#" class="filter"><i class="fas fa-filter fa-2x"></i></a>
+        </div>
 
-        </article>
+        @foreach ($hills as $hill)
+            {{-- @include('hills.article')
+            <a href="/hills/{{ $hill->id }}">Open</a> --}}
+            <a href="/hills/{{ $hill->id }}">
+                <article class="hill">
+                    <div class="image"></div>
+                    <div>
+
+                        <h4>
     
-    @endforeach
+                            {{ $hill->name }}
+                        </h4>
+                        <p>
+                            {{ $hill->height }} m.n.m.
+                        </p>
+                        <p class="description">
+                            {{ $hill->description }}
+                        </p>
+                    </div>
+                    
+                </article>
+            </a>
+        
+        @endforeach
+    </div>
 @endsection
