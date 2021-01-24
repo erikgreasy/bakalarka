@@ -1,0 +1,24 @@
+.homepage {
+    padding: 50px 0;
+    overflow: hidden;
+    .homepage-title {
+        font-size: 28px;
+    }
+    .welcome-line {
+        color: $grey;
+        font-size: 16px;
+    }
+    section {
+        padding: 40px 0;
+        .homepage-section-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            h2 {
+                font-size: 22px;
+                max-width: 50%;
+            }
+        }
+    }
+}

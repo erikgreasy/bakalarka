@@ -2,6 +2,7 @@
 
 use App\Log;
 use App\Hill;
+use App\Trip;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     // user logged in
     if( Auth::check() ) {
-        return view( 'homepage' );
+        return view( 'homepage', [
+            'trips' => Trip::all(),
+            'users' => User::all(),
+            'hills' => Hill::all(),
+        ] );
     }
 
     return view( 'welcome' );

@@ -9,13 +9,14 @@
 
 // Partials
 @import 'explore';
+@import 'homepage';
+@import 'wishlist-hill-card';
 
 * {
     font-family: 'Roboto', sans-serif;
 }
 
 img {
-    max-width: 200px;
 }
 
 #stopTrip {

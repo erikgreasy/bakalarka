@@ -10970,12 +10970,71 @@ a.text-dark:focus {
   line-height: 1.2em;
 }
 
-* {
-  font-family: "Roboto", sans-serif;
+.homepage {
+  padding: 50px 0;
+  overflow: hidden;
 }
 
-img {
-  max-width: 200px;
+.homepage .homepage-title {
+  font-size: 28px;
+}
+
+.homepage .welcome-line {
+  color: #868686;
+  font-size: 16px;
+}
+
+.homepage section {
+  padding: 40px 0;
+}
+
+.homepage section .homepage-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.homepage section .homepage-section-heading h2 {
+  font-size: 22px;
+  max-width: 50%;
+}
+
+.wishlist-hill-card {
+  background: #fff;
+  box-shadow: 5px 10px 33px -15px rgba(0, 0, 0, 0.75);
+  border-radius: 6px;
+  width: 200px;
+}
+
+.wishlist-hill-card img {
+  border-radius: 6px;
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+}
+
+.wishlist-hill-card .info {
+  padding: 10px;
+}
+
+.wishlist-hill-card .info h4 {
+  margin-bottom: 0;
+}
+
+.wishlist-hill-card .info .wishlist-mountain {
+  color: #868686;
+  margin-bottom: 10px;
+}
+
+.wishlist-cards {
+  display: flex;
+  gap: 20px;
+}
+
+* {
+  font-family: "Roboto", sans-serif;
 }
 
 #stopTrip {

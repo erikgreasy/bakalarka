@@ -11,25 +11,7 @@
         @foreach ($hills as $hill)
             {{-- @include('hills.article')
             <a href="/hills/{{ $hill->id }}">Open</a> --}}
-            <a href="/hills/{{ $hill->id }}">
-                <article class="hill">
-                    <div class="image"></div>
-                    <div>
-
-                        <h4>
-    
-                            {{ $hill->name }}
-                        </h4>
-                        <p>
-                            {{ $hill->height }} m.n.m.
-                        </p>
-                        <p class="description">
-                            {{ $hill->description }}
-                        </p>
-                    </div>
-                    
-                </article>
-            </a>
+            @include( 'partials/hill-card' )
         
         @endforeach
     </div>
