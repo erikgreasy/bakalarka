@@ -14,7 +14,7 @@ class AddDateToTripsTable extends Migration
     public function up()
     {
         Schema::table('trips', function (Blueprint $table) {
-            $table->timestamp('date', 0);
+            $table->timestamp('date')->useCurrent();
         });
     }
 
