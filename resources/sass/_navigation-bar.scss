@@ -1,8 +1,9 @@
 .mobile-navigation-bar {
     background: #fff;
     position: fixed;
-    bottom: 0;
+    bottom: -1px;
     width: 100%;
+    z-index: 5;
     ul {
         display: flex;
         justify-content: space-evenly;

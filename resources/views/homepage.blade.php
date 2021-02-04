@@ -9,45 +9,40 @@
                 <h1 class="homepage-title">Ahoj {{ auth()->user()->name }}</h1>
                 <p class="welcome-line">Kam sa dnes vydáš na dobrodružstvo?</p>
             </div>
+            @include('partials.my-hills')
             <section>
-                <div class="homepage-section-heading">
-                    <h2>Moje kopce</h2>
-                    <a href="#">Zobraziť všetky</a>
-
-                </div>
-                <div class="wishlist-cards">
-                    @foreach ($hills as $hill)
-                        @include('partials/wishlist-hill-card')
-                    @endforeach
-                </div>
-            </section>
-            <section>
-                <div class="homepage-section-heading">
+                <div class="section-heading">
 
                     <h2>Najnovšie dobrodružstvá</h2>
-                    <a href="#">Zobraziť všetky</a>
+                    <a href="/trips">Zobraziť všetky</a>
                 </div>
                 <div>
                     @foreach ($trips as $trip)
-                        <a href="/trips/{{ $trip->id }}">
-                            <article>
-                                <h4>{{ $trip->title }}</h4>
-                            </article>
-                        </a>
+                        @include('partials.trip-card')
                     @endforeach
                 </div>
             </section>
-            <section>
-                <div class="homepage-section-heading">
+            <section class="users-ranklist">
+                <div class="section-heading">
 
                     <h2>Rebríček dobrodruhov</h2>
-                    <a href="#">Zobraziť všetky</a>
+                    <a href="/users">Zobraziť všetky</a>
                 </div>
-                @foreach ($users as $user)
-                    <h4>
-                        {{ $user->name }}
-                    </h4>
-                @endforeach
+                <div class="users">
+
+                    @foreach ($users as $user)
+                        <a href="">
+
+                            <div class="user">
+                                <img src="{{ $user->avatar_path }}" alt="">
+                                <h4>
+                                    {{ $user->name }}
+                                </h4>
+                                <p>Lorem ipsum dolor sit.</p>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
             </section>
         </div>
     </div>

@@ -2,15 +2,25 @@
 
 @section('content')
 
+    <div class="container">
+        <div class="users-page">
+            <div class="explore-heading">
+                <h3>Najviac nachodených kilometrov</h3>
+                <a href="#">Filter</a>
+            </div>
+            <h3></h3>
+        </div>
+        <div class="users-ranklist">
+            @foreach ($users as $user)
+                @include( 'partials.user-card' )
+            @endforeach
 
-    <ul>
-        @foreach ($users as $user)
-            <li>
-                <a href="/users/{{ $user->id }}">
-                    {{ $user->name }}
-                </a>
-            </li>
-        @endforeach
-    </ul>
+        </div>
+        {{-- <ul>
+                <li>
+                    
+                </li>
+        </ul> --}}
+    </div>
     
 @endsection

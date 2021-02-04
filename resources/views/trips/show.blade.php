@@ -1,43 +1,46 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>{{ $trip->title }} / <small>{{ date( 'd.m.Y', strtotime( $trip->date ) ) }}</small></h2>
-        <a href="/hills/{{ $trip->hill->id }}">
-            {{ $trip->hill->name }}
-        </a>
-        /
-        <a href="/users/{{ $trip->user->id }}">
-            {{ $trip->user->name }}
-        </a>
-    <p>
-        {!! nl2br( $trip->description ) !!}
+    <div class="trip-detail">
 
-    </p>
-
-    @foreach ($trip->images as $img)
-        <img src="{{ asset( $img->path ) }}" alt="">
-    @endforeach
-
-    @foreach ($trip->logs as $log)
-        <p>
-            {{ $log }}
-        </p>
-    @endforeach
-
-    @can('update', $trip)
+        <div class="trip-thumbnail">
+            <img src="{{ asset($trip->thumbnail_path) }}" alt="">
+            
+        </div>
         <div>
-            <a href="/trips/{{ $trip->id }}/edit" method="POST" class="btn btn-primary">
-                Edit
+            <div class="container">
+    
+                <h2>{{ $trip->title }}</h2>
+                <p class="trip-user">{{ $trip->user->name }}</p>
+                <div class="trip-stats">
+                    {{ $trip->hill->name }}
+                    {{ $trip->date }}
+                </div>
+                <p class="trip-desc">
+
+                    {!!  nl2br( $trip->description ) !!}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div>
+        @foreach( $trip->images as $image )
+            <img src="{{ $image->path }}" alt="">
+            
+        @endforeach
+    </div>
+
+    <div class="floating-btn">
+        <i class="fas fa-th"></i>
+    </div>
+    <ul class="floating-btn-options">
+        <li>
+            <a href="">
+                Upraviť trip
             </a>
-              
-        </div>
-        <div>
-            <form action="/trips/{{ $trip->id }}" method="POST">
-                @method('DELETE')
-                @csrf
-                <button class="btn btn-danger" onclick="return confirm('are you sure?')">Delete trip</button>
-            </form>
-        </div>
-    @endcan
+        </li>
+        
+    </ul>
+    
 
 @endsection

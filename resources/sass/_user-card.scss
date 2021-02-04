@@ -1,0 +1,29 @@
+.user-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-radius: 6px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    background: #fff;
+    
+    -webkit-box-shadow: 13px 13px 33px -15px rgba(0,0,0,0.75);
+    -moz-box-shadow: 13px 13px 33px -15px rgba(0,0,0,0.75);
+    box-shadow: 13px 13px 33px -15px rgba(0,0,0,0.75);
+    .ranking {
+        font-size: 30px;
+        font-weight: 600;
+    }
+    .avatar-wrapper {
+        width: 80px;
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+        }
+    }
+    p {
+        margin-bottom: 0;
+    }
+}

@@ -22,7 +22,7 @@ Route::get('/', function () {
     // user logged in
     if( Auth::check() ) {
         return view( 'homepage', [
-            'trips' => Trip::all(),
+            'trips' => Trip::latest()->take(3)->get(),
             'users' => User::all(),
             'hills' => Hill::all(),
         ] );
@@ -44,13 +44,15 @@ Route::resource('mountains', 'MountainController');
 
 Route::get( 'my-profile', function() {
     return view( 'users.show', [
-        'user'  => Auth::user()
+        'user'  => Auth::user(),
+        'hills' => Hill::all()
     ] );
 } )->middleware( 'auth' );
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get( '/hills/{hill}/track', 'HillController@track' );
+
 
 Route::post( '/hills/{hill}/track', 'LogController@log' );
 Route::post( '/trips/tracking', 'TripController@handle_tracking_trip' );

@@ -98,6 +98,13 @@ class HillController extends Controller
     public function track( $id ) {
         return view( 'hills.track', [
             'hill_id'   => $id,
+            'hill'      => Hill::find($id)
+        ] );
+    }
+
+    public function info( Hill $hill ) {
+        return view( 'hills.info', [
+            'hill'  => $hill
         ] );
     }
 }

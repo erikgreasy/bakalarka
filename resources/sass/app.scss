@@ -11,6 +11,20 @@
 @import 'explore';
 @import 'homepage';
 @import 'wishlist-hill-card';
+@import 'card';
+@import 'statistics-tab';
+@import 'hill';
+@import 'trip';
+@import 'floating-btn';
+@import 'user-card';
+@import 'track';
+
+
+
+
+
+
+
 
 * {
     font-family: 'Roboto', sans-serif;
@@ -48,26 +62,12 @@ body {
 body.floating-options-opened {
     overflow: hidden;
     &:after {
-        height: 200vh;
+        height: 10000vh;
         opacity: .7;
     }
 }
 
-.floating-btn {
-    background: blue;
-    position: fixed;
-    bottom: 100px;
-    right: 5vh;
-    height: 80px;
-    width: 80px;
-    border-radius: 50%;
-    z-index: 200;
-    -webkit-box-shadow: 13px 13px 33px -15px rgba(0,0,0,0.75);
-    -moz-box-shadow: 13px 13px 33px -15px rgba(0,0,0,0.75);
-    box-shadow: 13px 13px 33px -15px rgba(0,0,0,0.75);
-    transition: transform .4s;
-    
-}
+
 .logout-link {
     color: #9A0909;
 }

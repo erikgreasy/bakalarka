@@ -10938,38 +10938,6 @@ a.text-dark:focus {
   font-size: 12px;
 }
 
-.hill {
-  background: #fff;
-  box-shadow: 5px 10px 33px -15px rgba(0, 0, 0, 0.75);
-  margin-bottom: 20px;
-  border-radius: 6px;
-  padding: 10px;
-  display: grid;
-  grid-template-columns: 90px auto;
-  gap: 10px;
-}
-
-.hill .image {
-  width: 90px;
-  height: 90px;
-  background: #868686;
-  border-radius: 6px;
-}
-
-.hill h4 {
-  font-size: 17px;
-  margin-bottom: 0;
-}
-
-.hill p {
-  margin-bottom: 0;
-}
-
-.hill .description {
-  color: #868686;
-  line-height: 1.2em;
-}
-
 .homepage {
   padding: 50px 0;
   overflow: hidden;
@@ -10984,18 +10952,39 @@ a.text-dark:focus {
   font-size: 16px;
 }
 
-.homepage section {
+.users-ranklist .users {
+  display: flex;
+  gap: 20px;
+}
+
+.users-ranklist .users .user {
+  width: 120px;
+  text-align: center;
+}
+
+.users-ranklist .users .user img {
+  max-width: 80%;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.users-ranklist .users .user p {
+  font-size: 16px;
+  color: #868686;
+}
+
+section {
   padding: 40px 0;
 }
 
-.homepage section .homepage-section-heading {
+.section-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
-.homepage section .homepage-section-heading h2 {
+.section-heading h2 {
   font-size: 22px;
   max-width: 50%;
 }
@@ -11033,6 +11022,285 @@ a.text-dark:focus {
   gap: 20px;
 }
 
+.slick-list {
+  overflow: visible !important;
+}
+
+.card {
+  background: #fff;
+  box-shadow: 5px 10px 33px -15px rgba(0, 0, 0, 0.75);
+  margin-bottom: 20px;
+  border-radius: 6px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 95px auto;
+  gap: 10px;
+}
+
+.card .image {
+  width: 95px;
+  height: 95px;
+}
+
+.card .image img {
+  border-radius: 6px;
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.card h4 {
+  font-size: 17px;
+  margin-bottom: 0;
+}
+
+.card p {
+  margin-bottom: 0;
+}
+
+.card .description {
+  color: #868686;
+  line-height: 1.2em;
+}
+
+.statistics-tabs {
+  background: #fff;
+  position: absolute;
+  z-index: 2;
+  transform: translateY(-90%);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  border-radius: 6px;
+  box-shadow: 5px 10px 33px -15px rgba(0, 0, 0, 0.75);
+}
+
+.statistics-tabs .tab {
+  text-align: center;
+  width: 100%;
+}
+
+.statistics-tabs .tab p {
+  margin-bottom: 0;
+}
+
+.hill-show .top-section {
+  background-size: cover;
+  background-position: center;
+  height: 52vh;
+  text-align: center;
+  border-radius: 6px;
+  position: relative;
+  top: -2vh;
+  box-shadow: 0px 6px 20px -9px rgba(0, 0, 0, 0.75);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hill-show .top-section:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: #000;
+  border-radius: 6px;
+  opacity: 0.6;
+}
+
+.hill-show .top-section .content {
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hill-show .top-section .add-to-wishlist {
+  position: absolute;
+  right: 50px;
+}
+
+.hill-show .top-section .add-to-wishlist i {
+  font-size: 20px;
+}
+
+.hill-show .hill-tabs {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 18px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 20px 0;
+}
+
+.hill-show .hill-tabs a {
+  color: #868686;
+  text-decoration: none;
+}
+
+.hill-show .content-sections section {
+  padding: 0;
+}
+
+.hill-show #info {
+  display: none;
+}
+
+.trip-detail .trip-thumbnail {
+  height: 45vh;
+  width: 100%;
+  transform: translateY(-6px);
+  margin-bottom: 20px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.trip-detail .trip-thumbnail img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.trip-detail .trip-user {
+  font-size: 16px;
+  color: #2A464F;
+}
+
+.trip-detail .trip-stats {
+  margin: 20px 0;
+}
+
+.trip-detail .trip-desc {
+  color: #868686;
+  font-size: 16px;
+}
+
+.floating-btn {
+  background: #fff;
+  position: fixed;
+  bottom: 100px;
+  right: 5vh;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  z-index: 200;
+  box-shadow: 13px 13px 33px -15px rgba(0, 0, 0, 0.75);
+  transition: transform 0.4s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-radius: 6px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  background: #fff;
+  box-shadow: 13px 13px 33px -15px rgba(0, 0, 0, 0.75);
+}
+
+.user-card .ranking {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.user-card .avatar-wrapper {
+  width: 80px;
+}
+
+.user-card .avatar-wrapper img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.user-card p {
+  margin-bottom: 0;
+}
+
+.track {
+  height: 100vh;
+  background-image: url("/images/mountain-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 999999;
+  color: #fff;
+  text-align: center;
+}
+
+.track h3 {
+  font-weight: 300;
+  font-size: 35px;
+}
+
+.track h3 span {
+  font-size: 22px;
+  padding-left: 10px;
+}
+
+.track p {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.track:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.6;
+  z-index: 2;
+}
+
+.track .destination {
+  padding-top: 30px;
+  margin-bottom: 30px;
+}
+
+.track .time h2 {
+  font-weight: 300;
+  font-size: 45px;
+}
+
+.track .container {
+  position: relative;
+  z-index: 3;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.track .btn {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.track #takePhoto {
+  margin-bottom: 30px;
+}
+
 * {
   font-family: "Roboto", sans-serif;
 }
@@ -11066,21 +11334,8 @@ body.floating-options-opened {
 }
 
 body.floating-options-opened:after {
-  height: 200vh;
+  height: 10000vh;
   opacity: 0.7;
-}
-
-.floating-btn {
-  background: blue;
-  position: fixed;
-  bottom: 100px;
-  right: 5vh;
-  height: 80px;
-  width: 80px;
-  border-radius: 50%;
-  z-index: 200;
-  box-shadow: 13px 13px 33px -15px rgba(0, 0, 0, 0.75);
-  transition: transform 0.4s;
 }
 
 .logout-link {
@@ -11291,8 +11546,9 @@ input.form-control {
 .mobile-navigation-bar {
   background: #fff;
   position: fixed;
-  bottom: 0;
+  bottom: -1px;
   width: 100%;
+  z-index: 5;
   box-shadow: 0px -4px 31px -18px rgba(0, 0, 0, 0.75);
 }
 
@@ -11311,20 +11567,37 @@ input.form-control {
 
 .user-profile {
   padding-bottom: 150px;
+  overflow: hidden;
 }
 
 .user-profile .top-section {
-  background: darkcyan;
   height: 52vh;
   text-align: center;
   border-radius: 6px;
   position: relative;
   top: -2vh;
   box-shadow: 0px 6px 20px -9px rgba(0, 0, 0, 0.75);
+  background-image: url("/images/mountain-bg.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.user-profile .top-section:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: #000;
+  border-radius: 6px;
+  opacity: 0.4;
 }
 
 .user-profile .top-section .user-details {
   position: relative;
+  z-index: 2;
   top: 7vh;
 }
 
@@ -11341,26 +11614,53 @@ input.form-control {
   color: #fff;
 }
 
-.user-profile .statistics-tabs {
+.user-edit {
   background: #fff;
+  height: 100vh;
   position: relative;
-  z-index: 2;
-  transform: translateY(-90%);
-  padding: 20px;
+  z-index: 6;
+}
+
+.user-edit header {
+  padding: 30px 0;
+  position: relative;
+}
+
+.user-edit header h1 {
+  font-size: 25px;
+  font-weight: 400;
   display: flex;
-  justify-content: space-between;
-  width: 85%;
-  margin: 0 auto;
-  border-radius: 6px;
-  box-shadow: 5px 10px 33px -15px rgba(0, 0, 0, 0.75);
-}
-
-.user-profile .statistics-tabs .tab {
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  width: 100%;
+  position: relative;
 }
 
-.user-profile .statistics-tabs .tab p {
-  margin-bottom: 0;
+.user-edit header .close-edit {
+  font-size: 20px;
+  position: absolute;
+  right: 0;
+  color: #000;
+}
+
+.user-edit form {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-edit form .form-group {
+  margin-bottom: 30px;
+}
+
+.user-edit form .form-group label {
+  color: #868686;
+}
+
+.user-edit input[type=text] {
+  color: #000 !important;
+  border-bottom: 2px solid #868686 !important;
 }
 

@@ -1,8 +1,11 @@
 const { data } = require('jquery');
 import Webcam from 'webcam-easy';
 var id, target, options;
+import 'slick-carousel';
 
 require('./bootstrap');
+// require('./bootstrap');
+
 var moment = require('moment');
 
 
@@ -32,7 +35,6 @@ $( '.floating-btn' ).on( 'click', function() {
     $( '.floating-btn-options' ).toggleClass( 'active' )
     
     if( $('body').hasClass('floating-options-opened') ) {
-
         $( this ).css({
             transform: `translateY(-${optionsHeight}px)`
         })
@@ -42,6 +44,34 @@ $( '.floating-btn' ).on( 'click', function() {
         })
     }
 } )
+
+$('.wishlist-cards').slick({
+    infinite: false,
+    slidesToShow: 1.5,
+    arrows: false,
+})
+
+$('#showInfo').click( function(e) {
+    e.preventDefault()
+    $('.content-sections section').hide()
+    $('#info').show()
+} )
+$('#showTrips').click( function(e) {
+    e.preventDefault()
+    $('.content-sections section').hide()
+    $('#trips').show()
+} )
+$('#showRanking').click( function(e) {
+    e.preventDefault()
+    $('.content-sections section').hide()
+    $('#ranking').show()
+} )
+
+// $('.users').slick({
+//     infinite: false,
+//     slidesToShow: 3.5,
+//     arrows: false,
+// })
 
 // const webcamElement = document.getElementById('webcam');
 // const canvasElement = document.getElementById('canvas');

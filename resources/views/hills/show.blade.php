@@ -1,45 +1,83 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('hills.article')
+    {{-- @include('hills.article') --}}
+    <div class="hill-show">
 
-    
+        <div class="top-section" style="background-image: url({{ asset( $hill->thumbnail_path ) }})">
+            <div class="content">
 
-
-    <div class="mt-5">
+                <div>
+                    <h1>
+                        {{ $hill->name }}
+                    </h1>
+                    <p>
+                        {{ $hill->mountain->name }}
+                    </p>
+                </div>
+                <div class="add-to-wishlist">
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+        </div>
         
+        @include( 'partials.statistics-tab' )
 
-        <a href="/trips/create" class="btn btn-info">
-            create trip
-        </a>
-        <a href="/hills/{{ $hill->id }}/track" class="btn btn-danger">
-            Start Trip
-        </a>
+        <div class="container">
 
-        <form action="/userhillwishlist" method="POST">
-            @csrf
-            <input type="hidden" name="hill" value="{{ $hill->id }}">
-            <input type="submit" class="btn btn-warning" value="add to wishlist">
-        </form>
+            <div class="hill-tabs">
+                <a href="#" id="showTrips">Návštevy</a>
+                <a href="#" id="showInfo">Info</a>
+                <a href="#" id="showRanking">Rebríček</a>
+            </div>
+        
+            <div class="content-sections">
+
+                <section id="trips">
+                    @foreach( $hill->trips as $trip )
+                        @include('partials.trip-card')
+                    @endforeach
+                    {{-- <a href="/trips/create" class="btn btn-info">
+                        create trip
+                    </a> --}}
+                    {{-- <a href="/hills/{{ $hill->id }}/track" class="btn btn-danger">
+                        Start Trip
+                    </a> --}}
+            
+                    {{-- <form action="/userhillwishlist" method="POST">
+                        @csrf
+                        <input type="hidden" name="hill" value="{{ $hill->id }}">
+                        <input type="submit" class="btn btn-warning" value="add to wishlist">
+                    </form> --}}
+                </section>
+                <section id="info">
+                    toto je info
+                </section>
+                <section id="ranking">
+                    toto je ranking
+                </section>
+            </div>
+
+
+            
+        
+            
+        </div>
     </div>
-    <div>
-        @foreach ($hill->images as $img)
-            <img src="{{ asset( $img->path ) }}" alt="">
-        @endforeach
+    <div class="floating-btn">
+        <i class="fas fa-th"></i>
     </div>
-    <h3>Trips</h3>
-    <ul>
-
-        @foreach ($hill->trips as $trip)
-            <li>
-
-                <a href="/trips/{{ $trip->id }}">
-                    {{ $trip->title }}
-                    
-                </a>
-            </li>
-        @endforeach
+    <ul class="floating-btn-options">
+        <li>
+            <a href="/hills/{{$hill->id}}/track">
+                Vyštartovať teraz
+            </a>
+        </li>
+        <li>
+            <a href="/trips/create">
+                Pridať záznam túry
+            </a>
+        </li>
     </ul>
-
     
 @endsection

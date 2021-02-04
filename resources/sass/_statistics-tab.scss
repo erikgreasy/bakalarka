@@ -1,0 +1,24 @@
+.statistics-tabs {
+    background: #fff;
+    position: absolute;
+    z-index: 2;
+    transform: translateY(-90%);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    border-radius: 6px;
+    -webkit-box-shadow: 5px 10px 33px -15px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 10px 33px -15px rgba(0,0,0,0.75);
+    box-shadow: 5px 10px 33px -15px rgba(0,0,0,0.75);
+    .tab {
+        text-align: center;
+        width: 100%;
+        p {
+            margin-bottom: 0;
+        }
+    }
+}

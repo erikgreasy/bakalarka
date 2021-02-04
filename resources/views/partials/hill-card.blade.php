@@ -1,6 +1,8 @@
 <a href="/hills/{{ $hill->id }}">
-    <article class="hill">
-        <div class="image"></div>
+    <article class="card">
+        <div class="image">
+            <img src="{{ asset($hill->thumbnail_path) }}" alt="">
+        </div>
         <div>
 
             <h4>
@@ -11,7 +13,7 @@
                 {{ $hill->height }} m.n.m.
             </p>
             <p class="description">
-                {{ $hill->description }}
+                {{ Str::limit( $hill->description, 80 ) }}
             </p>
         </div>
         

@@ -10,14 +10,7 @@
             <a href="#">Filter</a>
         </div>
         @foreach ($trips as $trip)
-            {{-- @include('hills.article')
-            <a href="/hills/{{ $hill->id }}">Open</a> --}}
-            <article>
-                <a href="/trips/{{ $trip->id }}">
-                    {{ $trip->title }}
-                </a>
-    
-            </article>
+            @include('partials.trip-card')
         
         @endforeach
     </div>
