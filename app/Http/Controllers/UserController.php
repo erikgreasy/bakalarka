@@ -102,5 +102,9 @@ class UserController extends Controller
     }
 
 
+
+    function filter() {
+        return view( 'users.filter' );
+    }
     
 }

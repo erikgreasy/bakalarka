@@ -10,56 +10,59 @@
         </ul>
     </div>
 @endif
+    <div class="container">
+        <h2>Nové dobrodružstvo</h2>
+        <form action="/hills" method="POST" enctype="multipart/form-data">
+    
+            @csrf
+    
+    
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" class="form-control">
+            </div>
+    
+            <div class="form-group">
+                <label for="name">Description:</label>
+                <textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
+            </div>
+    
+            <div class="form-group">
+                <label for="name">Height:</label>
+                <input type="number" name="height" id="height" class="form-control"> m.n.m.
+            </div>
+    
+            <div class="form-group">
+                <label for="name">Mountain:</label>
+                <select name="mountain" id="mountain" class="form-control">
+                    @foreach ($mountains as $mountain)
+                        <option value="{{ $mountain->id }}">{{ $mountain->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+    
+            <div class="form-group">
+                <label for="name">Lat:</label>
+                <input type="text" name="lat" id="lat" class="form-control">
+            </div>
+    
+            <div class="form-group">
+                <label for="name">Long:</label>
+                <input type="text" name="long" id="long" class="form-control">
+            </div>
+    
+            <div class="form-group">
+                <input id="image" type="file" name="images[]" class="" multiple>
+            </div>
+    
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </div>
+    
+            
+    
+        </form>
+    </div> <!-- END CONTAINER -->
 
-    <form action="/hills" method="POST" enctype="multipart/form-data">
-
-        @csrf
-
-
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="name" class="form-control">
-        </div>
-
-        <div class="form-group">
-            <label for="name">Description:</label>
-            <textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="name">Height:</label>
-            <input type="number" name="height" id="height" class="form-control"> m.n.m.
-        </div>
-
-        <div class="form-group">
-            <label for="name">Mountain:</label>
-            <select name="mountain" id="mountain" class="form-control">
-                @foreach ($mountains as $mountain)
-                    <option value="{{ $mountain->id }}">{{ $mountain->name }}</option>
-                @endforeach
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="name">Lat:</label>
-            <input type="text" name="lat" id="lat" class="form-control">
-        </div>
-
-        <div class="form-group">
-            <label for="name">Long:</label>
-            <input type="text" name="long" id="long" class="form-control">
-        </div>
-
-        <div class="form-group">
-            <input id="image" type="file" name="images[]" class="" multiple>
-        </div>
-
-        <div class="form-group">
-            <input type="submit" value="Submit" class="btn btn-primary">
-        </div>
-
-        
-
-    </form>
     
 @endsection

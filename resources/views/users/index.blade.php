@@ -6,7 +6,7 @@
         <div class="users-page">
             <div class="explore-heading">
                 <h3>Najviac nachodených kilometrov</h3>
-                <a href="#">Filter</a>
+                <a href="/users/filter">Filter</a>
             </div>
             <h3></h3>
         </div>

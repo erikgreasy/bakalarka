@@ -14,28 +14,27 @@
             </div>
             <div class="time">
                 <p>Uplynutý čas</p>
-                <h2>01:23:15</h2>
+                <h2 class="time-tracker">00:00:00</h2>
             </div>
             <div class="row">
                 <div class="distance col-6">
                     <p>Prejdená vzdialenosť</p>
-                    <h3>3.12<span>KM</span></h2>
+                    <h3>0.00<span>KM</span></h2>
                 </div>
 
                 <div class="speed col-6">
                     <p>Priemerná rýchlosť</p>
-                    <h3>5.6<span>KM/H</span></h2>
+                    <h3>0.0<span>KM/H</span></h2>
                 </div>
             </div>
 
             <input type="file" accept="image/*;capture=camera" id="takePhoto">
             <a id="startTrip" href="#" class="btn btn-light">
-        
-                Ukončiť túru
+                Začať túru
             </a>
         
             <a href="#" id="stopTrip" class="btn btn-danger">
-                Stop trip
+                Ukončiť túru
             </a>
         </div>
     </div>

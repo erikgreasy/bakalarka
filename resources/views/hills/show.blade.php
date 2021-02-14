@@ -2,7 +2,7 @@
 
 @section('content')
     {{-- @include('hills.article') --}}
-    <div class="hill-show">
+    <main class="hill-show">
 
         <div class="top-section" style="background-image: url({{ asset( $hill->thumbnail_path ) }})">
             <div class="content">
@@ -27,8 +27,8 @@
 
             <div class="hill-tabs">
                 <a href="#" id="showTrips">Návštevy</a>
-                <a href="#" id="showInfo">Info</a>
-                <a href="#" id="showRanking">Rebríček</a>
+                <a href="#info" id="showInfo">Info</a>
+                <a href="#ranking" id="showRanking">Rebríček</a>
             </div>
         
             <div class="content-sections">
@@ -51,7 +51,16 @@
                     </form> --}}
                 </section>
                 <section id="info">
-                    toto je info
+                    {{ $hill->description }}
+                    <div class="gallery">
+
+                        @foreach ($hill->images as $img)
+                            <div class="gallery-item">
+                                <img src="{{ asset($img->path) }}" alt="">
+                            </div>
+                            
+                        @endforeach
+                    </div>
                 </section>
                 <section id="ranking">
                     toto je ranking
@@ -63,7 +72,7 @@
         
             
         </div>
-    </div>
+    </main>
     <div class="floating-btn">
         <i class="fas fa-th"></i>
     </div>

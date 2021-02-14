@@ -51,6 +51,12 @@ $('.wishlist-cards').slick({
     arrows: false,
 })
 
+// $( '#info .gallery' ).slick({
+//     slidesToShow: 2
+// })
+
+
+
 $('#showInfo').click( function(e) {
     e.preventDefault()
     $('.content-sections section').hide()
@@ -182,13 +188,19 @@ function startTrip() {
     });
 }
 
+var trip_id;
 let interval;
+var startTime;
 $('#startTrip').on( 'click', function() {
     $(this).hide()
     $('#stopTrip').show()
     startTrip()
         .then( response => {
-        console.log( response )
+            console.log( response )
+            trip_id = response.trip_id;
+            startTime = new Date();
+
+            var intervalID = window.setInterval(myCallback, 1000);
         // id = navigator.geolocation.watchPosition(success, error, options);
         
     } )
@@ -199,6 +211,18 @@ $('#startTrip').on( 'click', function() {
 
         } )
 } )
+
+function myCallback() {
+    var timeNow = new Date();
+
+    var secondsPassed = parseInt( (timeNow - startTime) / 1000 );
+    var hours = parseInt( secondsPassed / 3600 ).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+    secondsPassed -= parseInt( hours * 3600 );
+    var minutes = parseInt( secondsPassed / 60 ).toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+    secondsPassed -= parseInt( minutes * 60 )
+    var seconds = secondsPassed.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false});
+    $( '.time .time-tracker' ).html(`${hours}:${minutes}:${seconds}`)
+}
 
 // $('#startTrip').on( 'click', function() {
 //     console.log( 'trip started' )

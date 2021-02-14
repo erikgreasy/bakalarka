@@ -35,7 +35,7 @@
     </div>
     <ul class="floating-btn-options">
         <li>
-            <a href="">
+            <a href="/trips/{{ $trip->id }}/edit">
                 Upraviť trip
             </a>
         </li>

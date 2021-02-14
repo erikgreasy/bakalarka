@@ -34,8 +34,14 @@ Route::get('/', function () {
 Auth::routes();
 
 
+Route::get('hills/filter', 'HillController@filter');
 Route::resource('hills', 'HillController');
+
+Route::get('trips/filter', 'TripController@filter');
 Route::resource('trips', 'TripController');
+
+
+Route::get( 'users/filter', 'UserController@filter' );
 Route::resource('users', 'UserController')->only([
     'index', 'show', 'edit', 'store', 'update'
 ]);
@@ -48,6 +54,8 @@ Route::get( 'my-profile', function() {
         'hills' => Hill::all()
     ] );
 } )->middleware( 'auth' );
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

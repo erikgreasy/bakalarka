@@ -102,9 +102,9 @@ class HillController extends Controller
         ] );
     }
 
-    public function info( Hill $hill ) {
-        return view( 'hills.info', [
-            'hill'  => $hill
-        ] );
+
+
+    public function filter() {
+        return view( 'hills.filter' );
     }
 }

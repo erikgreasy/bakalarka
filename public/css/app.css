@@ -11154,8 +11154,23 @@ section {
   padding: 0;
 }
 
-.hill-show #info {
+.hill-show #info,
+.hill-show #ranking {
   display: none;
+}
+
+.hill-show #info .gallery {
+  display: flex;
+  gap: 20px;
+}
+
+.hill-show #info .gallery .gallery-item {
+  width: 200px;
+}
+
+.hill-show #info .gallery .gallery-item img {
+  max-width: 100%;
+  border-radius: 6px;
 }
 
 .trip-detail .trip-thumbnail {
@@ -11186,6 +11201,42 @@ section {
 .trip-detail .trip-desc {
   color: #868686;
   font-size: 16px;
+}
+
+.trip-create,
+.trip-edit,
+.filter {
+  background: #fff;
+  position: relative;
+  z-index: 20;
+}
+
+.trip-create header,
+.trip-edit header,
+.filter header {
+  padding: 30px 0;
+  position: relative;
+}
+
+.trip-create header h1,
+.trip-edit header h1,
+.filter header h1 {
+  font-size: 25px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.trip-create header .close-edit,
+.trip-edit header .close-edit,
+.filter header .close-edit {
+  font-size: 20px;
+  position: absolute;
+  right: 0;
+  color: #000;
 }
 
 .floating-btn {
@@ -11315,6 +11366,10 @@ main {
 
 a {
   text-decoration: none !important;
+}
+
+* {
+  outline: none;
 }
 
 body:after {
@@ -11651,16 +11706,41 @@ input.form-control {
   align-items: center;
 }
 
-.user-edit form .form-group {
+.filter header .reset {
+  position: absolute;
+  left: 0;
+  font-size: 14px;
+}
+
+form .form-group {
   margin-bottom: 30px;
 }
 
-.user-edit form .form-group label {
-  color: #868686;
-}
-
-.user-edit input[type=text] {
+form .form-group input[type=text],
+form .form-group input[type=date],
+form .form-group select,
+form .form-group textarea {
+  border: none;
+  padding-left: 0;
+  border-radius: 0;
+  outline: none;
+  background: transparent;
   color: #000 !important;
   border-bottom: 2px solid #868686 !important;
+}
+
+form .form-group input[type=text]:focus,
+form .form-group input[type=date]:focus,
+form .form-group select:focus,
+form .form-group textarea:focus {
+  box-shadow: none !important;
+}
+
+form .form-group input[type=submit] {
+  width: 100%;
+}
+
+form .form-group label {
+  color: #868686;
 }
 

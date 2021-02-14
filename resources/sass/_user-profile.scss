@@ -77,15 +77,7 @@
         height: 80vh;
         justify-content: space-between;
         align-items: center;
-        .form-group {
-            margin-bottom: 30px;
-            label {
-                color: $grey;
-            }
-        }
+        
     }
-    input[type=text] {
-        color: #000 !important;
-        border-bottom: 2px solid $grey !important;
-    }
+    
 }

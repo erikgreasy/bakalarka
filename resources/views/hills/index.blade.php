@@ -5,7 +5,7 @@
     <div class="container">
         <div class="explore-heading">
             <h3>Najpopulárnejšie kopce</h3>
-            <a href="#" class="filter"><i class="fas fa-filter fa-2x"></i></a>
+            <a href="/hills/filter" class="filter"><i class="fas fa-filter fa-2x"></i></a>
         </div>
 
         @foreach ($hills as $hill)

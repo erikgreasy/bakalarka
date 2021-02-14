@@ -62116,7 +62116,10 @@ $('.wishlist-cards').slick({
   infinite: false,
   slidesToShow: 1.5,
   arrows: false
-});
+}); // $( '#info .gallery' ).slick({
+//     slidesToShow: 2
+// })
+
 $('#showInfo').click(function (e) {
   e.preventDefault();
   $('.content-sections section').hide();
@@ -62220,17 +62223,42 @@ function startTrip() {
   });
 }
 
+var trip_id;
 var interval;
+var startTime;
 $('#startTrip').on('click', function () {
   $(this).hide();
   $('#stopTrip').show();
   startTrip().then(function (response) {
-    console.log(response); // id = navigator.geolocation.watchPosition(success, error, options);
+    console.log(response);
+    trip_id = response.trip_id;
+    startTime = new Date();
+    var intervalID = window.setInterval(myCallback, 1000); // id = navigator.geolocation.watchPosition(success, error, options);
   })["catch"](function (error) {
     $('#stopTrip').hide();
     alert('error occured');
   });
-}); // $('#startTrip').on( 'click', function() {
+});
+
+function myCallback() {
+  var timeNow = new Date();
+  var secondsPassed = parseInt((timeNow - startTime) / 1000);
+  var hours = parseInt(secondsPassed / 3600).toLocaleString('en-US', {
+    minimumIntegerDigits: 2,
+    useGrouping: false
+  });
+  secondsPassed -= parseInt(hours * 3600);
+  var minutes = parseInt(secondsPassed / 60).toLocaleString('en-US', {
+    minimumIntegerDigits: 2,
+    useGrouping: false
+  });
+  secondsPassed -= parseInt(minutes * 60);
+  var seconds = secondsPassed.toLocaleString('en-US', {
+    minimumIntegerDigits: 2,
+    useGrouping: false
+  });
+  $('.time .time-tracker').html("".concat(hours, ":").concat(minutes, ":").concat(seconds));
+} // $('#startTrip').on( 'click', function() {
 //     console.log( 'trip started' )
 //     // load headers with CSRF token for laravel to be happy
 //     $.ajaxSetup({
@@ -62264,6 +62292,7 @@ $('#startTrip').on('click', function () {
 //     //     getLocation()
 //     // }, 4000);
 // } )
+
 
 $('#stopTrip').on('click', function () {
   console.log('trip ended');

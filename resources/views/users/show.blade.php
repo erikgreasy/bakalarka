@@ -15,11 +15,13 @@
 
         <div class="container mt-5">
 
-        @include('partials.my-hills')
+        @can('update', $user)
+            @include('partials.my-hills')
+        @endcan
 
         <section>
             <div class="section-heading">
-                <h2>Moje kopce</h2>
+                <h2>Dobrodružstvá</h2>
                 <a href="#">Zobraziť všetky</a>
         
             </div>

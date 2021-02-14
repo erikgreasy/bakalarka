@@ -28,11 +28,33 @@ class TripController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( Request $request )
     {
-        return view( 'trips.index', [
-            'trips' => Trip::all()
-        ] );
+        $order = $request->order;
+        $hills = $request->hill;
+
+        if( $hills ) {
+            // dd( $hills );
+            return view( 'trips.index', [
+                'trips' => Trip::whereIn( 'hill_id', $hills )->get()
+            ] );
+        }
+
+
+        if( $order == 'newest' ) {
+            return view( 'trips.index', [
+                'trips' => Trip::all()
+            ]);
+        } else if( $order == 'longest' ) {
+            return view( 'trips.index',[
+                'trips' => Trip::all()
+            ]);
+
+        } else {
+            return view( 'trips.index', [
+                'trips' => Trip::all()
+            ]);
+        }
     }
 
     /**
@@ -80,6 +102,7 @@ class TripController extends Controller
         $trip->description = $request->description;
         $trip->user_id = Auth::user()->id;
         $trip->hill_id = $request->hill;
+        // $trip->thumbnail_path = $request->thumbnail;
 
         if( isset( $images ) ) {
 
@@ -192,5 +215,11 @@ class TripController extends Controller
         $trip->hill_id = 1;
         $trip->save();
 
+    }
+
+    public function filter() {
+        return view( 'trips.filter', [
+            'hills' => Hill::all()
+        ]);
     }
 }

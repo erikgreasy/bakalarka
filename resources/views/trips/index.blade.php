@@ -1,17 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('partials/explore-links')
+    <main class="trips-index">
 
-    <div class="container">
-
-        <div class="explore-heading">
-            <h3>Najnovšie dobrodružstvá</h3>
-            <a href="#">Filter</a>
+        @include('partials/explore-links')
+    
+        <div class="container">
+    
+            <div class="explore-heading">
+                <h3>Najnovšie dobrodružstvá</h3>
+                <a href="/trips/filter">Filter</a>
+            </div>
+            @foreach ($trips as $trip)
+                @include('partials.trip-card')
+            
+            @endforeach
         </div>
-        @foreach ($trips as $trip)
-            @include('partials.trip-card')
-        
-        @endforeach
-    </div>
+    </main>
 @endsection
