@@ -33,25 +33,33 @@
                 <div class="form-group">
                     <h2>Pohoria</h2>
 
-                    <div>
-                        <input type="checkbox" id="mala_fatra" name="hill" vlaue="mala_fatra">
+                    @foreach( $mountains as $mountain )
+
+                        <div>
+                            <input type="checkbox" id="moutain_{{ $mountain->id }}" name="mountains[]" value="{{ $mountain->id }}">
+                            <label for="moutain_{{ $mountain->id }}">{{ $mountain->name }}</label>
+                        </div>
+                    @endforeach
+
+                    {{-- <div>
+                        <input type="checkbox" id="mala_fatra" name="hill[]" value="mala_fatra">
                         <label for="mala_fatra">Malá Fatra</label>
                     </div>
 
                     <div>
-                        <input type="checkbox" id="velka_fatra" name="hill" value="velka_fatra">
+                        <input type="checkbox" id="velka_fatra" name="hill[]" value="velka_fatra">
                         <label for="velka_fatra">Veľká Fatra</label>
                     </div>
 
                     <div>
-                        <input type="checkbox" id="vysoke_tatry" name="hill" value="vysoke_tatry">
+                        <input type="checkbox" id="vysoke_tatry" name="hill[]" value="vysoke_tatry">
                         <label for="vysoke_tatry">Vysoké Tatry</label>
                     </div>
 
                     <div>
                         <input type="checkbox" id="nizke_tatry" name="hill" value="nizke_tatry">
                         <label for="nizke_tatry">Nízke Tatry</label>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="form-group text-center">

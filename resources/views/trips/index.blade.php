@@ -9,7 +9,7 @@
     
             <div class="explore-heading">
                 <h3>Najnovšie dobrodružstvá</h3>
-                <a href="/trips/filter">Filter</a>
+                <a href="/trips/filter"><i class="fas fa-filter fa-2x"></i></a>
             </div>
             @foreach ($trips as $trip)
                 @include('partials.trip-card')

@@ -23,11 +23,29 @@ class HillController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
+        $hills = Hill::take(5);
+        if( isset( $request->mountains ) ) {
+            $mountains = $request->mountains;
+            $hills = $hills->whereIn( 'mountain_id', $mountains );
+            $hills->take(5);
+        }
+        if( isset( $request->order ) ) {
+            $order = $request->order;
+
+            if( $order == 'highest' ) {
+                $hills->orderBy( 'height', 'desc' );
+            } else if( $order == 'other' ) {
+                $hills->withCount('trips')->orderBy( 'trips_count', 'desc' );
+            }
+        }
+        
+
         return view('hills.index', [
-            'hills' => Hill::all()
+            'hills' => $hills->get()
         ]);
+        
     }
 
     public function show( Request $request, Hill $hill ) {
@@ -105,6 +123,8 @@ class HillController extends Controller
 
 
     public function filter() {
-        return view( 'hills.filter' );
+        return view( 'hills.filter', [
+            'mountains' => Mountain::all()
+        ] );
     }
 }

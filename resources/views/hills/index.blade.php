@@ -9,10 +9,7 @@
         </div>
 
         @foreach ($hills as $hill)
-            {{-- @include('hills.article')
-            <a href="/hills/{{ $hill->id }}">Open</a> --}}
             @include( 'partials/hill-card' )
-        
         @endforeach
     </div>
 @endsection
