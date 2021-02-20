@@ -11083,6 +11083,11 @@ section {
 .statistics-tabs .tab {
   text-align: center;
   width: 100%;
+  border-right: 2px solid #d8d8d8;
+}
+
+.statistics-tabs .tab:last-child {
+  border: none;
 }
 
 .statistics-tabs .tab p {
@@ -11350,6 +11355,10 @@ section {
 
 .track #takePhoto {
   margin-bottom: 30px;
+}
+
+.users-index .explore-heading {
+  margin-top: 30px;
 }
 
 * {
@@ -11706,10 +11715,18 @@ input.form-control {
   align-items: center;
 }
 
+.filter {
+  min-height: 100vh;
+}
+
 .filter header .reset {
   position: absolute;
   left: 0;
   font-size: 14px;
+}
+
+.filter .submit {
+  margin-top: 50px;
 }
 
 form .form-group {

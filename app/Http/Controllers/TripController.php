@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Hill;
 use App\Trip;
+use App\Mountain;
 use App\TripImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,30 +32,32 @@ class TripController extends Controller
     public function index( Request $request )
     {
         $order = $request->order;
-        $hills = $request->hill;
+        $hills = $request->hills;
+
+        $trips = Trip::take(10);
 
         if( $hills ) {
-            // dd( $hills );
-            return view( 'trips.index', [
-                'trips' => Trip::whereIn( 'hill_id', $hills )->get()
-            ] );
+            $trips = $trips->whereIn( 'hill_id', $hills );
         }
 
+        // if( $order == 'newest' ) {
+        //     return view( 'trips.index', [
+        //         'trips' => Trip::all()
+        //     ]);
+        // } else if( $order == 'longest' ) {
+        //     return view( 'trips.index',[
+        //         'trips' => Trip::all()
+        //     ]);
 
-        if( $order == 'newest' ) {
-            return view( 'trips.index', [
-                'trips' => Trip::all()
-            ]);
-        } else if( $order == 'longest' ) {
-            return view( 'trips.index',[
-                'trips' => Trip::all()
-            ]);
+        // } else {
+        //     return view( 'trips.index', [
+        //         'trips' => Trip::all()
+        //     ]);
+        // }
 
-        } else {
-            return view( 'trips.index', [
-                'trips' => Trip::all()
-            ]);
-        }
+        return view( 'trips.index', [
+            'trips' => $trips->get()
+        ]);
     }
 
     /**
@@ -219,7 +222,8 @@ class TripController extends Controller
 
     public function filter() {
         return view( 'trips.filter', [
-            'hills' => Hill::all()
+            'hills'     => Hill::all(),
+            'mountains' => Mountain::all()
         ]);
     }
 }

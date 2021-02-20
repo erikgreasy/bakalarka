@@ -17,6 +17,12 @@
     .tab {
         text-align: center;
         width: 100%;
+        border-right: 2px solid rgb(216, 216, 216);
+    
+        &:last-child {
+            border: none;
+        }
+        
         p {
             margin-bottom: 0;
         }

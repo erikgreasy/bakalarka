@@ -7,7 +7,7 @@
 
             <header>
                 <h1>
-                    <small class="reset">Reset</small>
+                    {{-- <small class="reset">Reset</small> --}}
                     Filter
                     <a href="/hills" class="close-edit">
                         <i class="fas fa-times"></i>
@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="form-group text-center">
-                    <button type="submit" class="btn btn-primary">Aplikovať</button>
+                    <button type="submit" class="btn btn-primary submit">Aplikovať</button>
                 </div>
             </form>
         </div>

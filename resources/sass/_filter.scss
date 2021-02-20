@@ -1,5 +1,7 @@
 .filter {
     
+    min-height: 100vh;
+
     header {
 
         .reset {
@@ -7,5 +9,9 @@
             left: 0;
             font-size: 14px;
         }
+    }
+
+    .submit {
+        margin-top: 50px;
     }
 }
