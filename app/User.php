@@ -47,10 +47,9 @@ class User extends Authenticatable
     }
 
     public function isInWishlist( $hill_id ) {
-        if( !empty( $this->getUserwishlist( $hill_id ) ) ) {
+        if( ! $this->getUserwishlist( $hill_id )->isEmpty() ) {
             return true;
         }
-
         return false;
     }
 

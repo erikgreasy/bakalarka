@@ -48,11 +48,19 @@ class HillController extends Controller
         
     }
 
+    /**
+     * Show single(detail) Hill
+     */
     public function show( Request $request, Hill $hill ) {
         $request->session()->put('hillId', $hill->id);
+        if( auth()->user()->isInWishlist( $hill->id ) ) {
+            $userhillwishlist = auth()->user()->getUserwishlist( $hill->id )[0];
+        } else {
+            $userhillwishlist = false;
+        }
         return view( 'hills.show', [
             'hill'  => $hill,
-            // 'userhillwishlist'  => auth()->user()->getUserwishlist( $hill->id )[0]
+            'userhillwishlist'  => $userhillwishlist
         ] );
     }
 

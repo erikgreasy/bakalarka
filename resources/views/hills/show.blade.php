@@ -15,16 +15,16 @@
                     </p>
                 </div>
 
-                @if( auth()->user()->isInWishlist( $hill->id ) )
+                @if( $userhillwishlist )
                     <div class="add-to-wishlist">
-                        {{-- <form action="/userhillwishlist/{{ $userhillwishlist->id }}" method="POST">
+                        <form action="/userhillwishlist/{{ $userhillwishlist->id }}" method="POST">
                             @csrf
                             @method( 'DELETE' )
                             <input type="hidden" name="hill" value="{{ $hill->id }}">
                             <button type="submit">
-                                <i class="far fa-star"></i>
+                                <i class="fas fa-star"></i>
                             </button>
-                        </form> --}}
+                        </form>
                     </div>
                 @else
                     <div class="add-to-wishlist">
