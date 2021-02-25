@@ -1,6 +1,6 @@
 <section class="my-hills">
     <div class="section-heading">
-        <h2>Kopce</h2>
+        <h2>Uložené kopce</h2>
         <a href="#">Zobraziť všetky</a>
 
     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Hill;
 use App\User;
+use App\UserHillWishlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -51,9 +52,10 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $hills = $user->getWishlistHills();
         return view( 'users.show', [
             'user'  => $user,
-            'hills' => Hill::all()
+            'hills' => $hills
         ] );
     }
 

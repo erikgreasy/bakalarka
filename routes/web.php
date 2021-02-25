@@ -24,7 +24,7 @@ Route::get('/', function () {
         return view( 'homepage', [
             'trips' => Trip::latest()->take(3)->get(),
             'users' => User::all(),
-            'hills' => Hill::all(),
+            'hills' => Auth::user()->getWishlistHills(),
         ] );
     }
 
@@ -49,10 +49,8 @@ Route::resource('mountains', 'MountainController');
 
 
 Route::get( 'my-profile', function() {
-    return view( 'users.show', [
-        'user'  => Auth::user(),
-        'hills' => Hill::all()
-    ] );
+    // Call function from controller
+    return App::call('App\Http\Controllers\UserController@show', ['user' => Auth::user()]);
 } )->middleware( 'auth' );
 
 
