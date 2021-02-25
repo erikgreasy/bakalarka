@@ -11136,8 +11136,15 @@ section {
   right: 50px;
 }
 
+.hill-show .top-section .add-to-wishlist button {
+  border: none;
+  background: none;
+  outline: none;
+}
+
 .hill-show .top-section .add-to-wishlist i {
   font-size: 20px;
+  color: #fff;
 }
 
 .hill-show .hill-tabs {

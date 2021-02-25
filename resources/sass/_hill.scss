@@ -31,14 +31,22 @@
             position: relative;
             z-index: 3;
             display: flex;
-        align-items: center;
-        justify-content: center;
+            align-items: center;
+            justify-content: center;
         }
         .add-to-wishlist {
             position: absolute;
             right: 50px;
+
+            button {
+                border: none;
+                background: none;
+                outline: none;
+            }
+
             i {
                 font-size: 20px;
+                color: #fff;
             }
         }
     }
