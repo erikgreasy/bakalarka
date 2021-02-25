@@ -20,8 +20,8 @@
                 <div class="form-group">
                     <h2>Zoradiť od najviac</h2>
 
-                    <input type="radio" id="newest" name="order" value="newest" checked>
-                    <label for="newest">Dobrodružstiev</label>
+                    <input type="radio" id="trips" name="order" value="trips" checked>
+                    <label for="trips">Dobrodružstiev</label>
 
                     <input type="radio" id="longest" name="order" value="longest">
                     <label for="longest">Kilometrov</label>

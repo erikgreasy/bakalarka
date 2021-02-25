@@ -46,5 +46,17 @@ class User extends Authenticatable
         return $this->hasMany( 'App\UserHillWishlist' );
     }
 
+    public function isInWishlist( $hill_id ) {
+        if( !empty( $this->getUserwishlist( $hill_id ) ) ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getUserwishlist( $hill_id ) {
+        $userwishlist = UserHillWishlist::where( 'hill_id', $hill_id )->where( 'user_id', $this->id )->get();
+        return $userwishlist;
+    }
 
 }

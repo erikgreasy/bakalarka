@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    {{-- @include('hills.article') --}}
     <main class="hill-show">
 
         <div class="top-section" style="background-image: url({{ asset( $hill->thumbnail_path ) }})">
@@ -15,9 +14,31 @@
                         {{ $hill->mountain->name }}
                     </p>
                 </div>
-                <div class="add-to-wishlist">
-                    <i class="far fa-star"></i>
-                </div>
+
+                @if( auth()->user()->isInWishlist( $hill->id ) )
+                    <div class="add-to-wishlist">
+                        {{-- <form action="/userhillwishlist/{{ $userhillwishlist->id }}" method="POST">
+                            @csrf
+                            @method( 'DELETE' )
+                            <input type="hidden" name="hill" value="{{ $hill->id }}">
+                            <button type="submit">
+                                <i class="far fa-star"></i>
+                            </button>
+                        </form> --}}
+                    </div>
+                @else
+                    <div class="add-to-wishlist">
+                        <form action="/userhillwishlist" method="POST">
+                            @csrf
+                            <input type="hidden" name="hill" value="{{ $hill->id }}">
+                            <button type="submit">
+                                <i class="far fa-star"></i>
+                            </button>
+                        </form>
+                    </div>
+                @endif
+
+               
             </div>
         </div>
         
@@ -44,11 +65,7 @@
                         Start Trip
                     </a> --}}
             
-                    {{-- <form action="/userhillwishlist" method="POST">
-                        @csrf
-                        <input type="hidden" name="hill" value="{{ $hill->id }}">
-                        <input type="submit" class="btn btn-warning" value="add to wishlist">
-                    </form> --}}
+                    
                 </section>
                 <section id="info">
                     {{ $hill->description }}

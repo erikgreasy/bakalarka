@@ -51,7 +51,8 @@ class HillController extends Controller
     public function show( Request $request, Hill $hill ) {
         $request->session()->put('hillId', $hill->id);
         return view( 'hills.show', [
-            'hill'  => $hill
+            'hill'  => $hill,
+            // 'userhillwishlist'  => auth()->user()->getUserwishlist( $hill->id )[0]
         ] );
     }
 

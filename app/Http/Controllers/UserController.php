@@ -23,10 +23,24 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        $users = User::take(10);
+        $order = $request->order;
+        $order_text = 'Predvolené radenie';
+
+        if( isset( $order ) ) {
+            if( $order == 'trips' ) {
+                $users->withCount('trips')->orderBy( 'trips_count', 'desc' );
+                $order_text = 'Najviac dobrodružstiev';
+            }
+        }
+
+
         return view( 'users.index', [
-            'users' => User::all()
+            'users'         => $users->get(),
+            'order_text'    => $order_text
         ] );
     }
 

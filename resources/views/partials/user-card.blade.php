@@ -2,7 +2,7 @@
     <div class="user-card">
         
         <div class="ranking"> 
-            #1
+            #{{ ++$index }}
         </div>
         <div class="avatar-wrapper">
 
