@@ -59,7 +59,7 @@ class User extends Authenticatable
     }
 
     public function getWishlistHills() {
-        $wishlists = UserHillWishlist::where( 'user_id', $this->id )->get();
+        $wishlists = UserHillWishlist::where( 'user_id', $this->id )->orderBy('id','desc')->get();
         $hills = [];
         foreach( $wishlists as $wish ) {
             $hills[] = $wish->hill;

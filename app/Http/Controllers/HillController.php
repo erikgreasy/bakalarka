@@ -87,7 +87,6 @@ class HillController extends Controller
         $images = $request->file( 'images' );
 
 
-
         $request->validate([
             'name'              => 'required',
             'description'       => 'required',
@@ -107,18 +106,22 @@ class HillController extends Controller
         $hill->latitude = $request->lat;
         $hill->longitude = $request->long;
 
+        $thumbnail = $request->thumbnail;
+        if( isset( $thumbnail ) ) {
+            $path = Storage::disk('public')->putFile('uploads', $thumbnail );
+            $hill->thumbnail_path = '/storage/' . $path;
+        }
         $hill->save();
 
+        if( isset($images) ) {
 
-        foreach( $images as $index => $img ) {
-            $hill_image = new HillImage();
-            $hill_image->hill_id = $hill->id; 
-            $path = Storage::disk('public')->putFile('uploads', $img );
-            $hill_image->path = '/storage/' . $path;
-            $hill_image->save();
-
-            
-            
+            foreach( $images as $index => $img ) {
+                $hill_image = new HillImage();
+                $hill_image->hill_id = $hill->id; 
+                $path = Storage::disk('public')->putFile('uploads', $img );
+                $hill_image->path = '/storage/' . $path;
+                $hill_image->save();
+            }
         }
         
         return redirect('hills/' . $hill->id);

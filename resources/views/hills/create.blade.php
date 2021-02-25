@@ -54,8 +54,15 @@
                     </div>
             
                     <div class="form-group">
-                        <input id="image" type="file" name="images[]" class="" multiple>
+                        <label for="thumbnail">Thumbnail:</label>
+                        <input id="thumbnail" type="file" name="thumbnail">
                     </div>
+
+                    <div class="form-group">
+                        <label for="images"></label>
+                        <input id="images" type="file" name="images[]" class="" multiple>
+                    </div>
+
             
                     <div class="form-group">
                         <input type="submit" value="Submit" class="btn btn-primary">
