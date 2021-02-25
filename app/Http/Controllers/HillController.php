@@ -38,7 +38,11 @@ class HillController extends Controller
                 $hills->orderBy( 'height', 'desc' );
             } else if( $order == 'other' ) {
                 $hills->withCount('trips')->orderBy( 'trips_count', 'desc' );
+            } else if( $order == 'newest')  {
+                $hills->orderBy( 'id', 'desc' );
             }
+        } else {
+            $hills->orderBy( 'id', 'desc' );
         }
         
 
