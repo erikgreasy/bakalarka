@@ -15,6 +15,7 @@ class LogController extends Controller
         $log->trip_id = $request->trip_id;
         $log->latitude = $request->lat;
         $log->longtitude = $request->long;
+        $log->speed = $request->speed;
 
         $log->save();
     }

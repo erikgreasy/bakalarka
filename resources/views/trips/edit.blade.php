@@ -45,8 +45,12 @@
                     <textarea name="description" id="tripDesc" cols="30" rows="5" class="form-control">{{ $trip->description }}</textarea>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group trip-thumbnail">
                     <label for="thumbnail">Thumbnail:</label>
+
+                    <img src="{{ asset($trip->thumbnail_path) }}" alt="">
+                    <a id="remove-thumbnail" class="btn btn-danger">Odstrániť fotku</a>
+
                     <input id="thumbnail" type="file" name="thumbnail" class="">
                 </div>
 

@@ -67,3 +67,5 @@ Route::resource('userhillwishlist', 'UserHillWishlistController');
 
 
 Route::get('images', 'ImageController@index');
+
+Route::post( '/trips/{trip}/end-trip', 'TripController@addDuration' );

@@ -61793,204 +61793,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
-/***/ "./node_modules/webcam-easy/src/webcam-easy.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/webcam-easy/src/webcam-easy.js ***!
-  \*****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Webcam; });
-class Webcam {
-    constructor(webcamElement, facingMode = 'user', canvasElement = null, snapSoundElement = null) {
-      this._webcamElement = webcamElement;
-      this._webcamElement.width = this._webcamElement.width || 640;
-      this._webcamElement.height = this._webcamElement.height || this._webcamElement.width * (3 / 4);
-      this._facingMode = facingMode;
-      this._webcamList = [];
-      this._streamList = [];
-      this._selectedDeviceId = '';
-      this._canvasElement = canvasElement;
-      this._snapSoundElement = snapSoundElement;
-    }
-
-    get facingMode(){
-      return this._facingMode;
-    }
-
-    set facingMode(value){
-      this._facingMode = value;
-    }
-
-    get webcamList(){
-      return this._webcamList;
-    }
-
-    get webcamCount(){
-      return this._webcamList.length;
-    }
-
-    get selectedDeviceId(){
-      return this._selectedDeviceId;
-    }
-
-    /* Get all video input devices info */
-    getVideoInputs(mediaDevices){
-      this._webcamList = [];
-      mediaDevices.forEach(mediaDevice => {
-        if (mediaDevice.kind === 'videoinput') {
-          this._webcamList.push(mediaDevice);
-        }
-      });
-      if(this._webcamList.length == 1){
-        this._facingMode = 'user';
-      }    
-      return this._webcamList;
-    }
-
-    /* Get media constraints */
-    getMediaConstraints() {
-        var videoConstraints = {};
-        if (this._selectedDeviceId == '') {
-            videoConstraints.facingMode =  this._facingMode;
-        } else {
-            videoConstraints.deviceId = { exact: this._selectedDeviceId};
-        }
-        var constraints = {
-            video: videoConstraints,
-            audio: false
-        };
-        return constraints;
-    }
-
-    /* Select camera based on facingMode */ 
-    selectCamera(){
-      for(let webcam of this._webcamList){
-        if(   (this._facingMode=='user' && webcam.label.toLowerCase().includes('front'))
-          ||  (this._facingMode=='enviroment' && webcam.label.toLowerCase().includes('back'))
-        )
-        {
-          this._selectedDeviceId = webcam.deviceId;
-          break;
-        }
-      }
-    }
-
-    /* Change Facing mode and selected camera */ 
-    flip(){
-      this._facingMode = (this._facingMode == 'user')? 'enviroment': 'user';
-      this._webcamElement.style.transform = "";
-      this.selectCamera();  
-    }
-
-    /*
-      1. Get permission from user
-      2. Get all video input devices info
-      3. Select camera based on facingMode 
-      4. Start stream
-    */
-    async start(startStream = true) {
-      return new Promise((resolve, reject) => {         
-        this.stop();
-        navigator.mediaDevices.getUserMedia(this.getMediaConstraints()) //get permisson from user
-          .then(stream => {
-            this._streamList.push(stream);
-            this.info() //get all video input devices info
-              .then(webcams =>{
-                this.selectCamera();   //select camera based on facingMode
-                if(startStream){
-                    this.stream()
-                        .then(facingMode =>{
-                            resolve(this._facingMode);
-                        })
-                        .catch(error => {
-                            reject(error);
-                        });
-                }else{
-                    resolve(this._selectedDeviceId);
-                }
-              }) 
-              .catch(error => {
-                reject(error);
-              });
-          })
-          .catch(error => {
-              reject(error);
-          });
-      });
-    }
-
-    /* Get all video input devices info */ 
-    async info(){
-      return new Promise((resolve, reject) => {            
-        navigator.mediaDevices.enumerateDevices()
-          .then(devices =>{
-            this.getVideoInputs(devices);
-            resolve(this._webcamList);
-          }) 
-          .catch(error => {
-            reject(error);
-          });
-      });
-    }
-  
-    /* Start streaming webcam to video element */ 
-    async stream() {
-      return new Promise((resolve, reject) => {         
-        navigator.mediaDevices.getUserMedia(this.getMediaConstraints())
-          .then(stream => {
-              this._streamList.push(stream);
-              this._webcamElement.srcObject = stream;
-              if(this._facingMode == 'user'){
-                this._webcamElement.style.transform = "scale(-1,1)";
-              }
-              this._webcamElement.play();
-              resolve(this._facingMode);
-          })
-          .catch(error => {
-              console.log(error);
-              reject(error);
-          });
-      });
-    }
-
-    /* Stop streaming webcam */ 
-    stop() {
-      this._streamList.forEach(stream => {
-        stream.getTracks().forEach(track => {
-          track.stop();
-        });
-      });   
-    }
-
-    snap() {
-      if(this._canvasElement!=null){
-        if(this._snapSoundElement!= null){
-          this._snapSoundElement.play();
-        }
-        this._canvasElement.height = this._webcamElement.scrollHeight;
-        this._canvasElement.width = this._webcamElement.scrollWidth;
-        let context = this._canvasElement.getContext('2d');
-        if(this._facingMode == 'user'){
-          context.translate(this._canvasElement.width, 0);
-          context.scale(-1, 1);
-        }
-        context.clearRect(0, 0, this._canvasElement.width, this._canvasElement.height);
-        context.drawImage(this._webcamElement, 0, 0, this._canvasElement.width, this._canvasElement.height);
-        let data = this._canvasElement.toDataURL('image/png');
-        return data;
-      }
-      else{
-        throw "canvas element is missing";
-      }
-    } 
-}
-
-
-/***/ }),
-
 /***/ "./node_modules/webpack/buildin/global.js":
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -62064,11 +61866,10 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var webcam_easy__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! webcam-easy */ "./node_modules/webcam-easy/src/webcam-easy.js");
-/* harmony import */ var slick_carousel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! slick-carousel */ "./node_modules/slick-carousel/slick/slick.js");
-/* harmony import */ var slick_carousel__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(slick_carousel__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var slick_carousel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! slick-carousel */ "./node_modules/slick-carousel/slick/slick.js");
+/* harmony import */ var slick_carousel__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(slick_carousel__WEBPACK_IMPORTED_MODULE_0__);
 var _require = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"),
-    data = _require.data;
+    data = _require.data; // import Webcam from 'webcam-easy';
 
 
 var id, target, options;
@@ -62078,6 +61879,9 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // requir
 
 
 var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+
+var distance = 0;
+var lastCoords = null;
 /**
  * REGISTER SERVICE WORKER
  */
@@ -62092,7 +61896,6 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 //         });
 //     });
 // }
-
 
 $('.floating-btn').on('click', function () {
   console.log('hop');
@@ -62203,7 +62006,8 @@ function startTrip() {
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
-  });
+  }); // POST request to /trips -> store method in Trip Controller gets called
+
   return $.ajax({
     type: 'POST',
     data: {
@@ -62233,7 +62037,8 @@ $('#startTrip').on('click', function () {
     console.log(response);
     trip_id = response.trip_id;
     startTime = new Date();
-    var intervalID = window.setInterval(myCallback, 1000); // id = navigator.geolocation.watchPosition(success, error, options);
+    var intervalID = window.setInterval(myCallback, 1000);
+    id = navigator.geolocation.watchPosition(success, error, options);
   })["catch"](function (error) {
     $('#stopTrip').hide();
     alert('error occured');
@@ -62299,14 +62104,63 @@ $('#stopTrip').on('click', function () {
   $(this).hide(); // clearInterval( interval )
 
   navigator.geolocation.clearWatch(id);
+  $.ajax({
+    type: 'POST',
+    data: {
+      trip_id: trip_id,
+      duration: parseInt(new Date() - startTime) / 1000,
+      distance: distance
+    },
+    url: "/trips/" + trip_id + "/end-trip",
+    success: function success() {
+      alert('success');
+    },
+    error: function error() {
+      alert('error');
+    }
+  }); // alert(parseInt(new Date() - startTime) / 1000 + 'sekund' )
+
   window.location.replace("/trips/" + trip_id);
 });
 
+function degreesToRadians(degrees) {
+  return degrees * Math.PI / 180;
+}
+
+function countDistance(lat1, lon1, lat2, lon2) {
+  var earthRadiusKm = 6371;
+  var dLat = degreesToRadians(lat2 - lat1);
+  var dLon = degreesToRadians(lon2 - lon1);
+  lat1 = degreesToRadians(lat1);
+  lat2 = degreesToRadians(lat2);
+  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return earthRadiusKm * c;
+}
+
 function success(pos) {
   var crd = pos.coords;
-  console.log(crd);
+  var speed = crd.speed;
+  var speedHTML = $('.speed h3');
+  var distanceHTML = $('.distance h3'); // distance += 10;
+
+  if (lastCoords) {
+    distance += countDistance(lastCoords.latitude, lastCoords.longitude, crd.latitude, crd.longitude); // distance += 5;
+  }
+
+  lastCoords = crd;
+  console.log("last coords: ".concat(lastCoords));
+
+  if (!speed) {
+    speed = 0;
+  } else {
+    // get speed in KM/H
+    speed = speed * (8 / 15);
+  }
+
+  speedHTML.text(parseFloat(speed).toFixed(1));
+  distanceHTML.text(parseFloat(distance).toFixed(2));
   console.log(trip_id);
-  return;
   $.ajaxSetup({
     headers: {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -62317,10 +62171,11 @@ function success(pos) {
     data: {
       trip_id: trip_id,
       lat: crd.latitude,
-      "long": crd.longitude
+      "long": crd.longitude,
+      speed: speed
     },
     // url:"{{ route('ajaxRequest.post') }}",
-    url: "/hills/1/track",
+    url: "/hills/" + hill_id + "/track",
     success: function success() {
       console.log({
         trip_id: trip_id,
@@ -62332,10 +62187,7 @@ function success(pos) {
       var err = JSON.parse(xhr.responseText);
       console.log(err);
     }
-  }); //   if (target.latitude === crd.latitude && target.longitude === crd.longitude) {
-  //     console.log('Congratulations, you reached the target');
-  //     navigator.geolocation.clearWatch(id);
-  //   }
+  });
 }
 
 function error(err) {
@@ -62358,31 +62210,27 @@ function getLocation() {
   } else {
     console.log("Geolocation is not supported by this browser.");
   }
-}
-
-function showPosition(position) {
-  console.log("Lat: ".concat(position.coords.latitude, " Long:").concat(position.coords.longitude));
-  console.log({
-    lat: position.coords.latitude
-  });
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-  $.ajax({
-    type: 'POST',
-    data: {
-      lat: position.coords.latitude,
-      "long": position.coords.longitude
-    },
-    // url:"{{ route('ajaxRequest.post') }}",
-    url: "/hills/1/track",
-    success: function success() {
-      console.log('success');
-    }
-  });
-}
+} // function showPosition(position) {
+//     console.log( `Lat: ${position.coords.latitude} Long:${ position.coords.longitude}` )
+//     console.log( { lat : position.coords.latitude } )
+//     $.ajaxSetup({
+//         headers: {
+//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         }
+//     });
+//     $.ajax({
+//         type:'POST',
+//         data: { lat : position.coords.latitude, long : position.coords.longitude },
+//         // url:"{{ route('ajaxRequest.post') }}",
+//         url:"/hills/" + hill_id +  "/track",
+//         success:function(){
+//            console.log( 'success' );
+//         },
+//         error:function() {
+//             alert('error on log')
+//         }
+//      });
+// }
 
 /***/ }),
 

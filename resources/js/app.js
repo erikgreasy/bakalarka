@@ -1,5 +1,5 @@
 const { data } = require('jquery');
-import Webcam from 'webcam-easy';
+// import Webcam from 'webcam-easy';
 var id, target, options;
 import 'slick-carousel';
 
@@ -8,7 +8,8 @@ require('./bootstrap');
 
 var moment = require('moment');
 
-
+var distance = 0;
+var lastCoords = null;
 
 /**
  * REGISTER SERVICE WORKER
@@ -167,6 +168,8 @@ function startTrip() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    // POST request to /trips -> store method in Trip Controller gets called
     return $.ajax({
         type:'POST',
         data: { 
@@ -201,7 +204,7 @@ $('#startTrip').on( 'click', function() {
             startTime = new Date();
 
             var intervalID = window.setInterval(myCallback, 1000);
-        // id = navigator.geolocation.watchPosition(success, error, options);
+            id = navigator.geolocation.watchPosition(success, error, options);
         
     } )
         .catch( error => {
@@ -211,6 +214,8 @@ $('#startTrip').on( 'click', function() {
 
         } )
 } )
+
+
 
 function myCallback() {
     var timeNow = new Date();
@@ -269,18 +274,72 @@ $('#stopTrip').on( 'click', function() {
     
     // clearInterval( interval )
     navigator.geolocation.clearWatch( id )
+    $.ajax({
+        type: 'POST',
+        data: {
+            trip_id: trip_id, 
+            duration: parseInt(new Date() - startTime) / 1000,
+            distance: distance
+        },
+
+        url: "/trips/" + trip_id + "/end-trip",
+        success: function() {
+            alert('success')
+        },
+        error: function() {
+            alert('error')
+        }
+
+    })
+    // alert(parseInt(new Date() - startTime) / 1000 + 'sekund' )
 
     window.location.replace("/trips/" + trip_id);
 } )
 
 
+function degreesToRadians(degrees) {
+    return degrees * Math.PI / 180;
+}
+
+function countDistance(lat1, lon1, lat2, lon2) {
+    var earthRadiusKm = 6371;
+    var dLat = degreesToRadians(lat2-lat1);
+    var dLon = degreesToRadians(lon2-lon1);
+
+    lat1 = degreesToRadians(lat1);
+    lat2 = degreesToRadians(lat2);
+
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    return earthRadiusKm * c;
+}
 
 function success(pos) {
-  var crd = pos.coords;
+    var crd = pos.coords;
+    var speed = crd.speed;
+    var speedHTML = $('.speed h3');
+    var distanceHTML = $('.distance h3');
+    // distance += 10;
+    if(lastCoords) {
+        distance += countDistance( lastCoords.latitude, lastCoords.longitude, crd.latitude, crd.longitude )
+        // distance += 5;
+    }
+    lastCoords = crd;
+    console.log( `last coords: ${lastCoords}` )
 
-  console.log( crd )
-  console.log( trip_id )
-  return
+
+    if( !speed ) {
+        speed = 0;
+    } else {
+        // get speed in KM/H
+        speed = speed * (8/15);
+    }
+    
+    speedHTML.text(parseFloat(speed).toFixed(1))
+    distanceHTML.text( parseFloat(distance).toFixed(2) );
+
+    console.log( trip_id )
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -288,9 +347,14 @@ function success(pos) {
     });
     $.ajax({
         type:'POST',
-        data: { trip_id: trip_id, lat : crd.latitude, long : crd.longitude },
+        data: { 
+            trip_id: trip_id, 
+            lat : crd.latitude, 
+            long : crd.longitude,
+            speed : speed
+        },
         // url:"{{ route('ajaxRequest.post') }}",
-        url:"/hills/1/track",
+        url:"/hills/"+ hill_id +"/track",
 
         success:function(){
             console.log( { trip_id: trip_id, lat : crd.latitude, long : crd.longitude } );
@@ -300,10 +364,6 @@ function success(pos) {
             console.log( err )
         }
     });
-//   if (target.latitude === crd.latitude && target.longitude === crd.longitude) {
-//     console.log('Congratulations, you reached the target');
-//     navigator.geolocation.clearWatch(id);
-//   }
 }
 
 function error(err) {
@@ -334,26 +394,29 @@ function getLocation() {
 }
 
 
-function showPosition(position) {
+// function showPosition(position) {
 
-    console.log( `Lat: ${position.coords.latitude} Long:${ position.coords.longitude}` )
-    console.log( { lat : position.coords.latitude } )
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-        type:'POST',
-        data: { lat : position.coords.latitude, long : position.coords.longitude },
-        // url:"{{ route('ajaxRequest.post') }}",
-        url:"/hills/1/track",
+//     console.log( `Lat: ${position.coords.latitude} Long:${ position.coords.longitude}` )
+//     console.log( { lat : position.coords.latitude } )
+//     $.ajaxSetup({
+//         headers: {
+//             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//         }
+//     });
+//     $.ajax({
+//         type:'POST',
+//         data: { lat : position.coords.latitude, long : position.coords.longitude },
+//         // url:"{{ route('ajaxRequest.post') }}",
+//         url:"/hills/" + hill_id +  "/track",
 
-        success:function(){
-           console.log( 'success' );
-        }
-     });
-}
+//         success:function(){
+//            console.log( 'success' );
+//         },
+//         error:function() {
+//             alert('error on log')
+//         }
+//      });
+// }
 
 
 

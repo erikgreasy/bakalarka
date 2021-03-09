@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Hill;
+use App\Trip;
 use App\User;
 use App\UserHillWishlist;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -32,10 +34,27 @@ class UserController extends Controller
         $order_text = 'Predvolené radenie';
 
         if( isset( $order ) ) {
-            if( $order == 'trips' ) {
-                $users->withCount('trips')->orderBy( 'trips_count', 'desc' );
-                $order_text = 'Najviac dobrodružstiev';
+            switch( $order ) {
+                case 'trips':
+                    $users->withCount('trips')->orderBy( 'trips_count', 'desc' );
+                    $order_text = 'Najviac dobrodružstiev';
+                    break;
+                case 'distance':
+                    $users->withCount(['trips as distance' => function($query) {
+                        $query->select(DB::raw('sum(distance)'));
+                    }])->orderBy('distance', 'DESC');
+                    $order_text = 'Najviac nachodených kilometrov';
+
+                    break;
+                case 'time':
+                    $users->withCount(['trips as duration' => function($query) {
+                        $query->select(DB::raw('sum(duration)'));
+                    }])->orderBy('duration', 'DESC');
+                    
+                    $order_text = 'Najviac času na horách';
+                    break;
             }
+           
         }
 
 

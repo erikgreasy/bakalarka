@@ -40,21 +40,6 @@ class TripController extends Controller
             $trips = $trips->whereIn( 'hill_id', $hills );
         }
 
-        // if( $order == 'newest' ) {
-        //     return view( 'trips.index', [
-        //         'trips' => Trip::all()
-        //     ]);
-        // } else if( $order == 'longest' ) {
-        //     return view( 'trips.index',[
-        //         'trips' => Trip::all()
-        //     ]);
-
-        // } else {
-        //     return view( 'trips.index', [
-        //         'trips' => Trip::all()
-        //     ]);
-        // }
-
         return view( 'trips.index', [
             'trips' => $trips->get()
         ]);
@@ -74,24 +59,14 @@ class TripController extends Controller
     }
 
 
-
-
-
-
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
 
-        // if( request()->ajax() ) {
-        //     $request->date = date( 'Y-m-d h:i:s' );
-        // }
-        // print_r( $_POST );
-        // die();
         $images = $request->file( 'image' );
-        // print_r( $images );
+        $thumbnail = $request->file( 'thumbnail' );
 
         $request->validate([
             // 'date'              => 'required|before_or_equal: today',
@@ -105,6 +80,11 @@ class TripController extends Controller
         $trip->description = $request->description;
         $trip->user_id = Auth::user()->id;
         $trip->hill_id = $request->hill;
+        $trip->duration = 0;
+        $trip->avg_speed = 0;
+        $trip->distance = 0;
+        $trip->save();
+
         // $trip->thumbnail_path = $request->thumbnail;
 
         if( isset( $images ) ) {
@@ -115,17 +95,19 @@ class TripController extends Controller
                 $path = Storage::disk('public')->putFile('uploads', $img );
                 $trip_image->path = '/storage/' . $path;
                 $trip_image->save();
-    
-                
-                
             }
         }
-        $trip->save();
-        
+        if( isset( $thumbnail ) ) {
+            $path = Storage::disk('public')->putFile('uploads', $thumbnail );
+            $trip->thumbnail_path = '/storage/' . $path;
+            $trip->save();
+        }
+
         
         
 
 
+        // if is ajax request, send back trip_id to redirect
         if( request()->ajax() ) {
             return [ 'trip_id'  => $trip->id ];
         }
@@ -173,6 +155,12 @@ class TripController extends Controller
             'description'       => 'required'
         ]);
 
+        $thumbnail = $request->thumbnail;
+        if( $thumbnail ) {
+            echo 'hi';
+        }
+        dd($thumbnail);
+
         $trip->date = $request->date;
         $trip->title = $request->title;
         $trip->description = $request->description;
@@ -209,16 +197,16 @@ class TripController extends Controller
      * New route in web.php that calls this function on POST request, handles buttton click on track view
      * that makes an ajax request and just stores some shit to db
      */
-    public function handle_tracking_trip() {
-        $trip = new Trip();
-        $trip->date = '2020-11-15';
-        $trip->title = 'abc';
-        $trip->description = 'def';
-        $trip->user_id = 1;
-        $trip->hill_id = 1;
-        $trip->save();
+    // public function handle_tracking_trip(Request $request) {
+    //     $trip = new Trip();
+    //     $trip->date = '2020-11-15';
+    //     $trip->title = 'abc';
+    //     $trip->description = 'def';
+    //     $trip->user_id = Auth::user()->id;
+    //     $trip->hill_id = $request->hill_id;
+    //     $trip->save();
 
-    }
+    // }
 
     public function filter() {
         return view( 'trips.filter', [
@@ -226,4 +214,16 @@ class TripController extends Controller
             'mountains' => Mountain::all()
         ]);
     }
+
+    public function addDuration( Request $request, Trip $trip ) {
+        $trip = Trip::find( $trip->id );
+        // return 
+        $trip->duration = $request->duration;
+        $trip->distance = $request->distance;
+        $trip->avg_speed = $trip->logs->sum('speed');
+        $trip->save();
+    }
+
+
 }
+

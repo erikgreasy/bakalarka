@@ -53,4 +53,15 @@
             color: #000;
         }
     }
+
+    .form-group.trip-thumbnail {
+        img {
+            max-width: 100%;
+            position: relative;
+            z-index: 2;
+
+            
+        }
+        
+    }
 }

@@ -14,7 +14,8 @@
         
                     {{ $user->name }}
             </h4>
-            <p>54.2 km</p>
+            <p>{{ $user->walkedDistance() }} km</p>
+            <p>{{ $user->timeOnHills() }} s</p>
         </div>
         
     </div>

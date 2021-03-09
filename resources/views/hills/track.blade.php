@@ -19,12 +19,14 @@
             <div class="row">
                 <div class="distance col-6">
                     <p>Prejdená vzdialenosť</p>
-                    <h3>0.00<span>KM</span></h2>
+                    <h3>0.00</h3>
+                    <span>KM</span>
                 </div>
 
                 <div class="speed col-6">
-                    <p>Priemerná rýchlosť</p>
-                    <h3>0.0<span>KM/H</span></h2>
+                    <p>Rýchlosť</p>
+                    <h3>0.0</h3>
+                    <span>KM/H</span>
                 </div>
             </div>
 

@@ -23,8 +23,8 @@
                     <input type="radio" id="trips" name="order" value="trips" checked>
                     <label for="trips">Dobrodružstiev</label>
 
-                    <input type="radio" id="longest" name="order" value="longest">
-                    <label for="longest">Kilometrov</label>
+                    <input type="radio" id="distance" name="order" value="distance">
+                    <label for="distance">Nachodených kilometrov</label>
 
                     <input type="radio" id="time" name="order" value="time">
                     <label for="time">Času stráveného na horách</label>

@@ -11253,6 +11253,14 @@ section {
   color: #000;
 }
 
+.trip-create .form-group.trip-thumbnail img,
+.trip-edit .form-group.trip-thumbnail img,
+.filter .form-group.trip-thumbnail img {
+  max-width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
 .floating-btn {
   background: #fff;
   position: fixed;
@@ -11372,6 +11380,61 @@ section {
 
 * {
   font-family: "Roboto", sans-serif;
+}
+
+::-moz-placeholder {
+  color: #fff !important;
+}
+
+:-ms-input-placeholder {
+  color: #fff !important;
+}
+
+::placeholder {
+  color: #fff !important;
+}
+
+input.form-control {
+  padding: 10px 0;
+  width: 100%;
+  background-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+  border-radius: 0;
+  border-bottom: 1px solid #fff !important;
+  box-shadow: none !important;
+}
+
+form .form-group {
+  margin-bottom: 30px;
+}
+
+form .form-group input[type=text],
+form .form-group input[type=date],
+form .form-group select,
+form .form-group textarea {
+  border: none;
+  padding-left: 0;
+  border-radius: 0;
+  outline: none;
+  background: transparent;
+  color: #000;
+  border-bottom: 2px solid #868686 !important;
+}
+
+form .form-group input[type=text]:focus,
+form .form-group input[type=date]:focus,
+form .form-group select:focus,
+form .form-group textarea:focus {
+  box-shadow: none !important;
+}
+
+form .form-group input[type=submit] {
+  width: 100%;
+}
+
+form .form-group label {
+  color: #868686;
 }
 
 #stopTrip {
@@ -11549,6 +11612,10 @@ body.floating-options-opened:after {
   text-decoration: none;
 }
 
+.register .form-control {
+  color: #fff !important;
+}
+
 .login {
   color: #fff;
   background-image: url("/images/mountain-bg.jpg");
@@ -11593,26 +11660,12 @@ body.floating-options-opened:after {
   text-decoration: none;
 }
 
-::-moz-placeholder {
+.login label {
   color: #fff !important;
 }
 
-:-ms-input-placeholder {
+.login .form-control {
   color: #fff !important;
-}
-
-::placeholder {
-  color: #fff !important;
-}
-
-input.form-control {
-  padding: 10px 0;
-  width: 100%;
-  background-color: transparent !important;
-  outline: none !important;
-  border: none !important;
-  border-radius: 0;
-  border-bottom: 1px solid #fff !important;
 }
 
 .mobile-navigation-bar {
@@ -11735,37 +11788,5 @@ input.form-control {
 
 .filter .submit {
   margin-top: 50px;
-}
-
-form .form-group {
-  margin-bottom: 30px;
-}
-
-form .form-group input[type=text],
-form .form-group input[type=date],
-form .form-group select,
-form .form-group textarea {
-  border: none;
-  padding-left: 0;
-  border-radius: 0;
-  outline: none;
-  background: transparent;
-  color: #000 !important;
-  border-bottom: 2px solid #868686 !important;
-}
-
-form .form-group input[type=text]:focus,
-form .form-group input[type=date]:focus,
-form .form-group select:focus,
-form .form-group textarea:focus {
-  box-shadow: none !important;
-}
-
-form .form-group input[type=submit] {
-  width: 100%;
-}
-
-form .form-group label {
-  color: #868686;
 }
 

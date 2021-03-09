@@ -16,6 +16,6 @@ class Hill extends Model
     }
 
     public function trips() {
-        return $this->hasMany( 'App\Trip' );
+        return $this->hasMany( 'App\Trip' )->orderBy('id', 'DESC');
     }
 }

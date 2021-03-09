@@ -11,7 +11,7 @@
                 </h3>
             </div>
         </div>
-        @include( 'partials.statistics-tab' )
+        @include( 'partials.user-statistics-tab' )
 
         <div class="container mt-5">
 

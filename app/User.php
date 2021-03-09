@@ -2,9 +2,10 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -39,7 +40,7 @@ class User extends Authenticatable
 
 
     public function trips() {
-        return $this->hasMany( 'App\Trip' );
+        return $this->hasMany( 'App\Trip' )->orderBy('id', 'DESC');
     }
 
     public function wishlists() {
@@ -66,6 +67,15 @@ class User extends Authenticatable
         }
 
         return $hills;
+    }
+
+    public function timeOnHills() {
+        return $this->trips->sum('duration');
+    }
+
+    public function walkedDistance() {
+        return $this->trips->sum('distance');
+
     }
 
 }
