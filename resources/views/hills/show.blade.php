@@ -49,7 +49,7 @@
             <div class="hill-tabs">
                 <a href="#" id="showTrips">Návštevy</a>
                 <a href="#info" id="showInfo">Info</a>
-                <a href="#ranking" id="showRanking">Rebríček</a>
+                {{-- <a href="#ranking" id="showRanking">Rebríček</a> --}}
             </div>
         
             <div class="content-sections">
@@ -79,9 +79,9 @@
                         @endforeach
                     </div>
                 </section>
-                <section id="ranking">
+                {{-- <section id="ranking">
                     toto je ranking
-                </section>
+                </section> --}}
             </div>
 
 
