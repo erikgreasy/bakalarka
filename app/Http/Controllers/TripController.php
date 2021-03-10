@@ -158,8 +158,9 @@ class TripController extends Controller
         $thumbnail = $request->thumbnail;
         if( $thumbnail ) {
             echo 'hi';
+            print_r($thumbnail);
+            die();
         }
-        dd($thumbnail);
 
         $trip->date = $request->date;
         $trip->title = $request->title;

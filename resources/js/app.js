@@ -46,11 +46,19 @@ $( '.floating-btn' ).on( 'click', function() {
     }
 } )
 
+// SLICK
 $('.wishlist-cards').slick({
     infinite: false,
     slidesToShow: 1.5,
     arrows: false,
 })
+
+$('.trip-detail .trip-images').slick({
+    infinite: false,
+    slidesToShow: 1.5,
+    arrows: false,
+})
+
 
 // $( '#info .gallery' ).slick({
 //     slidesToShow: 2

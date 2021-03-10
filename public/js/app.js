@@ -61914,8 +61914,14 @@ $('.floating-btn').on('click', function () {
       transform: "translateY(0)"
     });
   }
-});
+}); // SLICK
+
 $('.wishlist-cards').slick({
+  infinite: false,
+  slidesToShow: 1.5,
+  arrows: false
+});
+$('.trip-detail .trip-images').slick({
   infinite: false,
   slidesToShow: 1.5,
   arrows: false

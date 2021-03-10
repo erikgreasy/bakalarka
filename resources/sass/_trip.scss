@@ -65,3 +65,29 @@
         
     }
 }
+
+// Trip detail
+.trip-detail {
+
+    .trip-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+    
+        i {
+            color: $grey;
+        }
+    }
+
+    .trip-images {
+        margin-top: 30px;
+
+        img {
+            max-width: 100%;
+            border-radius: 6px;
+            -webkit-box-shadow: 5px 10px 33px -15px rgba(0,0,0,0.75);
+            -moz-box-shadow: 5px 10px 33px -15px rgba(0,0,0,0.75);
+            box-shadow: 5px 10px 33px -15px rgba(0,0,0,0.75);
+        }
+    }
+}

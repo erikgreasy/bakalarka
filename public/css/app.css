@@ -11261,6 +11261,26 @@ section {
   z-index: 2;
 }
 
+.trip-detail .trip-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.trip-detail .trip-stats i {
+  color: #868686;
+}
+
+.trip-detail .trip-images {
+  margin-top: 30px;
+}
+
+.trip-detail .trip-images img {
+  max-width: 100%;
+  border-radius: 6px;
+  box-shadow: 5px 10px 33px -15px rgba(0, 0, 0, 0.75);
+}
+
 .floating-btn {
   background: #fff;
   position: fixed;
