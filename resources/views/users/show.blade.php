@@ -38,23 +38,21 @@
         
         
     @can('update', $user)
-        <div class="floating-btn">
-            <i class="fas fa-th"></i>
-        </div>
-        <ul class="floating-btn-options">
-                <li>
-                    <a href="/users/{{ $user->id }}/edit">Upraviť profil</a>
-                </li>
-                <li>
-                    <a href="javascript:void" onclick="$('#logout-form').submit();" class="logout-link">
-                        Logout
-                    </a>
-                    
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </li>
-            </ul>
+        <x-floating_btn>
+
+            <li>
+                <a href="/users/{{ $user->id }}/edit">Upraviť profil</a>
+            </li>
+            <li>
+                <a href="javascript:void" onclick="$('#logout-form').submit();" class="logout-link">
+                    Logout
+                </a>
+                
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </li>
+        </x-floating_btn>
     @endcan
         
 

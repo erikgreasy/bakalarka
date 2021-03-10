@@ -90,10 +90,9 @@
             
         </div>
     </main>
-    <div class="floating-btn">
-        <i class="fas fa-th"></i>
-    </div>
-    <ul class="floating-btn-options">
+
+    <x-floating_btn>
+
         <li>
             <a href="/hills/{{$hill->id}}/track">
                 Vyštartovať teraz
@@ -104,6 +103,7 @@
                 Pridať záznam túry
             </a>
         </li>
-    </ul>
+    </x-floating_btn>
+    
     
 @endsection

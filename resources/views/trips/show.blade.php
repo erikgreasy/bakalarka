@@ -48,17 +48,27 @@
         @endforeach
     </div>
 </main>
-    <div class="floating-btn">
-        <i class="fas fa-th"></i>
-    </div>
-    <ul class="floating-btn-options">
-        <li>
-            <a href="/trips/{{ $trip->id }}/edit">
-                Upraviť trip
-            </a>
-        </li>
+
+<x-floating_btn>
+
+    <li>
+        <a href="/trips/{{ $trip->id }}/edit">
+            Upraviť trip
+        </a>
+    </li>
+    <li>
+        <a href="javascript:void" onclick="$('#delete-form').submit();" class="logout-link">
+            Odstrániť trip
+        </a>
         
-    </ul>
+        <form id="delete-form" action="/trips/{{ $trip->id }}" method="POST" style="display: none;">
+            @method('DELETE')
+            @csrf
+        </form>
+    </li>
+
+</x-floating_btn>
+
     
 
 @endsection
