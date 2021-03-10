@@ -31,15 +31,15 @@
                 <div class="users">
 
                     @foreach ($users as $user)
-                        <a href="">
+                        <a href="/users/{{ $user->id }}">
 
-                            <div class="user">
+                            <article class="user">
                                 <img src="{{ $user->avatar_path }}" alt="">
                                 <h4>
                                     {{ $user->name }}
                                 </h4>
                                 <p>Lorem ipsum dolor sit.</p>
-                            </div>
+                            </article>
                         </a>
                     @endforeach
                 </div>

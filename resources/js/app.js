@@ -58,7 +58,10 @@ $('.trip-detail .trip-images').slick({
     slidesToShow: 1.5,
     arrows: false,
 })
-
+$('.users').slick({
+    infinite: false,
+    slidesToShow: 2.5
+})
 
 // $( '#info .gallery' ).slick({
 //     slidesToShow: 2

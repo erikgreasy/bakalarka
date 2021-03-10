@@ -10953,7 +10953,6 @@ a.text-dark:focus {
 }
 
 .users-ranklist .users {
-  display: flex;
   gap: 20px;
 }
 
@@ -10965,6 +10964,7 @@ a.text-dark:focus {
 .users-ranklist .users .user img {
   max-width: 80%;
   border-radius: 50%;
+  margin: 0 auto;
   margin-bottom: 10px;
 }
 
