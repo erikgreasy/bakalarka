@@ -14,8 +14,10 @@
         
                     {{ $user->name }}
             </h4>
-            <p>{{ $user->walkedDistance() }} km</p>
-            <p>{{ $user->timeOnHills() }} s</p>
+            <div class="user-stats">
+                <p>{{ $user->walkedDistance() }}km</p>
+                <p>{{ $user->timeOnHills() }}s</p>
+            </div>
         </div>
         
     </div>

@@ -91,3 +91,33 @@
         }
     }
 }
+
+.trip-edit {
+    input[name=thumbnail].hide {
+        display: none;
+    }
+
+    .thumbnail-wrapper {
+        position: relative;
+        max-width: 80%;
+        
+        #trip-thumbnail {
+        }
+
+        #remove-thumbnail {
+            background: $danger;
+            color: #fff;
+            height: 40px;
+            width: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            top: 0;
+            right: 0;
+            z-index: 200;
+            transform: translate(50%, -50%);
+            position: absolute;
+        }
+    }
+}

@@ -11095,6 +11095,7 @@ section {
 .statistics-tabs .tab p {
   margin-bottom: 0;
   line-height: 1.2em;
+  color: #868686;
 }
 
 .hill-show .top-section {
@@ -11284,6 +11285,31 @@ section {
   box-shadow: 5px 10px 33px -15px rgba(0, 0, 0, 0.75);
 }
 
+.trip-edit input[name=thumbnail].hide {
+  display: none;
+}
+
+.trip-edit .thumbnail-wrapper {
+  position: relative;
+  max-width: 80%;
+}
+
+.trip-edit .thumbnail-wrapper #remove-thumbnail {
+  background: #e3342f;
+  color: #fff;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  top: 0;
+  right: 0;
+  z-index: 200;
+  transform: translate(50%, -50%);
+  position: absolute;
+}
+
 .floating-btn {
   background: #fff;
   position: fixed;
@@ -11325,6 +11351,13 @@ section {
   width: 100%;
   height: auto;
   border-radius: 50%;
+}
+
+.user-card .user-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: #868686;
 }
 
 .user-card p {

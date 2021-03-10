@@ -23,6 +23,13 @@
             border-radius: 50%;
         }
     }
+
+    .user-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        color: $grey;
+    }
     p {
         margin-bottom: 0;
     }

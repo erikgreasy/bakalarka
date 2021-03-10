@@ -155,11 +155,16 @@ class TripController extends Controller
             'description'       => 'required'
         ]);
 
+
         $thumbnail = $request->thumbnail;
         if( $thumbnail ) {
-            echo 'hi';
-            print_r($thumbnail);
-            die();
+            $path = Storage::disk('public')->putFile('uploads', $thumbnail );
+            $trip->thumbnail_path = '/storage/' . $path;
+        }
+
+        $remove_thumbnail = $request->remove_thumbnail;
+        if($remove_thumbnail) {
+            $trip->thumbnail_path = '/images/image-placeholder.png';
         }
 
         $trip->date = $request->date;

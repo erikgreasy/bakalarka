@@ -11,6 +11,15 @@ var moment = require('moment');
 var distance = 0;
 var lastCoords = null;
 
+$('#remove-thumbnail').click(function(e) {
+    if(confirm('Naozaj chcete odstrániť náhľadový obrázok?')) {
+        $('input[name=remove_thumbnail]').val('true')
+        $('input#thumbnail').show()
+        $('img#trip-thumbnail').hide()
+        $(this).hide()
+    }
+})
+
 /**
  * REGISTER SERVICE WORKER
  */

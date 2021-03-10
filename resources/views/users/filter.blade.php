@@ -19,15 +19,18 @@
 
                 <div class="form-group">
                     <h2>Zoradiť od najviac</h2>
-
-                    <input type="radio" id="trips" name="order" value="trips" checked>
-                    <label for="trips">Dobrodružstiev</label>
-
-                    <input type="radio" id="distance" name="order" value="distance">
-                    <label for="distance">Nachodených kilometrov</label>
-
-                    <input type="radio" id="time" name="order" value="time">
-                    <label for="time">Času stráveného na horách</label>
+                    <div>
+                        <input type="radio" id="trips" name="order" value="trips" checked>
+                        <label for="trips">Dobrodružstiev</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="distance" name="order" value="distance">
+                        <label for="distance">Nachodených kilometrov</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="time" name="order" value="time">
+                        <label for="time">Času stráveného na horách</label>
+                    </div>
                 </div>
 
                 <div class="form-group text-center">

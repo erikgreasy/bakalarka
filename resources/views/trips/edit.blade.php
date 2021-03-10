@@ -20,7 +20,7 @@
                     </a>
                 </h1>
             </header>
-            <form action="/trips/{{ $trip->id }}" method="POST">
+            <form action="/trips/{{ $trip->id }}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
         
@@ -47,11 +47,22 @@
 
                 <div class="form-group trip-thumbnail">
                     <label for="thumbnail">Thumbnail:</label>
+                    
+                    <div class="thumbnail-wrapper">
 
-                    <img src="{{ asset($trip->thumbnail_path) }}" alt="">
-                    <a id="remove-thumbnail" class="btn btn-danger">Odstrániť fotku</a>
+                        @if ($trip->thumbnail_path != '/images/image-placeholder.png')
+                            <img src="{{ asset($trip->thumbnail_path) }}" alt="" id="trip-thumbnail">
+                            <input type="hidden" name="remove_thumbnail" value="false">
+                            <input id="thumbnail" type="file" name="thumbnail" class="hide">
 
-                    <input id="thumbnail" type="file" name="thumbnail" class="">
+                            <a id="remove-thumbnail" class=""><i class="fas fa-times"></i></a>
+                        @else
+                            <input id="thumbnail" type="file" name="thumbnail" >
+    
+                        @endif
+                    </div>
+
+                    
                 </div>
 
                 <div class="form-group text-center">
