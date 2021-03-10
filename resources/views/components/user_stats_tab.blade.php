@@ -4,11 +4,11 @@
         <p>Čas na horách</p>
     </div>
     <div class="tab">
-        <h5>1200</h5>
-        <p>Lorem sit</p>
+        <h5>{{ $user->walkedDistance() }}</h5>
+        <p>Prejdných kilometrov</p>
     </div>
     <div class="tab">
-        <h5>1200</h5>
-        <p>sit ipsum</p>
+        <h5>{{ count($user->trips) }}</h5>
+        <p>Túr na horách</p>
     </div>
 </div>

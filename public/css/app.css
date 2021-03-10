@@ -11069,7 +11069,7 @@ section {
   position: absolute;
   z-index: 2;
   transform: translateY(-90%);
-  padding: 20px;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
   width: 85%;
@@ -11083,6 +11083,8 @@ section {
 .statistics-tabs .tab {
   text-align: center;
   width: 100%;
+  padding: 10px;
+  flex: 1 1 0px;
   border-right: 2px solid #d8d8d8;
 }
 
@@ -11092,6 +11094,7 @@ section {
 
 .statistics-tabs .tab p {
   margin-bottom: 0;
+  line-height: 1.2em;
 }
 
 .hill-show .top-section {

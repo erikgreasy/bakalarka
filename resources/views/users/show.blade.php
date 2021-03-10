@@ -11,7 +11,9 @@
                 </h3>
             </div>
         </div>
-        @include( 'partials.user-statistics-tab' )
+
+
+        <x-user_stats_tab :user="$user" />
 
         <div class="container mt-5">
 

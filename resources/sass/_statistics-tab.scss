@@ -3,7 +3,7 @@
     position: absolute;
     z-index: 2;
     transform: translateY(-90%);
-    padding: 20px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     width: 85%;
@@ -17,6 +17,8 @@
     .tab {
         text-align: center;
         width: 100%;
+        padding: 10px;
+        flex: 1 1 0px;
         border-right: 2px solid rgb(216, 216, 216);
     
         &:last-child {
@@ -25,6 +27,7 @@
         
         p {
             margin-bottom: 0;
+            line-height: 1.2em;
         }
     }
 }
