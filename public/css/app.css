@@ -11475,7 +11475,6 @@ form .form-group textarea {
   outline: none;
   background: transparent;
   color: #000;
-  border-bottom: 2px solid #868686 !important;
 }
 
 form .form-group input[type=text]:focus,
@@ -11624,7 +11623,7 @@ body.floating-options-opened:after {
   margin-bottom: 10px;
 }
 
-.register {
+.login-register {
   color: #fff;
   background-image: url("/images/mountain-bg.jpg");
   background-size: cover;
@@ -11632,7 +11631,7 @@ body.floating-options-opened:after {
   height: 100vh;
 }
 
-.register:after {
+.login-register:after {
   content: "";
   position: absolute;
   z-index: 2;
@@ -11644,7 +11643,7 @@ body.floating-options-opened:after {
   opacity: 0.5;
 }
 
-.register .content {
+.login-register .content {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -11655,72 +11654,29 @@ body.floating-options-opened:after {
   z-index: 3;
 }
 
-.register .login-link {
+.login-register .content .content-wrapper {
+  width: 100%;
+  max-width: 300px;
+}
+
+.login-register .content .content-wrapper h2 {
+  margin-bottom: 30px;
+}
+
+.login-register .other-link {
   position: absolute;
   width: 100%;
   bottom: 60px;
   text-align: center;
 }
 
-.register .login-link a {
+.login-register .other-link a {
   color: #fff;
   display: block;
   text-decoration: none;
 }
 
-.register .form-control {
-  color: #fff !important;
-}
-
-.login {
-  color: #fff;
-  background-image: url("/images/mountain-bg.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-}
-
-.login:after {
-  content: "";
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: #000;
-  opacity: 0.5;
-}
-
-.login .content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-  z-index: 3;
-}
-
-.login .register-link {
-  position: absolute;
-  width: 100%;
-  bottom: 60px;
-  text-align: center;
-}
-
-.login .register-link a {
-  color: #fff;
-  display: block;
-  text-decoration: none;
-}
-
-.login label {
-  color: #fff !important;
-}
-
-.login .form-control {
+.login-register .form-control {
   color: #fff !important;
 }
 

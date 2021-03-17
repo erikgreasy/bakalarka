@@ -1,0 +1,57 @@
+
+.login-register {
+    color: #fff;
+    background-image: url( '/images/mountain-bg.jpg' );
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+
+    &:after {
+        content: "";
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: #000;
+        opacity: .5;
+    }
+
+    .content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        z-index: 3;
+
+        .content-wrapper {
+            width: 100%;
+            max-width: 300px;
+
+            h2 {
+                margin-bottom: 30px;
+            }
+        }
+    }
+
+    .other-link {
+        position: absolute;
+        width: 100%;
+        bottom: 60px;
+        text-align: center;
+        
+        a {
+            color: #fff;
+            display: block;
+            text-decoration: none;
+        }
+    }
+
+    .form-control  {
+        color: #fff !important;
+    }
+}
