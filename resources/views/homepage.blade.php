@@ -30,18 +30,38 @@
                 </div>
                 <div class="users">
 
-                    @foreach ($users as $user)
-                        <a href="/users/{{ $user->id }}">
+                    <a href="/users/{{ $most_distance->id }}">
 
-                            <article class="user">
-                                <img src="{{ $user->avatar_path }}" alt="">
-                                <h4>
-                                    {{ $user->name }}
-                                </h4>
-                                <p>Lorem ipsum dolor sit.</p>
-                            </article>
-                        </a>
-                    @endforeach
+                        <article class="user">
+                            <img src="{{ $most_distance->avatar_path }}" alt="">
+                            <h4>
+                                {{ $most_distance->name }}
+                            </h4>
+                            <p>Najviac nachodených kilometrov.</p>
+                        </article>
+                    </a>
+
+                    <a href="/users/{{ $most_trips->id }}">
+
+                        <article class="user">
+                            <img src="{{ $most_trips->avatar_path }}" alt="">
+                            <h4>
+                                {{ $most_trips->name }}
+                            </h4>
+                            <p>Najviac absolvovaných dobrodružstiev.</p>
+                        </article>
+                    </a>
+
+                    <a href="/users/{{ $most_time->id }}">
+
+                        <article class="user">
+                            <img src="{{ $most_time->avatar_path }}" alt="">
+                            <h4>
+                                {{ $most_time->name }}
+                            </h4>
+                            <p>Najviac času stráveného na horách.</p>
+                        </article>
+                    </a>
                 </div>
             </section>
         </div>

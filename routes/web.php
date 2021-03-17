@@ -23,7 +23,13 @@ Route::get('/', function () {
     if( Auth::check() ) {
         return view( 'homepage', [
             'trips' => Trip::latest()->take(3)->get(),
-            'users' => User::all(),
+            'most_distance' => User::take(1)->withCount(['trips as distance' => function($query) {
+                $query->select(DB::raw('sum(distance)'));
+            }])->orderBy('distance', 'DESC')->get()[0],
+            'most_trips'    => User::take(1)->withCount('trips')->orderBy( 'trips_count', 'desc' )->get()[0],
+            'most_time'     => User::take(1)->withCount(['trips as duration' => function($query) {
+                $query->select(DB::raw('sum(duration)'));
+            }])->orderBy('duration', 'DESC')->get()[0],
             'hills' => Auth::user()->getWishlistHills(),
         ] );
     }
