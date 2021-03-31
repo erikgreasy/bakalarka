@@ -23,7 +23,7 @@ class CreateHillsTable extends Migration
             $table->bigInteger('mountain_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign( 'mountain_id' )->references( 'id' )->on( 'mountains' );
+            $table->foreign( 'mountain_id' )->references( 'id' )->on( 'mountains' )->onDelete('cascade');
         });
     }
 
