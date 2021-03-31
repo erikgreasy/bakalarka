@@ -14,6 +14,16 @@
     -webkit-box-shadow: 5px 10px 33px -15px rgba(0,0,0,0.75);
     -moz-box-shadow: 5px 10px 33px -15px rgba(0,0,0,0.75);
     box-shadow: 5px 10px 33px -15px rgba(0,0,0,0.75);
+
+    @include media-breakpoint-up(lg) {
+        transform: translateY(0);
+        position: relative;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        background: none;
+    }
+
     .tab {
         text-align: center;
         width: 100%;
@@ -25,10 +35,24 @@
             border: none;
         }
         
+        h5 {
+            @include media-breakpoint-up(md) {
+                font-size: 22px;
+            }
+
+            @include media-breakpoint-up(lg) {
+                font-size: 35px;
+            }
+        }
+
         p {
             margin-bottom: 0;
             line-height: 1.2em;
             color: $grey;
+
+            @include media-breakpoint-up(lg) {
+                font-size: 20px;
+            }
         }
     }
 }

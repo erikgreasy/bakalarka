@@ -8,10 +8,13 @@
 @import '~bootstrap/scss/bootstrap';
 
 // Partials
+@import 'partials/card';
+@import 'partials/desktop-navbar';
+
+
 @import 'explore';
 @import 'homepage';
 @import 'wishlist-hill-card';
-@import 'card';
 @import 'statistics-tab';
 @import 'hill';
 @import 'trip';
@@ -91,6 +94,13 @@ form {
 
 main {
     padding-bottom: 100px;
+
+    @include media-breakpoint-up(md) {
+        padding-bottom: 150px;
+    }
+    @include media-breakpoint-up(lg) {
+        padding-top: 70px;
+    }
 }
 
 a {
@@ -168,52 +178,20 @@ body.floating-options-opened {
 .btn-outline {
     color: #fff;
     border: 2px solid #fff;
+
+    &:hover {
+        color: #fff;
+    }
 }
 
-.welcome {
-    background-image: url( '/images/mountain-bg.jpg' );
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    &:after {
-        content: "";
-        position: absolute;
-        z-index: 2;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        background: #000;
-        opacity: .5;
-    }
-    .content {
-        position: relative;
-        text-align: center;
-        z-index: 3;
-        color: #fff;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        .text {
-            position: relative;
-            top: -20px;
-            padding: 0 50px;
-        }
-        .buttons {
-            position: absolute;
-            bottom: 50px;
-            a {
-                margin-bottom: 10px;
-            }
-        }
-     
-    }
-}
+
 
 // PAGES
 @import 'pages/login-register';
+@import 'pages/welcome';
+@import 'pages/offline';
+
+
 
 
 

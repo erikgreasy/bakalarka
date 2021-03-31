@@ -5,7 +5,7 @@
     </div>
     <div class="tab">
         <h5>{{ $user->walkedDistance() }}</h5>
-        <p>Prejdných kilometrov</p>
+        <p>Prejdených kilometrov</p>
     </div>
     <div class="tab">
         <h5>{{ count($user->trips) }}</h5>

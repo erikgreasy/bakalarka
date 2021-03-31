@@ -8,10 +8,12 @@
             <h1>Turista</h1>
             <p>Si pripravený odštartovať nové dobrodružstvo?</p>
         </div>
-        <div class="buttons">
+        <div class="buttons-wrapper">
             <p><small>Pre pokračovanie:</small></p>
-            <a href="/login" class="btn btn-block btn-full">Prihlásiť sa</a>
-            <a href="#" class="btn btn-block btn-outline">Registrovať sa</a>
+            <div class="buttons">
+                <a href="/login" class="btn btn-full">Prihlásiť sa</a>
+                <a href="/register" class="btn btn-outline">Registrovať sa</a>
+            </div>
     
         </div>
     </div>

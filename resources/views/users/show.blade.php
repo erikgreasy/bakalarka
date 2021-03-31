@@ -24,7 +24,7 @@
         <section>
             <div class="section-heading">
                 <h2>Dobrodružstvá</h2>
-                <a href="#">Zobraziť všetky</a>
+                {{-- <a href="#">Zobraziť všetky</a> --}}
         
             </div>
             @forelse ($user->trips as $trip)

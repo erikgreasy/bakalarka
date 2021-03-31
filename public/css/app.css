@@ -10903,6 +10903,92 @@ a.text-dark:focus {
   }
 }
 
+.card {
+  background: #fff;
+  box-shadow: 5px 10px 33px -15px rgba(0, 0, 0, 0.75);
+  margin-bottom: 20px;
+  border-radius: 6px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 95px auto;
+  gap: 10px;
+}
+
+@media (min-width: 768px) {
+  .card {
+    grid-template-columns: 130px auto;
+    padding: 15px;
+  }
+}
+
+.card .image {
+  width: 95px;
+  height: 95px;
+}
+
+@media (min-width: 768px) {
+  .card .image {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+.card .image img {
+  border-radius: 6px;
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.card h4 {
+  font-size: 17px;
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .card h4 {
+    font-size: 20px;
+  }
+}
+
+.card p {
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .card p {
+    font-size: 16px;
+  }
+}
+
+.card .description {
+  color: #868686;
+  line-height: 1.2em;
+}
+
+@media (min-width: 768px) {
+  .card .description {
+    font-size: 16px;
+  }
+}
+
+#desktopNavbar {
+  display: none;
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 2000;
+  box-shadow: 0px -4px 31px -18px rgba(0, 0, 0, 0.75);
+}
+
+@media (min-width: 992px) {
+  #desktopNavbar {
+    display: flex;
+  }
+}
+
 .explore-links {
   font-size: 18px;
   font-weight: 600;
@@ -10910,6 +10996,12 @@ a.text-dark:focus {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+
+@media (min-width: 768px) {
+  .explore-links {
+    padding: 25px 0;
+  }
 }
 
 .explore-links a {
@@ -10934,12 +11026,18 @@ a.text-dark:focus {
   font-size: 20px;
 }
 
+@media (min-width: 768px) {
+  .explore-heading h3 {
+    font-size: 25px;
+  }
+}
+
 .explore-heading .filter {
   font-size: 12px;
 }
 
 .homepage {
-  padding: 50px 0;
+  padding-top: 100px;
   overflow: hidden;
 }
 
@@ -10994,6 +11092,11 @@ section {
   box-shadow: 5px 10px 33px -15px rgba(0, 0, 0, 0.75);
   border-radius: 6px;
   width: 200px;
+  transition: 0.3s;
+}
+
+.wishlist-hill-card:hover {
+  transform: translateY(-10px);
 }
 
 .wishlist-hill-card img {
@@ -11026,44 +11129,6 @@ section {
   overflow: visible !important;
 }
 
-.card {
-  background: #fff;
-  box-shadow: 5px 10px 33px -15px rgba(0, 0, 0, 0.75);
-  margin-bottom: 20px;
-  border-radius: 6px;
-  padding: 10px;
-  display: grid;
-  grid-template-columns: 95px auto;
-  gap: 10px;
-}
-
-.card .image {
-  width: 95px;
-  height: 95px;
-}
-
-.card .image img {
-  border-radius: 6px;
-  height: 100%;
-  width: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.card h4 {
-  font-size: 17px;
-  margin-bottom: 0;
-}
-
-.card p {
-  margin-bottom: 0;
-}
-
-.card .description {
-  color: #868686;
-  line-height: 1.2em;
-}
-
 .statistics-tabs {
   background: #fff;
   position: absolute;
@@ -11080,6 +11145,15 @@ section {
   box-shadow: 5px 10px 33px -15px rgba(0, 0, 0, 0.75);
 }
 
+@media (min-width: 992px) {
+  .statistics-tabs {
+    transform: translateY(0);
+    position: relative;
+    box-shadow: none;
+    background: none;
+  }
+}
+
 .statistics-tabs .tab {
   text-align: center;
   width: 100%;
@@ -11092,10 +11166,28 @@ section {
   border: none;
 }
 
+@media (min-width: 768px) {
+  .statistics-tabs .tab h5 {
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 992px) {
+  .statistics-tabs .tab h5 {
+    font-size: 35px;
+  }
+}
+
 .statistics-tabs .tab p {
   margin-bottom: 0;
   line-height: 1.2em;
   color: #868686;
+}
+
+@media (min-width: 992px) {
+  .statistics-tabs .tab p {
+    font-size: 20px;
+  }
 }
 
 .hill-show .top-section {
@@ -11111,6 +11203,12 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (min-width: 992px) {
+  .hill-show .top-section {
+    top: -3vh;
+  }
 }
 
 .hill-show .top-section:after {
@@ -11198,6 +11296,12 @@ section {
   margin-bottom: 20px;
   border-radius: 6px;
   overflow: hidden;
+}
+
+@media (min-width: 992px) {
+  .trip-detail .trip-thumbnail {
+    transform: translateY(-20px);
+  }
 }
 
 .trip-detail .trip-thumbnail img {
@@ -11339,7 +11443,7 @@ section {
 }
 
 .user-card .ranking {
-  font-size: 30px;
+  font-size: 22px;
   font-weight: 600;
 }
 
@@ -11351,6 +11455,10 @@ section {
   width: 100%;
   height: auto;
   border-radius: 50%;
+}
+
+.user-card h4 {
+  font-size: 1.2rem;
 }
 
 .user-card .user-stats {
@@ -11500,6 +11608,18 @@ main {
   padding-bottom: 100px;
 }
 
+@media (min-width: 768px) {
+  main {
+    padding-bottom: 150px;
+  }
+}
+
+@media (min-width: 992px) {
+  main {
+    padding-top: 70px;
+  }
+}
+
 a {
   text-decoration: none !important;
 }
@@ -11577,50 +11697,8 @@ body.floating-options-opened:after {
   border: 2px solid #fff;
 }
 
-.welcome {
-  background-image: url("/images/mountain-bg.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-}
-
-.welcome:after {
-  content: "";
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: #000;
-  opacity: 0.5;
-}
-
-.welcome .content {
-  position: relative;
-  text-align: center;
-  z-index: 3;
+.btn-outline:hover {
   color: #fff;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.welcome .content .text {
-  position: relative;
-  top: -20px;
-  padding: 0 50px;
-}
-
-.welcome .content .buttons {
-  position: absolute;
-  bottom: 50px;
-}
-
-.welcome .content .buttons a {
-  margin-bottom: 10px;
 }
 
 .login-register {
@@ -11680,6 +11758,103 @@ body.floating-options-opened:after {
   color: #fff !important;
 }
 
+.welcome {
+  background-image: url("/images/mountain-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+.welcome:after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #000;
+  opacity: 0.5;
+}
+
+.welcome .content {
+  position: relative;
+  text-align: center;
+  z-index: 3;
+  color: #fff;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome .content .text {
+  position: relative;
+  top: -20px;
+  padding: 0 50px;
+}
+
+@media (min-width: 992px) {
+  .welcome .content .text {
+    top: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  .welcome .content .text h1 {
+    font-size: 4em;
+  }
+}
+
+@media (min-width: 992px) {
+  .welcome .content .text p {
+    font-size: 1.2em;
+  }
+}
+
+.welcome .content .buttons-wrapper {
+  position: absolute;
+  bottom: 50px;
+}
+
+@media (min-width: 992px) {
+  .welcome .content .buttons-wrapper {
+    bottom: 100px;
+  }
+}
+
+@media (min-width: 992px) {
+  .welcome .content .buttons-wrapper .buttons {
+    display: flex;
+    gap: 20px;
+  }
+}
+
+.welcome .content .buttons-wrapper a {
+  margin-bottom: 10px;
+  display: block;
+}
+
+#offline .content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+}
+
+#offline img {
+  max-width: 200px;
+}
+
+#offline .message {
+  margin-top: 30px;
+  font-size: 20px;
+  text-align: center;
+  color: #868686;
+}
+
 .mobile-navigation-bar {
   background: #fff;
   position: fixed;
@@ -11702,6 +11877,12 @@ body.floating-options-opened:after {
   font-size: 20px;
 }
 
+@media (min-width: 992px) {
+  .mobile-navigation-bar {
+    display: none;
+  }
+}
+
 .user-profile {
   padding-bottom: 150px;
   overflow: hidden;
@@ -11717,6 +11898,12 @@ body.floating-options-opened:after {
   background-image: url("/images/mountain-bg.jpg");
   background-size: cover;
   background-position: center;
+}
+
+@media (min-width: 992px) {
+  .user-profile .top-section {
+    height: 55vh;
+  }
 }
 
 .user-profile .top-section:after {
@@ -11736,6 +11923,18 @@ body.floating-options-opened:after {
   position: relative;
   z-index: 2;
   top: 7vh;
+}
+
+@media (min-width: 768px) {
+  .user-profile .top-section .user-details {
+    top: 12vh;
+  }
+}
+
+@media (min-width: 992px) {
+  .user-profile .top-section .user-details {
+    top: 15vh;
+  }
 }
 
 .user-profile .top-section .user-details .user-avatar {

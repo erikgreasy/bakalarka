@@ -11,7 +11,7 @@
     -moz-box-shadow: 13px 13px 33px -15px rgba(0,0,0,0.75);
     box-shadow: 13px 13px 33px -15px rgba(0,0,0,0.75);
     .ranking {
-        font-size: 30px;
+        font-size: 22px;
         font-weight: 600;
     }
     .avatar-wrapper {
@@ -22,6 +22,10 @@
             height: auto;
             border-radius: 50%;
         }
+    }
+
+    h4 {
+        font-size: 1.2rem;
     }
 
     .user-stats {

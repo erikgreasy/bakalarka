@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+// const workboxPlugin = require('workbox-webpack-plugin')
 
 /*
  |--------------------------------------------------------------------------
@@ -13,3 +14,16 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
+
+ 
+// if (mix.inProduction()) {
+//     mix.webpackConfig({
+//         plugins: [
+//             new workboxPlugin.InjectManifest({
+//                 swSrc: path.resolve(__dirname, 'public') + '/sw-offline.js', // more control over the caching
+//                 swDest: 'sw.js', // the service-worker file name
+//                 // importsDirectory: 'service-worker' // have a dedicated folder for sw files
+//             })
+//         ]
+//     })
+// // }

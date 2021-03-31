@@ -63,6 +63,10 @@ Route::get( 'my-profile', function() {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/offline', function() {
+    return view('offline');
+});
+
 Route::get( '/hills/{hill}/track', 'HillController@track' );
 
 

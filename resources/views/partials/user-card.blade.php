@@ -16,6 +16,7 @@
             </h4>
             <div class="user-stats">
                 <p>{{ $user->walkedDistance() }}km</p>
+                |
                 <p>{{ $user->timeOnHills() }}s</p>
             </div>
         </div>

@@ -1,0 +1,21 @@
+#offline {
+
+    .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 70vh;
+    }
+
+    img {
+        max-width: 200px;
+    }
+
+    .message {
+        margin-top: 30px;
+        font-size: 20px;
+        text-align: center;
+        color: $grey;
+    }
+}

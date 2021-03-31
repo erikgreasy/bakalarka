@@ -1,129 +1,231 @@
-var STATIC_CACHE = 'static-cache-v1';
-var DYAMIC_CACHE = 'dynamic-cache-v1';
+var STATIC_CACHE = 'static-cache-v3';
+var DYNAMIC_CACHE = 'dynamic-cache';
+var AVATARS_CACHE = 'avatars';
+var UPLOADS_CACHE = 'uploads';
+
+var allowedCaches = [
+    STATIC_CACHE,
+    DYNAMIC_CACHE,
+    AVATARS_CACHE,
+    UPLOADS_CACHE
+]
+
+const staticFiles = [
+    'css/app.css',
+    'js/app.js',
+    'js/manifest.json',
+    '/storage/avatars/default.png',
+    '/images/image-placeholder.png',
+    '/images/mountain-bg.jpg',
+    '/images/offline.png',
+    '/offline',
+    'icons/maskable_icon_x192.png',
+    'favicon.ico',
+    // '/hills',
+    // '/trips',
+    // '/my-profile',
+];
 
 
-self.addEventListener( 'install', function(event) {
-    console.log( 'Installing SW' )
+self.addEventListener('install', event => {
+    console.log('Service worker installing...');
 
-    // event.waitUntil extends the lifetime of the install 
-    // event until the passed promise resolves successfully. 
-    // If the promise rejects, the installation is considered 
-    // a failure and this service worker is abandoned (if an 
-    // older version is running, it stays active).
+    // Add a call to skipWaiting here
     event.waitUntil(
-        caches.open( STATIC_CACHE )
-            .then( cache => {
-                console.log( 'Precaching app shell' );
+        caches.open(STATIC_CACHE)
+        .then(cache => {
+            return cache.addAll(staticFiles);
+        })
+    );
+});
 
-                // cache.addAll will reject if any of the resources fail to 
-                // cache. This means the service worker will only install if 
-                // all of the resources in cache.addAll have been cached.
-                return cache.addAll([
-                    'js/app.js',
-                    'css/app.css',
-                    
-                ]);
-            } )
-            .catch( err => {
-                console.error( err )
-            } )
-    )
-    
-} )
+  
+self.addEventListener('activate', event => {
+        // delete any caches that aren't in expectedCaches
+        // which will get rid of static-v1
+        event.waitUntil(
+        caches.keys().then(keys => Promise.all(
+            keys.map(key => {
+            if (!allowedCaches.includes(key)) {
+                return caches.delete(key);
+            }
+            })
+        )).then(() => {
+            console.log('V2 now ready to handle fetches!');
+        })
+    );
+});
+
+self.addEventListener('fetch', event => {
+    // Parse the URL:
+    var requestURL = new URL(event.request.url);
+    if (requestURL.origin == location.origin) {
+        if(event.request.method == 'GET') {
+
+        // AVATARS 
+        if (new RegExp('\/(.*)storage\/avatars\/(.*).(?:jpg|jpeg|png|gif|svg)$').test(requestURL)) {
+
+            event.respondWith(
+                caches.open(AVATARS_CACHE)
+                .then(cache => {
+
+                    return cache.match(requestURL)
+                    .then(response => {
+                        if(response) {
+                            return response;
+                        }
+                        return fetch(requestURL)
+                        .then(res => {
+                            cache.put(requestURL, res.clone());
+                            return res;
+                        })
+                        .catch(err => {
+                            return caches.match('/images/placeholder.png');
+                        })
+                    })
+                })
+             
+            )
+            
+        } else if(new RegExp('\/(.*)storage\/uploads\/(.*).(?:jpg|jpeg|png|gif|svg)$').test(requestURL)) {
+            event.respondWith(
+                caches.open(UPLOADS_CACHE)
+                .then(cache => {
+
+                    return cache.match(requestURL)
+                    .then(response => {
+                        if(response) {
+                            return response;
+                        }
+                        return fetch(requestURL)
+                        .then(res => {
+                            cache.put(requestURL, res.clone());
+                            return res;
+                        })
+                        .catch(err => {
+                            return caches.match('/storage/uploads/default.png');
+                        })
+                    })
+                })
+            )
+             
+        }else {
+            // var networkDataReceived = false;
+
+            // var networkUpdate = fetch( event.request ).then( res => {
+            //     networkDataReceived = true;
+            //     console.log('update page network')
+            // } )
 
 
+            // caches.match(event.request).then(res => {
+            //     if( res ) {
+            //         if( !networkDataReceived ) {
+            //             console.log('update page cache')
+            //         }
+            //         return res;
+            //     }
 
-self.addEventListener( 'activate', function(event) {
-    // var cacheAllowlist = ['static-cache-v1', 'dynamic-cache-v1'];
-    console.log( 'Activating SW' )
-    event.waitUntil(
-        caches.keys()
-            .then( function( keyList ) {
+            // }).catch(err => {
+            //     return networkUpdate;
+            // })
 
-                return Promise.all( keyList.map( key => {
-                    if( key !== STATIC_CACHE && key !== DYAMIC_CACHE ) {
-                        console.log( 'Removing old cache.', key );
-                        return caches.delete(key);
-                    }
-                } ) )
-                // return Promise.all(
-                //     cacheNames.map( function( cacheName ) {
-                //         if( cacheAllowlist.indexOf( cacheName ) === -1 ) {
-                //             return caches.delete( cacheName );
-                //         }
-                //     } )
-                // )
-        } )
-    )
-    return self.clients.claim();
-} )
+            // evt.respondWith(fromCache(evt.request));
 
-
-
-self.addEventListener('fetch', function(event) {
-
-
-    event.respondWith(
-        // try the network
-        fetch( event.request )
-            .then( res => {
-                return caches.open( DYAMIC_CACHE )
-                    .then( cache => {
-                        // put in cache if success
-                        cache.put( event.request.url, res.clone() );
-                        return res;
-                    } )
-            } )
-            .catch( err => {
-                // fallback to cache
-                return caches.match( event.request )
-                .then( (res) => {
-                    if( res == undefined ) {
-                        return new Response('undefined response - OFFLINE');
-                    }
-                    return res;
-                } )
+            event.respondWith(
                 
-            } )
-    )
+                caches.match(event.request)
+                    .then(response => {
 
-    // event.respondWith(
-    //     caches.match(event.request)
-    //         .then(function(response) {
-    //             // Cache hit - return response
-    //             if (response) {
-    //                 return response;
-    //             }
-    //             return fetch(event.request)
-    //                 .then( function( response ) {
-    //                     // Check if we receive valid response. Basic indicates request from our origin.
-    //                     if( !response || response.status !== 200 || response.type !== 'basic' ) {
-    //                         return response;
-    //                     }
+                        if (response) {
+                            console.log('Found ', event.request.url, ' in cache');
+                            return response;
+                        }
+
+                        console.log(event.request)
+
+                        return caches.open( DYNAMIC_CACHE ).then(cache => {
+                            return cache.keys().then(keys => {
+                                return fetch(event.request).then(res => {
+                                    cache.put( event.request, res.clone() )
+                                    return res;
+                                })
+                            })
+                        })
+
+                    }).catch(error => {
+
+                        // Respond with custom offline page
+                        return caches.match('/offline');
+                    })
+                );
+
+            event.waitUntil(
+                caches.open(STATIC_CACHE).then(cache => {
+                    cache.match(event.request).then(res => {
+                        if(res) {
+                            console.log(event.request.url + ' found in static cache')
+                            return;
+                        }
+
+                    })
+
+                    update( event.request, DYNAMIC_CACHE );
+                    // caches.open(DYNAMIC_CACHE).then(cache => {
+                    //     return cache.match(event.request).then(res => {
+                    //         if(res) {
+                    //             return fetch(event.request).then(res => {
+                    //                 return cache.put(event.request, res);
+                    //             })
+                    //         }
+                    //     })
+                    // })
+                    // fetch(event.request).then(res => {
+                    //     return cache.put(event.request, res)
+                    // })
+                    // .catch(err => {
+                    //     console.log(err)
+                    // })
+                })
+            )
+       
+    
 
 
-    //                     // IMPORTANT: Clone the response. A response is a stream
-    //                     // and because we want the browser to consume the response
-    //                     // as well as the cache consuming the response, we need
-    //                     // to clone it so we have two streams.
-    //                     var responseToCache = response.clone();
-
-    //                     caches.open( DYNAMIC_CACHE )
-    //                         .then( function( cache ) {
-                                
-    //                             cache.put( event.request, responseToCache );
-    //                         } )
-    //                         .catch( err => console.log( err ) )
-    //                     return response;
-
-    //                 } ) // end of fetch.then function
-    //                 .catch( err => {
-    //                     console.log( err )
-    //                 } )
-                    
-    //         }
-    //     )
-    // ); // end of event.respondWith
+    
+            // event.respondWith(fromCache(event.request));
+            // event.waitUntil(update(event.request));
+        
+        }
+    } // END request GET
+    } // END location origin
 });
 
 
+// function fromCache(request) {
+//     return caches.open(STATIC_CACHE).then(function (cache) {
+//         return cache.match(request).then(function (matching) {
+//                 return matching
+
+            
+//         }).catch(err => {
+//             return cache.match('/offline')
+//         })
+//     });
+// }
+
+
+function update(request, cache_name) {
+    caches.open(cache_name).then(cache => {
+        return cache.match(request).then(res => {
+            if(res) {
+                return fetch(request).then(res => {
+                    return cache.put(request, res);
+                })
+                .catch(err => {
+                    console.error(request.url + ' err in update')
+                })
+            }
+        })
+    })
+}

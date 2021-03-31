@@ -41,7 +41,7 @@ class TripController extends Controller
         }
 
         return view( 'trips.index', [
-            'trips' => $trips->get()
+            'trips' => $trips->orderBy('id', 'DESC')->get()
         ]);
     }
 

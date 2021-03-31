@@ -1,11 +1,11 @@
 <div class="statistics-tabs">
     <div class="tab">
-        <h5>1200</h5>
-        <p>Sit amet</p>
+        <h5>{{ $hill->height }}</h5>
+        <p>m.n.m.</p>
     </div>
     <div class="tab">
-        <h5>1200</h5>
-        <p>Lorem sit</p>
+        <h5>{{ count( $hill->trips ) }}</h5>
+        <p>dobrodružstiev</p>
     </div>
     <div class="tab">
         <h5>1200</h5>

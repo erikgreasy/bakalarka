@@ -17,11 +17,7 @@
                 @endforeach
     
             </div>
-            {{-- <ul>
-                    <li>
-                        
-                    </li>
-            </ul> --}}
+           
         </div>
     </main>
     
