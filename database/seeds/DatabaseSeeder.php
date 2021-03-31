@@ -1,8 +1,5 @@
 <?php
 
-use HillSeeder;
-use UserSeeder;
-use MountainSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
