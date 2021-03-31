@@ -14,7 +14,7 @@ const staticFiles = [
     'css/app.css',
     'js/app.js',
     'js/manifest.json',
-    '/storage/avatars/default.png',
+    '/images/avatars/default.png',
     '/images/image-placeholder.png',
     '/images/mountain-bg.jpg',
     '/images/offline.png',

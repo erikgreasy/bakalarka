@@ -109,7 +109,7 @@ class UserController extends Controller
         if( isset( $request->avatar ) ) {
 
             // User had profile picture before, delete that picture
-            if( $user->avatar_path != '/storage/avatars/default.png' ) {
+            if( $user->avatar_path != '/images/default.png' ) {
                 $exploded_path = explode( '/', $user->avatar_path );
                 $file = $exploded_path[ count( $exploded_path ) -1 ];
                 Storage::delete( '/public/avatars/' . $file );
