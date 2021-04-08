@@ -16,7 +16,7 @@
                 {{ $trip->hill->name }}
             </p>
             <p class="description">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium eum vel sint
+                {{ Str::limit( $trip->description, 80 ) }}
             </p>
         </div>
         
