@@ -14,16 +14,13 @@ const staticFiles = [
     'css/app.css',
     'js/app.js',
     'js/manifest.json',
-    '/images/avatars/default.png',
+    '/images/default.png',
     '/images/image-placeholder.png',
     '/images/mountain-bg.jpg',
     '/images/offline.png',
     '/offline',
     'icon/maskable_icon_x192.png',
     'favicon.ico',
-    // '/hills',
-    // '/trips',
-    // '/my-profile',
 ];
 
 
