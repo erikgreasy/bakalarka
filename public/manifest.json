@@ -2,7 +2,7 @@
     "name": "Turista",
     "short_name": "Turista",
     "start_url": "/",
-    "display": "fullscreen",
+    "display": "standalone",
     "theme_color": "#2A464F",
     "background_color": "#fff",
     "icons": [
