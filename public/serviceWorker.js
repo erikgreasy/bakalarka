@@ -13,7 +13,7 @@ var allowedCaches = [
 const staticFiles = [
     'css/app.css',
     'js/app.js',
-    'js/manifest.json',
+    'manifest.json',
     '/images/default.png',
     '/images/image-placeholder.png',
     '/images/mountain-bg.jpg',
