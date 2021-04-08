@@ -19,7 +19,7 @@ const staticFiles = [
     '/images/mountain-bg.jpg',
     '/images/offline.png',
     '/offline',
-    'icons/maskable_icon_x192.png',
+    'icon/maskable_icon_x192.png',
     'favicon.ico',
     // '/hills',
     // '/trips',
