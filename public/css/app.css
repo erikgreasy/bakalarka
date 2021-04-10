@@ -11546,6 +11546,10 @@ section {
   font-family: "Roboto", sans-serif;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 ::-moz-placeholder {
   color: #fff !important;
 }
@@ -11989,6 +11993,15 @@ body.floating-options-opened:after {
 
 .filter {
   min-height: 100vh;
+  width: 100%;
+  top: 0;
+  position: absolute;
+  transition: 0.3s;
+  transform: translateX(100%);
+}
+
+.filter.open {
+  transform: translateX(0);
 }
 
 .filter header .reset {

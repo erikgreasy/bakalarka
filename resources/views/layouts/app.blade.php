@@ -29,20 +29,20 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 </head>
 <body class="">
-    @auth
+    {{-- @auth
         <header>
             <x-desktop_navbar></x-desktop_navbar>
         </header>
-    @endauth
+    @endauth --}}
     <div id="app">
         
         <div>
 
             @yield('content')
         </div>
-        @auth
+        {{-- @auth
             @include( 'partials.navigation' )
-        @endauth
+        @endauth --}}
     </div>
 
     <!-- Scripts -->
