@@ -40,7 +40,7 @@ class User extends Authenticatable
 
 
     public function trips() {
-        return $this->hasMany( 'App\Trip' )->orderBy('id', 'DESC');
+        return $this->hasMany( 'App\Trip' )->orderBy('id', 'DESC')->limit(10);
     }
 
     public function wishlists() {
