@@ -1,7 +1,12 @@
 <?php
 
+use App\Hill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiControllers\HillController;
+use App\Http\Controllers\ApiControllers\TripController;
+use App\Http\Controllers\ApiControllers\UserController;
+use App\Http\Controllers\ApiControllers\MountainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +22,22 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::get('/hills', function() {
+//     return Hill::all();
+// });
+
+Route::get('/hills', [HillController::class, 'index']);
+Route::get('/hill/{id}', [HillController::class, 'show']);
+
+
+Route::get( '/mountains', [MountainController::class, 'index']);
+
+Route::get('/trips', [TripController::class, 'index']);
+Route::get('/trip/{id}', [TripController::class, 'show']);
+
+
+
+Route::get('/users', [UserController::class, 'index']);
+Route::get('/user/{id}', [UserController::class, 'show']);
+Route::get('/current-user', [UserController::class, 'currentUserId']);
