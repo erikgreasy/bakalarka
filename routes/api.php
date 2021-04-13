@@ -23,10 +23,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::get('/hills', function() {
-//     return Hill::all();
-// });
-
 Route::get('/hills', [HillController::class, 'index']);
 Route::get('/hill/{id}', [HillController::class, 'show']);
 
@@ -35,7 +31,7 @@ Route::get( '/mountains', [MountainController::class, 'index']);
 
 Route::get('/trips', [TripController::class, 'index']);
 Route::get('/trip/{id}', [TripController::class, 'show']);
-
+Route::post( '/trips', [TripController::class, 'store'] );
 
 
 Route::get('/users', [UserController::class, 'index']);
