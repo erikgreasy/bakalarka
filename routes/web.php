@@ -89,6 +89,9 @@ Auth::routes();
 // Route::get('/register', function() {
 //     return view('auth.register');
 // })->name('register');
+Route::get('/app-shell', function() {
+    return view('home');
+});
 
 
 Route::get('{any}', function () {
