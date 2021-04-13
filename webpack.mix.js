@@ -1,5 +1,7 @@
 const mix = require('laravel-mix');
 
+require('laravel-mix-workbox');
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -12,4 +14,10 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js').sourceMaps()
-    .sass('resources/sass/app.scss', 'public/css');
+    .sass('resources/sass/app.scss', 'public/css')
+    // .injectManifest({
+    //     swSrc: './resources/js/service-worker.js',
+    //     swDest: 'sw.js',
+    //     maximumFileSizeToCacheInBytes: 50000000,
+        
+    // });
