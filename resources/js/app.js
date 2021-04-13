@@ -9,25 +9,7 @@ import VueRouter from 'vue-router'
 
 import Vue from 'vue'
 import App from './App.vue'
-import Home from './views/Home.vue';
-
-import Hills from './views/hills/Hills.vue';
-import ShowHill from './views/hills/ShowHill.vue';
-
-import Users from './views/users/Users.vue';
-import ShowUser from './views/users/ShowUser.vue';
-
-import Trips from './views/trips/Trips.vue';
-import ShowTrip from './views/trips/ShowTrip.vue';
-
-
-import Login from './views/Login.vue';
-
-import PageNotFound from './views/PageNotFound.vue';
-
-
-
-
+import routes from './routes';
 
 Vue.use(VueRouter)
 
@@ -46,63 +28,10 @@ Vue.use(VueRouter)
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 
-const routes = [
-    { 
-      path: '/', 
-      name: 'Home',
-      component: Home 
-    },
-    { 
-        path: '/hills', 
-        name: 'Hills',
-        component: Hills 
-      },
-    {
-        path: '/users',
-        name: 'Users',
-        component: Users
-    },
-    {
-        path: '/my-profile',
-        name: 'My profile',
-        component: ShowUser
-    },
-    {
-      path: '/user/:id',
-      name: 'ShowUser',
-      component: ShowUser
-    },
-    {
-      path: '/hill/:id',
-      name: 'ShowHill',
-      component: ShowHill
-    },
-    {
-      path: '/trips',
-      name: 'Trips',
-      component: Trips
-    },
-    {
-      path: '/trip/:id',
-      name: 'ShowTrip',
-      component: ShowTrip
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
-    },
-    {
-      path: "*",
-      name: '404',
-      component: PageNotFound
-    }
-    
-  ]
-  const router = new VueRouter({
+const router = new VueRouter({
     routes, // short for `routes: routes`
     mode: 'history'
-  })
+})
   
 
 /**
@@ -111,7 +40,7 @@ const routes = [
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
- const app = new Vue({
+const app = new Vue({
     el: '#app',
     components: { App },
     router,
