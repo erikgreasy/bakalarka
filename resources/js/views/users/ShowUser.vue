@@ -39,7 +39,7 @@
             </div>
 
                 
-                
+            <float-btn></float-btn>
             <!-- @can('update', $user)
                 <x-floating_btn>
 
@@ -69,11 +69,13 @@
 <script>
 import StatisticsTab from '../../components/StatisticsTab';
 import TripCard from '../../components/TripCard';
+import FloatBtn from '../../components/FloatBtn';
 
 export default {
     components: {
         StatisticsTab,
-        TripCard
+        TripCard,
+        FloatBtn
     },
     data() {
         return {
