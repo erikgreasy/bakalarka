@@ -5,10 +5,26 @@
         <div class="container">
 
             <div>
-                <h1 class="homepage-title">Ahoj {{ user.name }}</h1>
+                <h1 class="homepage-title">Ahoj {{ loggedUser.name }}</h1>
                 <p class="welcome-line">Kam sa dnes vydáš na dobrodružstvo?</p>
             </div>
-            <!-- @include('partials.my-hills') -->
+
+            <section class="my-hills">
+                <div class="section-heading">
+                    <h2>Uložené kopce</h2>
+
+                </div>
+                <div class="wishlist-cards" v-if="wishlist.length">
+                    <div v-for="hill in wishlist" :key="hill.id">
+                        <wishlist-hill :hill="hill"></wishlist-hill>
+                    </div>
+                </div>
+                <div v-else>
+                    Zatiaľ žiadne uložené kopce
+                </div>
+            </section>
+            
+
             <section>
                 <div class="section-heading">
 
@@ -70,15 +86,20 @@
 
 <script>
 import TripCard from '../components/TripCard';
+import WishlistHill from '../components/WishlistHill';
+// import VueSlickCarousel from 'vue-slick-carousel'
+// import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 
 export default {
     components: {
-        TripCard
+        TripCard,
+        WishlistHill,
+        // VueSlickCarousel,
     },
     data() {
         return {
             trips: [],
-            user: {}
+            wishlist: [],
         }
     },
 
@@ -89,24 +110,25 @@ export default {
                     this.trips = data.data
                 })
         },
-        getLoggedUser() {
-            axios.get('/api/current-user')
+
+        getWishlist() {
+            axios.get('/api/wishlist')
                 .then(data => {
-                    if( data.data ) {
-                        this.user = data.data
-                    }
+                    this.wishlist = data.data
                 })
-                .catch(err => {
-                    console.log(err)
-                })
-        },
+        }
         
         
     },
-    
+    computed: {
+        loggedUser() {
+            return this.$store.getters.getLoggedUser
+        }
+    },
     created() {
         this.getTrips()
-        this.getLoggedUser()
+        this.getWishlist()
+
     }
     
 }

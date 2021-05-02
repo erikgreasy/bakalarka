@@ -9,7 +9,7 @@
     
             <div class="explore-heading">
                 <h3>Najnovšie dobrodružstvá</h3>
-                <a href="/trips/filter"><i class="fas fa-filter fa-2x"></i></a>
+                <a @click="openFilter"><i class="fas fa-filter fa-2x"></i></a>
             </div>
 
             <div v-for="trip in trips" :key="trip.id">
@@ -17,21 +17,23 @@
                 <trip-card :trip="trip"></trip-card>
 
             </div>
-            <!-- @foreach ($trips as $trip)
-                @include('partials.trip-card')
-            
-            @endforeach -->
+
         </div>
+
+        <trips-filter></trips-filter>
     </main>
 </template>
 
 <script>
 import TripCard from '../../components/TripCard';
+import TripsFilter from '../../components/TripsFilter';
 
 export default {
     components: {
-        TripCard
+        TripCard,
+        TripsFilter
     },
+    
     data() {
         return {
             trips: []
@@ -39,14 +41,22 @@ export default {
     },
 
     methods: {
-        getTrips() {
-            axios.get( '/api/trips' )
+        getTrips( order = 'newest', hills = [] ) {
+            let url = '/api/trips?order=' + order;
+            hills.forEach(element => {
+                url += '&hills[]=' + element;
+            });
+            
+            axios.get( url )
                 .then( data => {
                     this.trips = data.data
                 } )
                 .catch(err => {
                     console.log(err)
                 })
+        },
+        openFilter() {
+            document.querySelector('.filter').classList.add('open')
         }
     },
 

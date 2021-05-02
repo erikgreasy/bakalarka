@@ -4,8 +4,9 @@
             <i class="fas fa-th"></i>
         </div>
         <ul class="floating-btn-options">
-            <li>Link1</li>
-            <li>Link2</li>
+            <slot>
+                
+            </slot>
         </ul>
     </div>
 </template>
@@ -15,8 +16,29 @@ export default {
 
     methods: {
         open() {
-            alert('open')
+
+            const optionsHeight = $( '.floating-btn-options' ).height() - 62
+            console.log(optionsHeight)
+            $( 'body' ).toggleClass( 'floating-options-opened' )
+            $( '.floating-btn-options' ).toggleClass( 'active' )
+            
+            if( $('body').hasClass('floating-options-opened') ) {
+                $( '.floating-btn' ).css({
+                    transform: `translateY(-${optionsHeight}px)`
+                })
+            } else {
+                $( '.floating-btn' ).css({
+                    transform: `translateY(0)`
+                })
+            }
         }
+    },
+    mounted() {
+        $( '.floating-btn-options a' ).on('click', function() {
+            $( 'body' ).toggleClass( 'floating-options-opened' )
+
+        })
+
     }
     
 }

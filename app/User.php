@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -9,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -40,7 +41,7 @@ class User extends Authenticatable
 
 
     public function trips() {
-        return $this->hasMany( 'App\Trip' )->orderBy('id', 'DESC')->limit(10);
+        return $this->hasMany( 'App\Trip' );
     }
 
     public function wishlists() {

@@ -11,6 +11,6 @@ class UserHillWishlist extends Model
 
 
     public function hill() {
-        return $this->belongsTo( 'App\Hill' );
+        return $this->belongsTo( 'App\Hill' )->with('mountain');
     }
 }

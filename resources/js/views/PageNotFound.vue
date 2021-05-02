@@ -1,7 +1,9 @@
 <template>
-    <div>
-        404
-    </div>
+    <main>
+        <div class="container">
+            404
+        </div>
+    </main>
 </template>
 
 <script>

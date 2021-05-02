@@ -3,10 +3,12 @@
 use App\Hill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiControllers\AuthController;
 use App\Http\Controllers\ApiControllers\HillController;
 use App\Http\Controllers\ApiControllers\TripController;
 use App\Http\Controllers\ApiControllers\UserController;
 use App\Http\Controllers\ApiControllers\MountainController;
+use App\Http\Controllers\ApiControllers\WishlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,12 +20,20 @@ use App\Http\Controllers\ApiControllers\MountainController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+// Route::post('/login', [AuthController::class, 'login']);
+// Route::post('/register', [AuthController::class, 'register']);
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::group(['middleware' => ['auth:sanctum']], function() {
+    Route::get('/hills', [HillController::class, 'index']);
+    Route::get('/wishlist', [WishlistController::class, 'index']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+});
+
+Route::get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/hills', [HillController::class, 'index']);
 Route::get('/hill/{id}', [HillController::class, 'show']);
 
 
@@ -32,8 +42,12 @@ Route::get( '/mountains', [MountainController::class, 'index']);
 Route::get('/trips', [TripController::class, 'index']);
 Route::get('/trip/{id}', [TripController::class, 'show']);
 Route::post( '/trips', [TripController::class, 'store'] );
+Route::put('/trip/{id}', [TripController::class, 'update']);
+Route::delete('/trip/{id}', [TripController::class, 'destroy']);
+
 
 
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/user/{id}', [UserController::class, 'show']);
-Route::get('/current-user', [UserController::class, 'currentUserId']);
+Route::put('/user/{id}', [UserController::class, 'update']);
+

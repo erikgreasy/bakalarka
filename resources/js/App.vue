@@ -1,7 +1,9 @@
 <template>
     <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light" id="desktopNavbar">
-            <a class="navbar-brand" href="/">Turista</a>
+            <router-link to="/" class="navbar-brand">
+                Turista
+            </router-link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -72,7 +74,7 @@ export default {
     },
     methods: {
         getLoggedUser() {
-            axios.get('/api/current-user')
+            axios.get('/api/user')
                 .then(data => {
                     if( data.data ) {
                         this.user = data.data
@@ -85,6 +87,8 @@ export default {
     },
     created() {
         this.getLoggedUser()
+        this.$store.dispatch('setLoggedUser')
+        this.$store.dispatch('setUsers')
     }
 }
 </script>

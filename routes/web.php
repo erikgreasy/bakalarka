@@ -40,7 +40,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('home');
 // });
 
-// Auth::routes();
+Auth::routes();
 
 
 // Route::get('hills/filter', 'HillController@filter');
@@ -63,7 +63,7 @@ use Illuminate\Support\Facades\Route;
 // } )->middleware( 'auth' );
 
 
-Auth::routes();
+// Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/offline', function() {

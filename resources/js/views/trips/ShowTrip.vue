@@ -1,78 +1,78 @@
 <template>
-    
-    <main class="trip-detail">
+    <div>
 
-        <div class="trip-thumbnail">
-            <img v-bind:src="trip.thumbnail_path" alt="">
-            
-        </div>
-        <div>
-            <div class="container">
-
-                <h2>{{ trip.title }}</h2>
-                <p class="trip-user">{{ trip.user.name }}</p>
-                <div class="trip-stats">
-                    <div>
-                        <i class="fas fa-map-marker-alt"></i>
-                        {{ trip.hill.name }}
-                    </div>
-                    <div>
-                        <i class="far fa-calendar"></i>
-                        {{ trip.date }}
-                    </div>
-                    
-                    <div v-if="trip.distance">
-                        <i class="fas fa-hiking"></i>
-                        {{ trip.distance }} km
-                    </div>
-
-                    <div v-if="trip.duration">
-                        <div>
-                            <i class="far fa-clock"></i>
-                            {{ trip.duration }} s
-                        </div>
-                    </div>
-
-                </div>
-                <p class="trip-desc">
-
-                    {{ trip.description  }}
-                </p>
-            </div>
-        </div>
-        <div class="trip-images">
-            <!-- @foreach( $trip->images as $image )
-                <img src="{{ $image->path }}" alt="">
+        <main class="trip-detail">
+            <div class="trip-thumbnail">
+                <img v-bind:src="trip.thumbnail_path" alt="">
                 
-            @endforeach -->
-        </div>
-    </main>
+            </div>
+            <div>
+                <div class="container">
 
-    <!-- <x-floating_btn>
+                    <h2>{{ trip.title }}</h2>
+                    <router-link :to="'/user/' + trip.user.id" class="trip-user">{{ trip.user.name }}</router-link>
+                    <div class="trip-stats">
+                        <div>
+                            <i class="fas fa-map-marker-alt"></i>
+                            {{ trip.hill.name }}
+                        </div>
+                        <div>
+                            <i class="far fa-calendar"></i>
+                            {{ trip.date }}
+                        </div>
+                        
+                        <div v-if="trip.distance">
+                            <i class="fas fa-hiking"></i>
+                            {{ trip.distance }} km
+                        </div>
 
-        <li>
-            <a href="/trips/{{ $trip->id }}/edit">
-                Upraviť trip
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void" onclick="$('#delete-form').submit();" class="logout-link">
-                Odstrániť trip
-            </a>
-            
-            <form id="delete-form" action="/trips/{{ $trip->id }}" method="POST" style="display: none;">
-                @method('DELETE')
-                @csrf
-            </form>
-        </li>
+                        <div v-if="trip.duration">
+                            <div>
+                                <i class="far fa-clock"></i>
+                                {{ trip.duration }} s
+                            </div>
+                        </div>
 
-    </x-floating_btn> -->
+                    </div>
+                    <p class="trip-desc">
+
+                        {{ trip.description  }}
+                    </p>
+                </div>
+            </div>
+            <div class="trip-images">
+                <!-- @foreach( $trip->images as $image )
+                    <img src="{{ $image->path }}" alt="">
+                    
+                @endforeach -->
+            </div>
+        </main>
+
+        <float-btn v-if="trip.user.id == loggedUser.id">
+            <li>
+                <router-link :to="'/trip/' + trip.id + '/edit'">
+                    Upraviť trip
+                </router-link>
+            </li>
+            <li>
+                <a href="#" @click="deleteTrip" class="logout-link">
+                    Odstrániť trip
+                </a>
+            </li>
+        </float-btn>
+
+    </div>
 
 </template>
 
 
 <script>
+import FloatBtn from '../../components/FloatBtn';
+
 export default {
+    components: {
+        FloatBtn
+    },
     data() {
         return {
             trip: {}
@@ -87,6 +87,17 @@ export default {
                 .catch(err => {
                     console.log(err);
                 })
+        },
+        deleteTrip() {
+            axios.delete( '/api/trip/' + this.trip.id )
+                .then(data => {
+                    this.$router.push( '/' );
+                })
+        }
+    },
+    computed: {
+        loggedUser() {
+            return this.$store.getters.getLoggedUser
         }
     },
     created() {

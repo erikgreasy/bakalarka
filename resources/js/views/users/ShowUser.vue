@@ -6,20 +6,27 @@
                         <img v-bind:src="user.avatar_path" alt="profile picture" class="user-avatar">
                         <h3 class="username">
                             
-                            {{ user.name }} 
+                            {{ user.name }}
                         </h3>
                     </div>
                 </div>
 
-                <statistics-tab></statistics-tab>
+                <statistics-tab :data="[user.distance, user.numOfTrips, user.time]"></statistics-tab>
                 <!-- <x-user_stats_tab :user="$user" /> -->
 
                 <div class="container mt-5">
 
-                <!-- @can('update', $user)
-                    @include('partials.my-hills')
-                @endcan -->
-
+                <section class="my-hills" v-if="wishlist.length">
+                    <div class="section-heading">
+                        <h2>Uložené kopce</h2>
+                    </div>
+                    <div class="wishlist-cards">
+                            <div v-for="hill in wishlist" :key="hill.id">
+                                <wishlist-hill :hill="hill"></wishlist-hill>
+                            </div>
+                    </div>
+                </section>
+            
                 <section>
                     <div class="section-heading">
                         <h2>Dobrodružstvá</h2>
@@ -39,30 +46,23 @@
             </div>
 
                 
-            <float-btn></float-btn>
-            <!-- @can('update', $user)
-                <x-floating_btn>
-
-                    <li>
-                        <a href="/users/{{ $user->id }}/edit">Upraviť profil</a>
-                    </li>
-                    <li>
-                        <a href="javascript:void" onclick="$('#logout-form').submit();" class="logout-link">
-                            Logout
-                        </a>
-                        
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </li>
-                </x-floating_btn>
-            @endcan -->
+            <float-btn v-if="user.id == loggedUser.id">
+                <li>
+                    <router-link :to="'/user/' + user.id + '/edit'">
+                        Upraviť profil
+                    </router-link>
+                </li>
+                <li>
+                    
+                    <a @click="logout" class="logout-link">
+                        Logout
+                    </a>
+                   
+                </li>
+            </float-btn>
+               
                 
-
-                
-                
-                
-            </div>
+        </div>
     </div>
 </template>
 
@@ -70,31 +70,53 @@
 import StatisticsTab from '../../components/StatisticsTab';
 import TripCard from '../../components/TripCard';
 import FloatBtn from '../../components/FloatBtn';
+import WishlistHill from '../../components/WishlistHill';
+
 
 export default {
     components: {
         StatisticsTab,
         TripCard,
-        FloatBtn
+        FloatBtn,
+        WishlistHill
     },
     data() {
         return {
-            user: {}
+            user: {},
+            wishlist: []
         }
     },
     methods: {
         getUser() {
             axios.get( '/api/user/' + this.$route.params.id )
                 .then(data => {
-                    this.user = data.data
+                    this.user = data.data.data
                 })
                 .catch(err => {
                     this.$router.push('/')
                 })
+        },
+        getWishlist() {
+            axios.get('/api/wishlist')
+                .then(data => {
+                    this.wishlist = data.data
+                })
+        },        
+        logout() {
+            axios.post('/logout')
+                .then(res => {
+                    window.location.replace("/");
+                })
+        }
+    },
+    computed: {
+        loggedUser() {
+            return this.$store.getters.getLoggedUser
         }
     },
     created() {
         this.getUser()
+        this.getWishlist()
     }
 }
 </script>

@@ -35,11 +35,6 @@ export default {
         UserCard,
         UsersFilter
     },
-    data() {
-        return {
-            users: []
-        }
-    },
     methods: {
         getUsers( order = 'trips' ) {
             axios.get('/api/users?order=' + order)
@@ -54,8 +49,10 @@ export default {
             document.querySelector('.filter').classList.add('open')
         }
     },
-    created() {
-        this.getUsers();
-    }
+    computed: {
+        users() {
+            return this.$store.getters.allUsers
+        }
+    },
 }
 </script>
