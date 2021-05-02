@@ -18,8 +18,7 @@
                         <!-- {{ $trip->hill->name }} -->
                     </p>
                     <p class="description">
-                        {{ trip.description }}
-                        <!-- {{ Str::limit( $trip->description, 80 ) }} -->
+                        {{ trip.description.substring(0, 100) }}...
                     </p>
                 </div>
             

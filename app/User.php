@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Hill;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
@@ -45,30 +46,30 @@ class User extends Authenticatable
     }
 
     public function wishlists() {
-        return $this->hasMany( 'App\UserHillWishlist' );
+        return $this->belongsToMany( Hill::class, 'wishlists' )->with('mountain');
     }
 
-    public function isInWishlist( $hill_id ) {
-        if( ! $this->getUserwishlist( $hill_id )->isEmpty() ) {
-            return true;
-        }
-        return false;
-    }
+    // public function isInWishlist( $hill_id ) {
+    //     if( ! $this->getUserwishlist( $hill_id )->isEmpty() ) {
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
-    public function getUserwishlist( $hill_id ) {
-        $userwishlist = UserHillWishlist::where( 'hill_id', $hill_id )->where( 'user_id', $this->id )->get();
-        return $userwishlist;
-    }
+    // public function getUserwishlist( $hill_id ) {
+    //     $userwishlist = UserHillWishlist::where( 'hill_id', $hill_id )->where( 'user_id', $this->id )->get();
+    //     return $userwishlist;
+    // }
 
-    public function getWishlistHills() {
-        $wishlists = UserHillWishlist::where( 'user_id', $this->id )->orderBy('id','desc')->get();
-        $hills = [];
-        foreach( $wishlists as $wish ) {
-            $hills[] = $wish->hill;
-        }
+    // public function getWishlistHills() {
+    //     $wishlists = UserHillWishlist::where( 'user_id', $this->id )->orderBy('id','desc')->get();
+    //     $hills = [];
+    //     foreach( $wishlists as $wish ) {
+    //         $hills[] = $wish->hill;
+    //     }
 
-        return $hills;
-    }
+    //     return $hills;
+    // }
 
     public function timeOnHills() {
         return $this->trips->sum('duration');

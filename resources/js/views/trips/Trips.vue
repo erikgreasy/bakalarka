@@ -9,7 +9,7 @@
     
             <div class="explore-heading">
                 <h3>Najnovšie dobrodružstvá</h3>
-                <a @click="openFilter"><i class="fas fa-filter fa-2x"></i></a>
+                <a href="#" @click.prevent="openFilter"><i class="fas fa-filter fa-2x"></i></a>
             </div>
 
             <div v-for="trip in trips" :key="trip.id">

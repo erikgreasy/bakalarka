@@ -21,6 +21,8 @@ class CreateHillsTable extends Migration
             $table->decimal('latitude', 10, 8);
             $table->decimal('longitude', 11, 8);
             $table->bigInteger('mountain_id')->unsigned();
+            $table->string( 'thumbnail_path' )->default( '/images/image-placeholder.png' );
+
             $table->timestamps();
 
             $table->foreign( 'mountain_id' )->references( 'id' )->on( 'mountains' )->onDelete('cascade');

@@ -12,9 +12,11 @@
                     <h2>{{ trip.title }}</h2>
                     <router-link :to="'/user/' + trip.user.id" class="trip-user">{{ trip.user.name }}</router-link>
                     <div class="trip-stats">
-                        <div>
+                        <div v-if="trip.hill">
                             <i class="fas fa-map-marker-alt"></i>
-                            {{ trip.hill.name }}
+                            <router-link :to="'/hill/' + trip.hill.id">
+                                {{ trip.hill.name }}
+                            </router-link>
                         </div>
                         <div>
                             <i class="far fa-calendar"></i>

@@ -46,7 +46,7 @@ class TripController extends Controller
         $trip->duration = 0;
         $trip->avg_speed = 0;
         $trip->distance = 0;
-        // $trip->save();
+        $trip->save();
         
         return $trip;
     }
@@ -77,6 +77,21 @@ class TripController extends Controller
 
         $trip->delete();
         
+        return $trip;
+    }
+
+    public function endTrip( Request $request ) {
+        $request->validate([
+            'trip_id'   => 'required',
+            'duration'  => 'required',
+            'distance'  => 'required'
+        ]);
+        $trip = Trip::find( $request->trip_id );
+        $trip->duration = $request->duration;
+        $trip->distance = $request->distance;
+        $trip->avg_speed = $trip->logs->sum('speed');
+        $trip->save();
+
         return $trip;
     }
 

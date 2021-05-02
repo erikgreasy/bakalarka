@@ -9,11 +9,9 @@
 
                     <h4>
                         {{ hill.name }}
-                        <!-- {{ $hill->name }} -->
                     </h4>
                     <p>
                         {{ hill.height }} m.n.m.
-                        <!-- {{ $hill->height }} m.n.m. -->
                     </p>
                     <p class="description">
                         {{ hill.description }}

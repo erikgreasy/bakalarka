@@ -20,6 +20,7 @@ class CreateLogsTable extends Migration
             $table->decimal('longtitude', 11, 8);
             $table->timestamp( 'time' )->useCurrent();
             $table->timestamps();
+            $table->double( 'speed' );
 
             $table->foreign( 'trip_id' )->references( 'id' )->on( 'trips' )->onDelete( 'cascade' );
         });

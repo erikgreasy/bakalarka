@@ -19,6 +19,12 @@ class CreateTripsTable extends Migration
             $table->longText('description');
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('hill_id')->unsigned();
+            $table->bigInteger( 'duration' );
+            $table->double('distance');
+            $table->double('avg_speed');
+            $table->timestamp('date')->useCurrent();
+            $table->string( 'thumbnail_path' )->default( '/images/image-placeholder.png' );
+
             $table->timestamps();
 
             $table->foreign( 'user_id' )->references( 'id' )->on( 'users' )->onDelete('cascade');

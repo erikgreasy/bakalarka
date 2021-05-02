@@ -11,9 +11,6 @@
                     <a href="#" @click="closeFilter" class="close-edit">
                         <i class="fas fa-times"></i>
                     </a>
-                    <!-- <a href="/users" class="close-edit">
-                        <i class="fas fa-times"></i>
-                    </a> -->
                 </h1>
             </header>
 

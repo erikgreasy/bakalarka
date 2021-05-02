@@ -3,6 +3,7 @@
 use App\Hill;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiControllers\LogController;
 use App\Http\Controllers\ApiControllers\AuthController;
 use App\Http\Controllers\ApiControllers\HillController;
 use App\Http\Controllers\ApiControllers\TripController;
@@ -25,8 +26,10 @@ use App\Http\Controllers\ApiControllers\WishlistController;
 
 Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::get('/hills', [HillController::class, 'index']);
-    Route::get('/wishlist', [WishlistController::class, 'index']);
+    Route::get('/wishlists', [WishlistController::class, 'index']);
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::post('/logs', [LogController::class, 'store']);
 
 });
 
@@ -35,6 +38,9 @@ Route::get('/user', function (Request $request) {
 });
 
 Route::get('/hill/{id}', [HillController::class, 'show']);
+Route::post('/hill/{id}/wishlist', [WishlistController::class, 'store']);
+Route::get('/hill/{id}/wishlist', [WishlistController::class, 'show']);
+Route::delete('/hill/{id}/wishlist', [WishlistController::class, 'destroy']);
 
 
 Route::get( '/mountains', [MountainController::class, 'index']);
@@ -44,6 +50,7 @@ Route::get('/trip/{id}', [TripController::class, 'show']);
 Route::post( '/trips', [TripController::class, 'store'] );
 Route::put('/trip/{id}', [TripController::class, 'update']);
 Route::delete('/trip/{id}', [TripController::class, 'destroy']);
+Route::post('/end-trip', [TripController::class, 'endTrip']);
 
 
 

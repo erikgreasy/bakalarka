@@ -11,33 +11,28 @@
                         <h1>
                             {{ hill.name }}
                         </h1>
-                        <p>
+                        <p v-if="hill.mountain">
                             {{ hill.mountain.name }}
                         </p>
                     </div>
 
-                    <!-- @if( $userhillwishlist ) -->
-                        <div class="add-to-wishlist">
+                        <div class="add-to-wishlist" v-if="inWishlist">
                             <!-- <form action="/userhillwishlist/{{ $userhillwishlist->id }}" method="POST"> -->
                                 <!-- @csrf
                                 @method( 'DELETE' ) -->
                                 <!-- <input type="hidden" name="hill" value="{{ $hill->id }}"> -->
-                                <button type="submit">
+                                <button @click.prevent="removeFromWishlist">
                                     <i class="fas fa-star"></i>
                                 </button>
                             <!-- </form> -->
                         </div>
-                    <!-- @else -->
-                        <div class="add-to-wishlist">
-                            <!-- <form action="/userhillwishlist" method="POST">
-                                @csrf
-                                <input type="hidden" name="hill" value="{{ $hill->id }}">
-                                <button type="submit">
+
+                        <div class="add-to-wishlist" v-else>
+                            
+                                <button @click.prevent="addToWishlist">
                                     <i class="far fa-star"></i>
                                 </button>
-                            </form> -->
                         </div>
-                    <!-- @endif -->
 
                 
                 </div>
@@ -49,7 +44,7 @@
 
                 <div class="hill-tabs">
                     <a href="#" id="showTrips" @click.prevent="showTrips">Návštevy</a>
-                    <a href="#info" id="showInfo" @click.prevent="showInfo">Info</a>
+                    <a href="#" id="showInfo" @click.prevent="showInfo">Info</a>
                 </div>
             
                 <div class="content-sections">
@@ -106,7 +101,8 @@ export default {
     },
     data() {
         return {
-            hill: {}
+            hill: {},
+            inWishlist: false
         }
     },
     methods: {
@@ -126,10 +122,34 @@ export default {
         showTrips() {
             $('.content-sections section').hide();
             $('#trips').show();
+        },
+
+        addToWishlist() {
+            axios.post('/api/hill/' + this.$route.params.id + '/wishlist')
+                .then(res => {
+                    this.inWishlist = true
+                })
+        },
+
+        removeFromWishlist() {
+            axios.delete('/api/hill/' + this.$route.params.id + '/wishlist')
+                .then(res => {
+                    this.inWishlist = false;
+                })
+        },
+
+        isInWishlist() {
+            axios.get('/api/hill/' + this.$route.params.id + '/wishlist')
+                .then(res => {
+                    if(res.data) {
+                        this.inWishlist = true
+                    }
+                })
         }
     },
     created() {
         this.getHill()
+        this.isInWishlist()
     }
     
 }

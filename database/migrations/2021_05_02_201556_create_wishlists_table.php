@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserHillWishlistsTable extends Migration
+class CreateWishlistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateUserHillWishlistsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_hill_wishlists', function (Blueprint $table) {
-            $table->id();
+        Schema::create('wishlists', function (Blueprint $table) {
             $table->bigInteger( 'user_id' )->unsigned();
             $table->bigInteger( 'hill_id' )->unsigned();
-            $table->timestamps();           
             $table->foreign( 'user_id' )->references( 'id' )->on( 'users' )->onDelete( 'cascade' );
             $table->foreign( 'hill_id' )->references( 'id' )->on( 'hills' )->onDelete( 'cascade' );
         });
@@ -30,6 +28,6 @@ class CreateUserHillWishlistsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_hill_wishlists');
+        Schema::dropIfExists('wishlists');
     }
 }

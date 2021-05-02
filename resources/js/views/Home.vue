@@ -16,6 +16,7 @@
                 </div>
                 <div class="wishlist-cards" v-if="wishlist.length">
                     <div v-for="hill in wishlist" :key="hill.id">
+                        <!-- {{hill}} -->
                         <wishlist-hill :hill="hill"></wishlist-hill>
                     </div>
                 </div>
@@ -112,8 +113,9 @@ export default {
         },
 
         getWishlist() {
-            axios.get('/api/wishlist')
+            axios.get('/api/wishlists')
                 .then(data => {
+                    console.log(data)
                     this.wishlist = data.data
                 })
         }

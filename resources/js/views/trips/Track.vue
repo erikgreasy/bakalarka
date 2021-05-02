@@ -45,6 +45,7 @@ export default {
         return {
             speed: 0,
             distance: 0,
+            duration: 0,
             trip_id: null,
             geoId: null,
             lastCoords: null,
@@ -74,6 +75,7 @@ export default {
             })
                 .then(res => {
                     console.log(res)
+                    this.trip_id = res.data.id;
                     this.geoId = navigator.geolocation.watchPosition(this.success, this.error, this.geoOptions);
 
                 })
@@ -89,29 +91,21 @@ export default {
 
         stopTrip() {
             
-            // clearInterval( interval )
             navigator.geolocation.clearWatch( this.geoIdid )
-            // $.ajax({
-            //     type: 'POST',
-            //     data: {
-            //         trip_id: trip_id, 
-            //         duration: parseInt(new Date() - startTime) / 1000,
-            //         distance: distance
-            //     },
-
-            //     url: "/trips/" + trip_id + "/end-trip",
-            //     success: function() {
-            //         alert('success')
-            //     },
-            //     error: function() {
-            //         alert('error')
-            //     }
-
-            // })
-            // alert(parseInt(new Date() - startTime) / 1000 + 'sekund' )
-
-            // window.location.replace("/trips/" + trip_id);
-            this.$router.push('/trips/' + this.trip_id);
+            
+            axios.post('/api/end-trip', {
+                trip_id: this.trip_id,
+                duration: this.duration,
+                distance: this.distance,
+            })
+                .then(res => {
+                    console.log(res);
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+           
+            this.$router.push('/trip/' + this.trip_id);
         },
 
         
@@ -126,35 +120,12 @@ export default {
             }
             this.lastCoords = crd;
 
-            // console.log( trip_id )
-            // $.ajaxSetup({
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     }
-            // });
-            // $.ajax({
-            //     type:'POST',
-            //     data: { 
-            //         trip_id: trip_id, 
-            //         lat : crd.latitude, 
-            //         long : crd.longitude,
-            //         speed : speed
-            //     },
-            //     // url:"{{ route('ajaxRequest.post') }}",
-            //     url:"/hills/"+ hill_id +"/track",
-
-            //     success:function(){
-            //         console.log( { trip_id: trip_id, lat : crd.latitude, long : crd.longitude } );
-            //     },
-            //     error: function( xhr, status, error ) {
-            //         let err = JSON.parse(xhr.responseText)
-            //         console.log( err )
-            //     }
-            // });
+            this.addLog(crd.latitude, crd.longitude, this.speed);
+            
         },
 
         error(err) {
-            console.log('error')
+            console.error(err);
         },
 
         
@@ -175,6 +146,21 @@ export default {
             var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
             
             return earthRadiusKm * c;
+        },
+
+        addLog(lat, long, speed) {
+            axios.post('/api/logs', {
+                trip_id: this.trip_id,
+                lat: lat,
+                long: long,
+                speed: speed
+            })
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(err => {
+                    console.error(err)
+                })
         }
     }
     

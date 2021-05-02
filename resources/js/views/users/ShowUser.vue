@@ -92,12 +92,10 @@ export default {
                 .then(data => {
                     this.user = data.data.data
                 })
-                .catch(err => {
-                    this.$router.push('/')
-                })
+                
         },
         getWishlist() {
-            axios.get('/api/wishlist')
+            axios.get('/api/wishlists')
                 .then(data => {
                     this.wishlist = data.data
                 })
