@@ -112,7 +112,7 @@ export default {
                     this.hill = data.data
                 } )
                 .catch(err => {
-                    this.$router.push({name: '404'})
+                    // this.$router.push({name: '404'})
                 })
         },
         showInfo() {

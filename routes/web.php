@@ -93,13 +93,13 @@ Route::get('/app-shell', function() {
     return view('home');
 });
 
+Route::get('/offline', function() {
+    return view('offline');
+});
+
 
 Route::get('{any}', function () {
     
     return view('home');
     
 })->where('any', '.*')->middleware('auth:sanctum'); 
-
-// Route::get('/{vue_capture?}', function () {
-//     return view('home');
-// })->where('vue_capture', '[\/\w\.-]*')->middleware('auth');

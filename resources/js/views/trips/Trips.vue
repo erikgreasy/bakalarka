@@ -36,7 +36,7 @@ export default {
     
     data() {
         return {
-            trips: []
+            // trips: []
         }
     },
 
@@ -59,9 +59,14 @@ export default {
             document.querySelector('.filter').classList.add('open')
         }
     },
+    computed: {
+        trips() {
+            return this.$store.getters.allTrips
+        }
+    },
 
     created() {
-        this.getTrips();
+        // this.getTrips();
     }
     
 }

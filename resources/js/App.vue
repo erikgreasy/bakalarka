@@ -69,26 +69,34 @@
 export default {
     data() {
         return {
-            user: {}
+            // user: {}
         }
     },
     methods: {
-        getLoggedUser() {
-            axios.get('/api/user')
-                .then(data => {
-                    if( data.data ) {
-                        this.user = data.data
-                    }
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+        // getLoggedUser() {
+        //     axios.get('/api/user')
+        //         .then(data => {
+        //             if( data.data ) {
+        //                 this.user = data.data
+        //             }
+        //         })
+        //         .catch(err => {
+        //             console.log(err)
+        //         })
+        // }
+    },
+    computed: {
+        user() {
+            return this.$store.getters.getLoggedUser
         }
     },
+
     created() {
-        this.getLoggedUser()
+        // this.getLoggedUser()
         this.$store.dispatch('setLoggedUser')
         this.$store.dispatch('setUsers')
+        this.$store.dispatch('setHills')
+        this.$store.dispatch('setTrips')
     }
 }
 </script>

@@ -14,9 +14,9 @@
                 <statistics-tab :data="[user.distance, user.numOfTrips, user.time]"></statistics-tab>
                 <!-- <x-user_stats_tab :user="$user" /> -->
 
-                <div class="container mt-5">
+            <div class="container mt-5">
 
-                <section class="my-hills" v-if="wishlist.length">
+                <section class="my-hills" v-if="user && user.id == loggedUser.id && wishlist.length">
                     <div class="section-heading">
                         <h2>Uložené kopce</h2>
                     </div>
@@ -34,8 +34,14 @@
                 
                     </div>
 
-                    <div v-for="trip in user.trips" :key="trip.id">
-                        <trip-card :trip="trip"></trip-card>
+                    <div v-if="user && user.trips && user.trips.length">
+                        <div v-for="trip in user.trips" :key="trip.id">
+                            <trip-card :trip="trip"></trip-card>
+                        </div>
+                    </div>
+
+                    <div v-else>
+                        Zatiaľ žiadne dobrodružstvá
                     </div>
                     <!-- @forelse ($user->trips as $trip)
                         @include('partials.trip-card')
@@ -46,7 +52,7 @@
             </div>
 
                 
-            <float-btn v-if="user.id == loggedUser.id">
+            <float-btn v-if="user && user.id == loggedUser.id">
                 <li>
                     <router-link :to="'/user/' + user.id + '/edit'">
                         Upraviť profil
@@ -92,6 +98,9 @@ export default {
                 .then(data => {
                     this.user = data.data.data
                 })
+                .catch(err => {
+
+                })
                 
         },
         getWishlist() {
@@ -103,6 +112,7 @@ export default {
         logout() {
             axios.post('/logout')
                 .then(res => {
+                    localStorage.removeItem('loggedUser')
                     window.location.replace("/");
                 })
         }

@@ -34,7 +34,7 @@ export default {
     },
     data() {
         return {
-            hills: []
+            // hills: []
         }
     },
     methods: {
@@ -56,8 +56,15 @@ export default {
             document.querySelector('.filter').classList.add('open')
         }
     },
+
+    computed: {
+        hills() {
+            return this.$store.getters.allHills
+        }
+    },
+
     created() {
-        this.getHills()
+        // this.getHills()
     }
 }
 </script>

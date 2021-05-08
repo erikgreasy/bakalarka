@@ -10,7 +10,7 @@
                 <div class="container">
 
                     <h2>{{ trip.title }}</h2>
-                    <router-link :to="'/user/' + trip.user.id" class="trip-user">{{ trip.user.name }}</router-link>
+                    <router-link v-if="trip.user" :to="'/user/' + trip.user.id" class="trip-user">{{ trip.user.name }}</router-link>
                     <div class="trip-stats">
                         <div v-if="trip.hill">
                             <i class="fas fa-map-marker-alt"></i>

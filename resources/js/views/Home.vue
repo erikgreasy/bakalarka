@@ -88,18 +88,14 @@
 <script>
 import TripCard from '../components/TripCard';
 import WishlistHill from '../components/WishlistHill';
-// import VueSlickCarousel from 'vue-slick-carousel'
-// import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 
 export default {
     components: {
         TripCard,
         WishlistHill,
-        // VueSlickCarousel,
     },
     data() {
         return {
-            trips: [],
             wishlist: [],
         }
     },
@@ -125,12 +121,13 @@ export default {
     computed: {
         loggedUser() {
             return this.$store.getters.getLoggedUser
+        },
+        trips() {
+            return this.$store.getters.allTrips
         }
     },
     created() {
-        this.getTrips()
         this.getWishlist()
-
     }
     
 }

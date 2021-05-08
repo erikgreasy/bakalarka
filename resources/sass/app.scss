@@ -1,5 +1,7 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+// @import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/solid";
 
 // Variables
 @import 'variables';
@@ -31,7 +33,7 @@
 
 
 
-* {
+body {
     font-family: 'Roboto', sans-serif;
 }
 
