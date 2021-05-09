@@ -16,8 +16,8 @@
                     </h4>
                     <div class="user-stats">
 
-                        <p v-if="user.distance">{{ user.distance }}km</p>
-                        <p v-if="user.duration">{{ user.duration }}s</p>
+                        <p v-if="user.distance">{{ user.distance.toFixed(2) }}km</p>
+                        <p v-if="user.duration">{{ (user.duration/3600).toFixed(2) }} hod</p>
                     </div>
                 </div>
                 

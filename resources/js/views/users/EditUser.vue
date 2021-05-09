@@ -27,7 +27,7 @@
            
                     <div class="form-group">
                         <label for="avatar">Profile pic:</label>
-                        <input type="file" name="avatar" id="avatar">
+                        <input type="file" ref="file" @change="handleAvatar()" name="avatar" id="avatar">
                     </div>
                 </div>
         
@@ -47,7 +47,8 @@ export default {
     data() {
         return {
             user: {},
-            errors: []
+            errors: [],
+            avatar: null
         }
     },
 
@@ -64,11 +65,21 @@ export default {
         },
 
         update() {
-            axios.put( '/api/user/' + this.$route.params.id, {
-                name: this.user.name
-            } )
+            let formData = new FormData();
+            formData.append('_method', 'PUT');
+            formData.append('name', this.user.name);
+            formData.append('avatar', this.avatar);
+
+            axios.post( '/api/user/' + this.$route.params.id, formData, {
+                headers: {
+                    'Content-Type': "multipart/form-data; charset=utf-8;"
+                }
+            })
                 .then(res => {
                     console.log(res)
+                    this.$store.dispatch('setUsers')
+                    this.$store.dispatch('setLoggedUser')
+
                     this.$router.push( '/user/' + this.$route.params.id )
 
                 })
@@ -79,6 +90,9 @@ export default {
                     console.log(err.response)
                 })
 
+        },
+        handleAvatar() {
+            this.avatar = this.$refs.file.files[0]
         }
 
     },

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\ApiControllers;
 
 use App\Trip;
+use App\TripImage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,7 @@ class TripController extends Controller
 
 
     public function show( $id ) {
-        return Trip::with('user')->with('hill')->findOrFail($id);
+        return Trip::with('user')->with('hill')->with('images')->findOrFail($id);
     }
 
     public function store( Request $request ) {
@@ -48,20 +49,51 @@ class TripController extends Controller
         $trip->distance = 0;
         $trip->save();
         
+        $images = $request->file( 'images' );
+        if( isset( $images ) ) {
+            foreach( $images as $index => $img ) {
+                $trip_image = new TripImage();
+                $trip_image->trip_id = $trip->id; 
+
+                $name = '/trips/' . uniqid() . '.' . $img->extension();
+                $img->storePubliclyAs('public', $name);
+                $trip_image->path = '/storage/' . $name;
+                $trip_image->save();
+            }
+
+        }
+
+        $thumbnail = $request->file( 'thumbnail' );
+        if( isset( $thumbnail ) ) {
+            $name = '/trips/' . uniqid() . '.' . $thumbnail->extension();
+            $thumbnail->storePubliclyAs('public', $name);
+            $trip->thumbnail_path = '/storage/' . $name;
+            $trip->save();
+        }
+
         return $trip;
     }
 
 
     public function update( Request $request ) {
+        
+        $trip = Trip::findOrFail( $request->id );
+        $this->authorize('update', $trip);
+
         $request->validate([
             'title'         => 'required|string',
             'description'   => 'required|string',
             'date'          => 'required'
         ]);
 
-        $trip = Trip::findOrFail( $request->id );
-        
-        $this->authorize('update', $trip);
+
+        $thumbnail = $request->file( 'thumbnail' );
+
+        if( isset($thumbnail) ) {
+            $name = '/trips/' . uniqid() . '.' . $thumbnail->extension();
+            $thumbnail->storePubliclyAs('public', $name);
+            $trip->thumbnail_path = '/storage/' . $name;
+        }
 
         $trip->date = $request->date;
         $trip->title = $request->title;

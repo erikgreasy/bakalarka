@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <main class="trip-detail">
             <div class="trip-thumbnail">
                 <img v-bind:src="trip.thumbnail_path" alt="">
@@ -14,7 +13,7 @@
                     <div class="trip-stats">
                         <div v-if="trip.hill">
                             <i class="fas fa-map-marker-alt"></i>
-                            <router-link :to="'/hill/' + trip.hill.id">
+                            <router-link v-if="trip.hill" :to="'/hill/' + trip.hill.id">
                                 {{ trip.hill.name }}
                             </router-link>
                         </div>
@@ -43,10 +42,7 @@
                 </div>
             </div>
             <div class="trip-images">
-                <!-- @foreach( $trip->images as $image )
-                    <img src="{{ $image->path }}" alt="">
-                    
-                @endforeach -->
+                <img v-for="img in trip.images" :key="img.id" :src="img.path" >
             </div>
         </main>
 
@@ -93,6 +89,7 @@ export default {
         deleteTrip() {
             axios.delete( '/api/trip/' + this.trip.id )
                 .then(data => {
+                    this.$store.dispatch('setTrips')
                     this.$router.push( '/' );
                 })
         }

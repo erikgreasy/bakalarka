@@ -12,10 +12,24 @@
                 <a href="#" @click.prevent="openFilter"><i class="fas fa-filter fa-2x"></i></a>
             </div>
 
-            <div v-for="trip in trips" :key="trip.id">
+            <div v-if="!filter">
+                <div  v-for="trip in trips" :key="trip.id">
 
-                <trip-card :trip="trip"></trip-card>
+                    <trip-card :trip="trip"></trip-card>
 
+                </div>
+            </div>
+
+            <div v-else>
+                <div  v-for="trip in filteredTrips" :key="trip.id">
+
+                    <trip-card :trip="trip"></trip-card>
+
+                </div>
+
+                <p v-if="!filteredTrips.length">
+                    Žiadne dobrodružstvá nevyhovujú kritériam
+                </p>
             </div>
 
         </div>
@@ -36,7 +50,8 @@ export default {
     
     data() {
         return {
-            // trips: []
+            filteredTrips: [],
+            filter: false
         }
     },
 
@@ -49,7 +64,8 @@ export default {
             
             axios.get( url )
                 .then( data => {
-                    this.trips = data.data
+                    this.filter = true
+                    this.filteredTrips = data.data
                 } )
                 .catch(err => {
                     console.log(err)

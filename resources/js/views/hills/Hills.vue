@@ -13,9 +13,20 @@
                 </a>
             </div>
 
-            <div v-for="hill in hills" :key="hill.id">
-                <hill-card :hill="hill"></hill-card>
+            <div v-if="!filter">
+                <div v-for="hill in hills" :key="hill.id">
+                    <hill-card :hill="hill"></hill-card>
+                </div>
             </div>
+            <div v-else>
+                <div v-for="hill in filteredHills" :key="hill.id">
+                    <hill-card :hill="hill"></hill-card>
+                </div>
+                <p v-if="!filteredHills.length">
+                    Žiadne kopce nevyhovujú kritériam
+                </p>
+            </div>
+
         </div>
 
         <hills-filter></hills-filter>
@@ -30,11 +41,12 @@ import HillsFilter from '../../components/HillsFilter';
 export default {
     components: {
         HillCard,
-        HillsFilter
+        HillsFilter,
     },
     data() {
         return {
-            // hills: []
+            filteredHills: [],
+            filter: false
         }
     },
     methods: {
@@ -46,7 +58,8 @@ export default {
             axios.get(url)
                 .then( data => {
                     console.log(data.data)
-                    this.hills = data.data;
+                    this.filter = true
+                    this.filteredHills = data.data;
                 } )
                 .catch(err => {
                     console.log(err)

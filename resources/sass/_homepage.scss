@@ -14,13 +14,15 @@
 .users-ranklist {
     .users {
         gap: 20px;
-
+        display: flex;
         .user {
             width: 120px;
             text-align: center;
             
             img {
-                max-width: 80%;
+                height: 96px;
+                width: 96px;
+                object-fit: cover;
                 border-radius: 50%;
                 margin: 0 auto;
                 margin-bottom: 10px;

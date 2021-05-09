@@ -23,7 +23,7 @@ class WishlistController extends Controller
 
     public function store($id) {
         $hill = Hill::findOrFail($id);
-        Auth::user()->wishlists()->sync([$hill->id]);
+        Auth::user()->wishlists()->attach([$hill->id]);
         return true;
     }
 

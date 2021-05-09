@@ -28,8 +28,6 @@
                     @endif -->
                     <form enctype="multipart/form-data" @submit.prevent="createTrip">
                 
-                        <!-- @csrf -->
-                
                         <div class="form-group">
                             <label for="tripTitle">Title:</label>
                             <input type="text" name="title" id="tripTitle" class="form-control" v-model="fields.title">
@@ -50,18 +48,18 @@
 
                         <div class="form-group">
                             <label for="thumbnail">Thumbnail:</label>
-                            <input id="thumbnail" type="file" name="thumbnail" class="">
+                            <input id="thumbnail" type="file" ref="file" @change="handleThumbnail()" name="thumbnail" class="">
                         </div>
 
                         <div class="form-group">
                             <label for="image">Fotky:</label>
-                            <input id="image" type="file" name="image[]" class="" multiple>
+                            <input id="image" type="file" ref="gallery" @change="handleGallery()" name="image[]" class="" multiple>
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Pridať" class="btn btn-primary">
                         </div>
                 
-                        
+                        {{gallery}}
                 
                     </form>
                 </div> <!-- END CONTAINER -->
@@ -79,22 +77,40 @@ export default {
             fields: {
                 title: '',
                 date: '',
-                description: ''
-                
-
-            }
+                description: '',
+                thumbnail: null,
+            },
+            gallery: []
         }
     },
 
     methods: {
         createTrip() {
-            axios.post('/api/trips', {
-                hill_id: this.hill.id,
-                title: this.fields.title,
-                date: this.fields.date,
-                description: this.fields.description
+            let formData = new FormData();
+
+            formData.append('hill_id', this.hill.id)
+            
+            // Add all gallery images
+            _.each(this.gallery, (value, key) => {
+                formData.append('images[' + key + ']', value);
+
+            })
+
+            // Add all the fields to formdata
+            _.each(this.fields, (value, key) => {
+                formData.append(key, value)
+            })
+
+            // Make request to api
+            axios.post('/api/trips', formData, 
+            {
+                headers: {
+                    'Content-Type': "multipart/form-data; charset=utf-8;"
+                }
             })
                 .then(res => {
+                    console.log(res)
+                    this.$store.dispatch('setTrips')
                     this.$router.push( '/trip/' + res.data.id );
                 })
                 .catch(err => {
@@ -104,6 +120,16 @@ export default {
                     }
                     
                 })
+        },
+        
+        handleThumbnail() {
+            this.fields.thumbnail = this.$refs.file.files[0]
+        },
+
+        handleGallery() {
+            _.each(this.$refs.gallery.files, (value, key) => {
+                this.gallery.push(value)
+            })
         }
     }
 }

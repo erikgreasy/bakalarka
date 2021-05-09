@@ -46,17 +46,40 @@
                 </div>
                 <div class="users">
 
-                    <!-- <a href="/users/{{ $most_distance->id }}">
+                    
+                    <router-link v-if="most_distance" :to="'/user/' + most_distance.id">
 
                         <article class="user">
-                            <img src="{{ $most_distance->avatar_path }}" alt="">
+                            <img :src="most_distance.avatar_path">
                             <h4>
-                                {{ $most_distance->name }}
+                                {{ most_distance.name }}
                             </h4>
                             <p>Najviac nachodených kilometrov.</p>
                         </article>
-                    </a>
+                    </router-link>
 
+                    <router-link v-if="most_trips" :to="'/user/' + most_trips.id">
+
+                        <article class="user">
+                            <img :src="most_trips.avatar_path">
+                            <h4>
+                                {{ most_trips.name }}
+                            </h4>
+                            <p>Najviac absolvovaných dobrodružstiev.</p>
+                        </article>
+                    </router-link>
+
+                    <router-link v-if="most_time" :to="'/user/' + most_time.id">
+
+                        <article class="user">
+                            <img :src="most_time.avatar_path">
+                            <h4>
+                                {{ most_time.name }}
+                            </h4>
+                            <p>Najviac času stráveného na horách.</p>
+                        </article>
+                    </router-link>
+<!-- 
                     <a href="/users/{{ $most_trips->id }}">
 
                         <article class="user">
@@ -97,6 +120,9 @@ export default {
     data() {
         return {
             wishlist: [],
+            most_distance: null,
+            most_trips: null,
+            most_time: null,
         }
     },
 
@@ -114,6 +140,16 @@ export default {
                     console.log(data)
                     this.wishlist = data.data
                 })
+        },
+        getTopUsers() {
+            axios.get('/api/users/top')
+                .then(res => {
+                    console.log(res)
+                    this.most_distance = res.data.most_distance
+                    this.most_trips = res.data.most_trips
+                    this.most_time = res.data.most_time
+
+                })
         }
         
         
@@ -124,10 +160,11 @@ export default {
         },
         trips() {
             return this.$store.getters.allTrips
-        }
+        },
     },
     created() {
         this.getWishlist()
+        this.getTopUsers()
     }
     
 }

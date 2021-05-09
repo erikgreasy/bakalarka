@@ -51,32 +51,50 @@ class UserController extends Controller
 
     public function update( Request $request ) {
 
+        $user = User::findOrFail( $request->id );
+        $this->authorize('update', $user);
+
         $request->validate([
             'name'  => 'required|string'
-        ]);
+        ]);    
 
-        // if( isset( $request->avatar ) ) {
 
-        //     // User had profile picture before, delete that picture
-        //     if( $user->avatar_path != '/images/default.png' ) {
-        //         $exploded_path = explode( '/', $user->avatar_path );
-        //         $file = $exploded_path[ count( $exploded_path ) -1 ];
-        //         Storage::delete( '/public/avatars/' . $file );
-        //     }
-        //     $avatar = $request->file( 'avatar' );
-        //     $path = Storage::disk('public')->putFile('avatars', $avatar );
-
-        //     $user->avatar_path = '/storage/' . $path;
+        $avatar = $request->file('avatar');
+        if( isset( $avatar ) ) {
+            // User had profile picture before, delete that picture
+            // if( $user->avatar_path != '/images/default.png' ) {
+            //     $exploded_path = explode( '/', $user->avatar_path );
+            //     $file = $exploded_path[ count( $exploded_path ) -1 ];
+            //     Storage::delete( '/public/avatars/' . $file );
+            // }
+            $name = 'users/' . uniqid() . '.' . $avatar->extension();
+            $avatar->storePubliclyAs('public', $name);
+            $user->avatar_path = '/storage/' . $name;
             
-        // }
+        }
 
-        $user = User::findOrFail( $request->id );
-
-        $this->authorize('update', $user);
         
         $user->name = $request->name;
         $user->save();
 
         return $user;
+    }
+
+    public function topUsers() {
+        $most_distance = User::take(1)->withCount(['trips as distance' => function($query) {
+                            $query->select(DB::raw('sum(distance)'));
+                        }])->orderBy('distance', 'DESC')->get()[0];
+
+        $most_trips = User::take(1)->withCount('trips')->orderBy( 'trips_count', 'desc' )->get()[0];
+        $most_time = User::take(1)->withCount(['trips as duration' => function($query) {
+                            $query->select(DB::raw('sum(duration)'));
+                        }])->orderBy('duration', 'DESC')->get()[0];
+
+        return response()->json([
+            'most_distance' => $most_distance,
+            'most_trips'    => $most_trips,
+            'most_time'     => $most_time,
+
+        ]);
     }
 }

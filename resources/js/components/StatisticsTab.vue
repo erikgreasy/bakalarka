@@ -1,19 +1,17 @@
 <template>
     <div class="statistics-tabs">
         <div class="tab">
-            <!-- <h5>{{ $hill->height }}</h5> -->
-            <h5>{{ data[0] }}</h5>
+            <h5 v-if="data.length">{{ data[0].value }}</h5>
+            <p>{{ data[0].name }}</p>
 
-            <p>nachodených kilometrov</p>
         </div>
         <div class="tab">
-            <!-- <h5>{{ count( $hill->trips ) }}</h5> -->
-            <h5>{{ data[1] }}</h5>
-            <p>dobrodružstiev</p>
+            <h5 v-if="data.length">{{ data[1].value }}</h5>
+            <p>{{ data[1].name }}</p>
         </div>
         <div class="tab">
-            <h5>{{ (data[2]/3600).toFixed(2) }}</h5>
-            <p>Hodín na horách</p>
+            <h5 v-if="data.length">{{ data[2].value }}</h5>
+            <p>{{ data[2].name }}</p>
         </div>
     </div>
 </template>

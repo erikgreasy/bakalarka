@@ -37,8 +37,12 @@
                 
                 </div>
             </div>
-            
-            <statistics-tab></statistics-tab>
+            <!-- {{ hill }} -->
+            <statistics-tab :data="[
+                {name: 'najviac navštevovaný', value: 'asd'},
+                {name: 'návštev', value: getNumOfTrips()},
+                {name: 'nazov3', value: 'asdasd'},
+            ]"></statistics-tab>
 
             <div class="container">
 
@@ -145,6 +149,14 @@ export default {
                         this.inWishlist = true
                     }
                 })
+        },
+
+        getNumOfTrips() {
+            if(this.hill.trips) {
+                return this.hill.trips.length
+            }
+
+            return 0
         }
     },
     created() {

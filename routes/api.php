@@ -57,4 +57,4 @@ Route::post('/end-trip', [TripController::class, 'endTrip']);
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/user/{id}', [UserController::class, 'show']);
 Route::put('/user/{id}', [UserController::class, 'update']);
-
+Route::get('/users/top', [UserController::class, 'topUsers']);

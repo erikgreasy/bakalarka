@@ -75,6 +75,7 @@ export default {
             })
                 .then(res => {
                     console.log(res)
+                    this.$store.dispatch('setTrips')
                     this.trip_id = res.data.id;
                     this.geoId = navigator.geolocation.watchPosition(this.success, this.error, this.geoOptions);
 
