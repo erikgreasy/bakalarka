@@ -28,4 +28,12 @@ class Hill extends Model
     public function wishlisters() {
         return $this->belongsToMany(User::class, 'wishlists');
     }
+
+    public function favoriteOrder() {
+        $hills = Hill::withCount('trips')->orderBy( 'trips_count', 'desc' )->get();
+
+        return $hills->search(function($hill) {
+            return $hill->id == $this->id;
+        });
+    }
 }

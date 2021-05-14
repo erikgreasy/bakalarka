@@ -199,7 +199,42 @@ registerRoute(/(.*)\/api\/hill\/[0-9]+$/, ({url, event, params}) => {
       });
 });
 
-// TODO
+registerRoute(/(.*)\/api\/trips/, ({url, event, params}) => {
+  return fetch(event.request)
+      .then(response => {
+          let clonedResponse = response.clone();
+          clonedResponse.json().then( body => {
+              openDB('Turista', 1).then(db => {
+        body.forEach(trip => {
+          db.put('trips', {
+            id: trip.id,
+            title: trip.title,
+            hill: trip.hill,
+            description: trip.description,
+            thumbnail_path: trip.thumbnail_path
+          });
+        });
+              });
+          });
+          return response;
+      }).catch(err => {
+          return openDB('Turista', 1).then( db => {
+      return db.transaction('trips')
+                       .objectStore('trips').getAll()
+                       .then(values => {
+            console.log(values);
+            return new Response(JSON.stringify(values), 
+              { "status" : 200 , 
+              "statusText" : "MyCustomResponse!" });
+           })
+          });
+      });
+});
+
+
+
+
+// SINGLE
 registerRoute(/(.*)\/api\/user\/[0-9]+$/, ({url, event, params}) => {
     return fetch(event.request)
         .then(response => {
@@ -283,6 +318,10 @@ async function createDB() {
 				keyPath: 'id',
 			});
       db.createObjectStore('hills', {
+				// The 'id' property of the object will be the key.
+				keyPath: 'id',
+			});
+      db.createObjectStore('trips', {
 				// The 'id' property of the object will be the key.
 				keyPath: 'id',
 			});

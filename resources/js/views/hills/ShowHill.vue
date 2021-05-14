@@ -1,7 +1,6 @@
 <template>
 
    <div>
-
        <main class="hill-show">
             <div class="top-section" v-bind:style="{ backgroundImage: 'url(' + hill.thumbnail_path + ')' }">
 
@@ -37,11 +36,11 @@
                 
                 </div>
             </div>
-            <!-- {{ hill }} -->
+
             <statistics-tab :data="[
-                {name: 'najviac navštevovaný', value: 'asd'},
+                {name: 'm.n.m.', value: hill.height},
                 {name: 'návštev', value: getNumOfTrips()},
-                {name: 'nazov3', value: 'asdasd'},
+                {name: 'obľúbený', value: hill.favoriteOrder + '.'},
             ]"></statistics-tab>
 
             <div class="container">
@@ -112,8 +111,9 @@ export default {
     methods: {
         getHill() {
             axios.get( '/api/hill/' + this.$route.params.id )
-                .then( data => {
-                    this.hill = data.data
+                .then( res => {
+                    console.log(res.data)
+                    this.hill = res.data.data
                 } )
                 .catch(err => {
                     // this.$router.push({name: '404'})

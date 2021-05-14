@@ -46,7 +46,6 @@ class UserController extends Controller
 
     public function show( $id ) {
         return new UserResource( User::findOrFail($id) );
-        return User::with('trips')->findOrFail( $id );
     }
 
     public function update( Request $request ) {

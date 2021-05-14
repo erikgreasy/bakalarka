@@ -47,8 +47,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="thumbnail">Thumbnail:</label>
-                            <input id="thumbnail" type="file" ref="file" @change="handleThumbnail()" name="thumbnail" class="">
+                            <label for="thumbnail" v-if="fields.thumbnail"><i class="fas fa-camera"></i>{{ fields.thumbnail.name }}</label>
+                            <label for="thumbnail" v-else><i class="fas fa-camera"></i>Nahrať náhľadový obrázok</label>
+                            <input id="thumbnail" type="file" ref="file" @change="handleThumbnail()" name="thumbnail" hidden>
                         </div>
 
                         <div class="form-group">
@@ -124,6 +125,7 @@ export default {
         
         handleThumbnail() {
             this.fields.thumbnail = this.$refs.file.files[0]
+            console.log(this.fields.thumbnail )
         },
 
         handleGallery() {

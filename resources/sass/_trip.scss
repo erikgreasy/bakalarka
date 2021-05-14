@@ -133,5 +133,13 @@
 
 .trip-create {
     
+    label[for=thumbnail] {
+        color: $primary;
 
+        .fa-camera {
+            padding-right: 15px;
+            color: $grey;
+        }
+
+    }
 }

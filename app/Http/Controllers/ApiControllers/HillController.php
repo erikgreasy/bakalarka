@@ -5,6 +5,7 @@ namespace App\Http\Controllers\ApiControllers;
 use App\Hill;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\HillResource;
 
 class HillController extends Controller
 {
@@ -33,6 +34,7 @@ class HillController extends Controller
     }
 
     public function show( $id ) {
-        return Hill::with('mountain')->with('trips')->findOrFail( $id );
+        return new HillResource(Hill::findOrFail($id));
+        // return Hill::with('mountain')->with('trips')->findOrFail( $id );
     }
 }

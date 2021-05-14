@@ -12,8 +12,8 @@
                 </div>
 
                 <statistics-tab v-if="user.distance && user.numOfTrips && user.time" :data="[
-                    {name: 'nachodených kilometrov', value: user.distance.toFixed(2)}, 
-                    {name: 'dobrodružstiev', value: user.numOfTrips}, 
+                    {name: 'kilometrov', value: user.distance.toFixed(2)}, 
+                    {name: 'túr', value: user.numOfTrips}, 
                     {name: 'hodín na horách', value: (user.time/3600).toFixed(2)}
                 ]"></statistics-tab>
 

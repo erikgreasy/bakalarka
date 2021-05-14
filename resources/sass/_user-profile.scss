@@ -92,6 +92,9 @@
         justify-content: space-between;
         align-items: center;
         
+        .form-control {
+            border-bottom: 1px solid #000 !important;
+        }
     }
     
 }
