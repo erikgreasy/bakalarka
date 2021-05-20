@@ -18,8 +18,11 @@
                 <div class="form-group">
                     <h2>Zoradiť od</h2>
 
-                    <input type="radio" id="male" name="order" value="newest" v-model="order">
-                    <label for="male">Najnovšie</label>
+                    <input type="radio" id="newest" name="order" value="newest" v-model="order">
+                    <label for="newest">Najnovšie</label>
+
+                    <input type="radio" id="longest" name="order" value="longest" v-model="order">
+                    <label for="longest">Najdlhšie</label>
 
                     <!-- <input type="radio" id="female" name="order" value="highest" v-model="order">
                     <label for="female">Najvyššie</label>

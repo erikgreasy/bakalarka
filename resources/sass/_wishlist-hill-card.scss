@@ -4,11 +4,14 @@
     -moz-box-shadow: 5px 10px 33px -15px rgba(0,0,0,0.75);
     box-shadow: 5px 10px 33px -15px rgba(0,0,0,0.75);
     border-radius: 6px;
-    width: 200px;
+    // width: 200px;
     transition: .3s;
 
     &:hover {
-        transform: translateY(-10px);
+
+        @include media-breakpoint-up(lg) {
+            transform: translateY(-10px);
+        }
     }
 
     img {
@@ -27,15 +30,4 @@
             margin-bottom: 10px;
         }
     }
-}
-
-.wishlist-cards {
-    display: flex;
-    gap: 20px;
-}
-
-.slick-list {
-    overflow: visible !important;
-}
-.my-hills {
 }

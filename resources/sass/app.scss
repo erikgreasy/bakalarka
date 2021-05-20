@@ -9,6 +9,9 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+@import '~slick-carousel/slick/slick';
+
+
 // Partials
 @import 'partials/card';
 @import 'partials/desktop-navbar';
@@ -24,7 +27,8 @@
 @import 'user-card';
 @import 'track';
 @import 'users';
-
+@import 'notfound';
+@import 'libs/slick';
 
 
 

@@ -19,7 +19,7 @@
                         </div>
                         <div>
                             <i class="far fa-calendar"></i>
-                            {{ trip.date }}
+                            {{ date }}
                         </div>
                         
                         <div v-if="trip.distance">
@@ -41,12 +41,14 @@
                     </p>
                 </div>
             </div>
-            <div class="trip-images">
-                <img v-for="img in trip.images" :key="img.id" :src="img.path" >
+            
+            <div class="container">
+                <trip-gallery v-if="trip.images" :images="trip.images" />
             </div>
+
         </main>
 
-        <float-btn v-if="trip.user.id == loggedUser.id">
+        <float-btn v-if="trip.user && trip.user.id == loggedUser.id">
             <li>
                 <router-link :to="'/trip/' + trip.id + '/edit'">
                     Upraviť trip
@@ -66,14 +68,18 @@
 
 <script>
 import FloatBtn from '../../components/FloatBtn';
+import TripGallery from '../../components/TripGallery';
+import moment from 'moment';
 
 export default {
     components: {
-        FloatBtn
+        FloatBtn,
+        TripGallery
     },
     data() {
         return {
-            trip: {}
+            trip: {},
+            date: ''
         }
     },
     methods: {
@@ -81,6 +87,8 @@ export default {
             axios.get( '/api/trip/' + this.$route.params.id )
                 .then(data => {
                     this.trip = data.data
+                    var date = new Date(this.trip.date)
+                    this.date = moment(date).format('DD.MM.Y')
                 })
                 .catch(err => {
                     console.log(err);

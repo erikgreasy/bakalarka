@@ -28,27 +28,15 @@
                         </textarea>
                     </div>
 
-                    <div class="form-group trip-thumbnail">
-                        <label for="thumbnail">Thumbnail:</label>
-                        
-                        <div class="thumbnail-wrapper">
+                    <div class="form-group">
+                        <label for="thumbnail" v-if="thumbnail"><i class="fas fa-camera"></i>{{ thumbnail.name }}</label>
+                        <label for="thumbnail" v-else><i class="fas fa-camera"></i>Nahrať náhľadový obrázok</label>
+                        <input id="thumbnail" type="file" ref="file" @change="handleThumbnail()" name="thumbnail" hidden>
+                    </div>
 
-                            <!-- <div>
-                                <img :src="trip.thumbnail_path">
-                                <a id="remove-thumbnail" @click="removeThumbnail" class=""><i class="fas fa-times"></i></a>
-                            </div> -->
-
-                            <!-- <input id="thumbnail" name="thumbnail" type="file" class=""> -->
-                            <div v-if="trip.thubmnail_path != '/images/image-placeholder.png'">
-                                <!-- <img :src="trip.thumbnail_path" alt="" id="trip-thumbnail"> -->
-                                <!-- <input type="hidden" name="remove_thumbnail" value="false" v-model="remove"> -->
-                                <input id="thumbnail" ref="file" @change="handleThumbnail()" type="file" name="thumbnail" class="">
-                                <!-- <a id="remove-thumbnail" @click="removeThumbnail"><i class="fas fa-times"></i></a> -->
-                            </div>
-
-                            <input  v-else id="thumbnail" ref="file" @change="handleThumbnail()" type="file" name="thumbnail" >
-                        </div>
-
+                    <div class="form-group">
+                        <label for="image">Fotky:</label>
+                        <input id="image" type="file" ref="gallery" @change="handleGallery()" name="image[]" class="" multiple>
                     </div>
 
                     <div class="form-group text-center">
@@ -69,7 +57,9 @@ export default {
         return {
             trip: {},
             remove: false,
-            thumbnail: null
+            thumbnail: null,
+            gallery: []
+
         }
     },
 
@@ -92,7 +82,12 @@ export default {
             formData.append('date', this.trip.date);
             formData.append('thumbnail', this.thumbnail);
 
+            // Add all gallery images
+            _.each(this.gallery, (value, key) => {
+                formData.append('images[' + key + ']', value);
 
+            })
+            
             axios.post( '/api/trip/' + this.$route.params.id, formData, {
                 headers: {
                     'Content-Type': "multipart/form-data; charset=utf-8;"
@@ -118,6 +113,12 @@ export default {
         handleThumbnail() {
             this.thumbnail = this.$refs.file.files[0]
         },
+
+        handleGallery() {
+            _.each(this.$refs.gallery.files, (value, key) => {
+                this.gallery.push(value)
+            })
+        }
     },
 
     created() {

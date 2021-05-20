@@ -85,7 +85,6 @@ class TripController extends Controller
         $trip->distance = 0;
         $trip->save();
 
-        // $trip->thumbnail_path = $request->thumbnail;
 
         if( isset( $images ) ) {
 

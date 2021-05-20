@@ -20,7 +20,8 @@ class HillResource extends JsonResource
             'name' => $this->name,
             'height' => $this->height,
             'trips' => $this->trips,
-            'favoriteOrder' => $this->favoriteOrder() + 1
+            'favoriteOrder' => $this->favoriteOrder() + 1,
+            'thumbnail_path'    => $this->thumbnail_path
         ];
     }
 }

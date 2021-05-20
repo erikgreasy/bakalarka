@@ -62,13 +62,9 @@
                         {{ hill.description }}
 
                         <div class="gallery">
-
-                            <!-- @foreach ($hill->images as $img) -->
-                                <div class="gallery-item">
-                                    <!-- <img src="{{ asset($img->path) }}" alt=""> -->
-                                </div>
-                                
-                            <!-- @endforeach -->
+                            <div class="gallery-item">
+                                <!-- <img src="{{ asset($img->path) }}" alt=""> -->
+                            </div>
                         </div>
                     </section>
                 </div>
@@ -132,6 +128,7 @@ export default {
             axios.post('/api/hill/' + this.$route.params.id + '/wishlist')
                 .then(res => {
                     this.inWishlist = true
+                    this.$store.dispatch('setWishlist')
                 })
         },
 
@@ -139,6 +136,7 @@ export default {
             axios.delete('/api/hill/' + this.$route.params.id + '/wishlist')
                 .then(res => {
                     this.inWishlist = false;
+                    this.$store.dispatch('setWishlist')
                 })
         },
 

@@ -25,10 +25,17 @@
                         <input type="text" name="name" id="name" v-model="user.name" class="form-control">
                     </div>
            
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="avatar">Profile pic:</label>
                         <input type="file" ref="file" @change="handleAvatar()" name="avatar" id="avatar">
+                    </div> -->
+                    
+                    <div class="form-group">
+                        <label for="avatar" v-if="avatar"><i class="fas fa-camera"></i>{{ avatar.name }}</label>
+                        <label for="avatar" v-else><i class="fas fa-camera"></i>Nahrať nový avatar</label>
+                        <input id="avatar" type="file" ref="file" @change="handleAvatar()" name="avatar" hidden>
                     </div>
+                 
                 </div>
         
                 <div class="form-group">

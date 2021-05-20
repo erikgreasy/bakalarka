@@ -50,7 +50,7 @@
                     </router-link>
                 </li>
                 <li>
-                    <router-link v-bind:to="'/user/' + user.id" class="nav-link">
+                    <router-link to="/my-profile" class="nav-link">
                         <i class="fas fa-user"></i>
                     </router-link>
                 </li>
@@ -72,19 +72,7 @@ export default {
             // user: {}
         }
     },
-    methods: {
-        // getLoggedUser() {
-        //     axios.get('/api/user')
-        //         .then(data => {
-        //             if( data.data ) {
-        //                 this.user = data.data
-        //             }
-        //         })
-        //         .catch(err => {
-        //             console.log(err)
-        //         })
-        // }
-    },
+   
     computed: {
         user() {
             return this.$store.getters.getLoggedUser
@@ -92,11 +80,12 @@ export default {
     },
 
     created() {
-        // this.getLoggedUser()
         this.$store.dispatch('setLoggedUser')
         this.$store.dispatch('setUsers')
         this.$store.dispatch('setHills')
         this.$store.dispatch('setTrips')
+        this.$store.dispatch('setWishlist')
+
     }
 }
 </script>

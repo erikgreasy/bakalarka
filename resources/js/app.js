@@ -14,7 +14,6 @@ import Vuex from 'vuex'
 
 import App from './App.vue'
 import routes from './routes';
-// import user from './store/modules/user'
 
 Vue.use(VueRouter)
 Vue.use(Vuex);
@@ -24,7 +23,8 @@ var store = new Vuex.Store({
         loggedUser: {},
         users: [],
         hills: [],
-        trips: []
+        trips: [],
+        wishlist: []
     },
     mutations: {
         setUser(state, payload) {
@@ -38,20 +38,20 @@ var store = new Vuex.Store({
         },
         setTrips(state, payload) {
             state.trips = payload
+        },
+        setWishlist(state, payload) {
+            state.wishlist = payload
         }
     },
     actions: {
         setLoggedUser(state) {
             axios.get('/api/user')
                 .then(res => {
-                    state.commit('setUser', res.data)
-                    console.log('ukladam loggnuteho usera do local storage')
-                    localStorage.setItem('loggedUser', JSON.stringify(res.data));
+                    state.commit('setUser', res.data.data)
+                    localStorage.setItem('loggedUser', JSON.stringify(res.data.data));
                 })
                 .catch(err => {
                     let user = JSON.parse( localStorage.getItem('loggedUser') )
-                    console.log('gettujem log usera z local storage')
-                    console.log(user)
                     state.commit('setUser', user)
                 })
         },
@@ -70,7 +70,13 @@ var store = new Vuex.Store({
         setTrips(state) {
             axios.get('/api/trips')
                 .then(res => {
-                    state.commit('setTrips', res.data)
+                    state.commit('setTrips', res.data.data)
+                })
+        },
+        setWishlist(state) {
+            axios.get('/api/wishlists')
+                .then(res => {
+                    state.commit('setWishlist', res.data)
                 })
         }
     },
@@ -82,10 +88,13 @@ var store = new Vuex.Store({
             return state.users;
         },
         allHills(state) {
-            return state.hills
+            return state.hills;
         },
         allTrips(state) {
-            return state.trips
+            return state.trips;
+        },
+        getWishlist(state) {
+            return state.wishlist;
         }
     }
 });
@@ -109,6 +118,9 @@ var store = new Vuex.Store({
 const router = new VueRouter({
     routes, // short for `routes: routes`
     mode: 'history',
+    // scrollBehavior (to, from, savedPosition) {
+    //     return { x: 0, y: 0,  }
+    // }
 })
 
 /**
@@ -127,16 +139,20 @@ const app = new Vue({
 /**
  * REGISTER SERVICE WORKER
  */
-// if ('serviceWorker' in navigator) {
-//     window.addEventListener('load', function() {
-//         navigator.serviceWorker.register('/sw.js').then(function(registration) {
-//             // Registration was successful
-//             console.log('ServiceWorker registration successful with scope: ', registration.scope);
-//         }, function(err) {
-//             // registration failed :(
-//             console.error('ServiceWorker registration failed: ', err);
-//         });
-//     });
-// } else {
-//     console.log('service worker not working')
-// }
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').then(function(registration) {
+            // Registration was successful
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(err) {
+            // registration failed :(
+            console.error('ServiceWorker registration failed: ', err);
+        });
+    });
+} else {
+    console.log('service worker not working')
+}
+
+navigator.serviceWorker.addEventListener('message', function(event) {
+    alert(event.data.alert);
+});

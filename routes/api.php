@@ -2,6 +2,7 @@
 
 use App\Hill;
 use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiControllers\LogController;
 use App\Http\Controllers\ApiControllers\AuthController;
@@ -34,7 +35,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 });
 
 Route::get('/user', function (Request $request) {
-    return $request->user();
+    return new UserResource( $request->user() );
 });
 
 Route::get('/hill/{id}', [HillController::class, 'show']);

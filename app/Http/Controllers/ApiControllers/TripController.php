@@ -18,11 +18,21 @@ class TripController extends Controller
 
         $trips = Trip::take(10);
 
+        if($order) {
+            if( $order == 'longest' ) {
+                $trips->orderBy('distance', 'DESC');
+            } else {
+                $trips = Trip::latest();
+            }
+        }
+
+
+
         if( $hills ) {
             $trips = $trips->whereIn( 'hill_id', $hills );
         }
 
-        return $trips->orderBy('id', 'DESC')->get();
+        return $trips->orderBy('id', 'DESC')->paginate(10);
     }
 
 
@@ -76,7 +86,6 @@ class TripController extends Controller
 
 
     public function update( Request $request ) {
-        
         $trip = Trip::findOrFail( $request->id );
         $this->authorize('update', $trip);
 
@@ -93,6 +102,20 @@ class TripController extends Controller
             $name = '/trips/' . uniqid() . '.' . $thumbnail->extension();
             $thumbnail->storePubliclyAs('public', $name);
             $trip->thumbnail_path = '/storage/' . $name;
+        }
+
+        $images = $request->file( 'images' );
+        if( isset( $images ) ) {
+            foreach( $images as $index => $img ) {
+                $trip_image = new TripImage();
+                $trip_image->trip_id = $trip->id; 
+
+                $name = '/trips/' . uniqid() . '.' . $img->extension();
+                $img->storePubliclyAs('public', $name);
+                $trip_image->path = '/storage/' . $name;
+                $trip_image->save();
+            }
+
         }
 
         $trip->date = $request->date;
@@ -122,6 +145,22 @@ class TripController extends Controller
         $trip->duration = $request->duration;
         $trip->distance = $request->distance;
         $trip->avg_speed = $trip->logs->sum('speed');
+
+        $images = $request->file( 'images' );
+        if( isset( $images ) ) {
+            foreach( $images as $index => $img ) {
+                $trip_image = new TripImage();
+                $trip_image->trip_id = $trip->id; 
+
+                $name = '/trips/' . uniqid() . '.' . $img->extension();
+                $img->storePubliclyAs('public', $name);
+                $trip_image->path = '/storage/' . $name;
+                $trip_image->save();
+            }
+
+        }
+
+
         $trip->save();
 
         return $trip;

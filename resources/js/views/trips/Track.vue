@@ -7,7 +7,7 @@
             </div>
             <div class="time">
                 <p>Uplynutý čas</p>
-                <h2 class="time-tracker">00:00:00</h2>
+                <h2 class="time-tracker">{{ padLeadingZeros(hours,2) }}:{{ padLeadingZeros(minutes, 2) }}:{{ padLeadingZeros(seconds,2) }}</h2>
             </div>
             <div class="row">
                 <div class="distance col-6">
@@ -23,7 +23,12 @@
                 </div>
             </div>
 
-            <input type="file" accept="image/*;capture=camera" id="takePhoto">
+            <div v-if="this.trip_id">
+                <label for="takePhoto"><i class="fas fa-camera"></i>Zaznamenať fotku</label>
+                <input type="file" ref="file" @change="handlePhoto" accept="image/*;capture=camera" id="takePhoto" hidden>
+
+            </div>
+
             <a @click.prevent="startTrip" id="startTrip" href="#" class="btn btn-light">
                 Začať túru
             </a>
@@ -46,9 +51,14 @@ export default {
             speed: 0,
             distance: 0,
             duration: 0,
+            seconds: 0,
+            minutes: 0,
+            hours: 0,
             trip_id: null,
             geoId: null,
             lastCoords: null,
+            startTime: null,
+            intervalId: null,
             hill: {
                 id: 2,
                 name: 'asdasd'
@@ -57,7 +67,8 @@ export default {
                 enableHighAccuracy: false,
                 timeout: 5000,
                 maximumAge: 0
-            }
+            },
+            images: []
         }
     },
 
@@ -66,10 +77,23 @@ export default {
             document.getElementById('stopTrip').style.display = 'block';
             document.getElementById('startTrip').style.display = 'none';
 
+            this.startTime = performance.now();
+
+            var self = this;
+            this.intervalId = setInterval(function() {
+                var now = performance.now()
+                self.duration = ((now - self.startTime)/1000).toFixed(0)
+                var time = self.duration;
+                self.hours = (time/3600).toFixed(0);
+                time -= (self.hours * 3600);
+                self.minutes = (time/60).toFixed(0);
+                time -= self.minutes * 60;
+                self.seconds = time
+            }, 1000)
 
             axios.post('/api/trips', {
-                title: 'New trip ',
-                description: 'Add description',
+                title: 'Nové dobrodružstvo na  ' + this.hill.name,
+                description: 'Zatiaľ žiaden popis',
                 hill_id: this.hill.id,
                 date: moment().format( 'Y-MM-DD HH:mm:ss' )
             })
@@ -91,13 +115,24 @@ export default {
         },
 
         stopTrip() {
-            
             navigator.geolocation.clearWatch( this.geoIdid )
+            clearInterval(this.intervalId);
             
-            axios.post('/api/end-trip', {
-                trip_id: this.trip_id,
-                duration: this.duration,
-                distance: this.distance,
+            let formData = new FormData();
+            formData.append('trip_id', this.trip_id);
+            formData.append('duration', this.duration);
+            formData.append('distance', this.distance);
+
+            // Add all gallery images
+            _.each(this.images, (value, key) => {
+                formData.append('images[' + key + ']', value);
+
+            })
+
+            axios.post('/api/end-trip', formData, {
+                headers: {
+                    'Content-Type': "multipart/form-data; charset=utf-8;"
+                }
             })
                 .then(res => {
                     console.log(res);
@@ -162,7 +197,27 @@ export default {
                 .catch(err => {
                     console.error(err)
                 })
+        },
+        padLeadingZeros(num, size) {
+            var s = num+"";
+            while (s.length < size) s = "0" + s;
+            return s;
+        },
+        handlePhoto() {
+            this.images.push( this.$refs.file.files[0] )
+            document.querySelector('#takePhoto').value = null
+            this.$refs.file.files = null;
+
         }
+    },
+
+    created() {
+        // Number.prototype.pad = function(size) {
+        //     var s = String(this);
+        //     while (s.length < (size || 2)) {s = "0" + s;}
+        //     return s;
+        // }
+
     }
     
 }

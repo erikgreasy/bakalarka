@@ -5,7 +5,6 @@
 
             <header>
                 <h1>
-                    <!-- {{-- <small class="reset">Reset</small> --}} -->
                     Filter
 
 

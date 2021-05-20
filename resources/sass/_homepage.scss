@@ -13,11 +13,13 @@
 
 .users-ranklist {
     .users {
-        gap: 20px;
-        display: flex;
         .user {
             width: 120px;
             text-align: center;
+            
+            @include media-breakpoint-up(md) {
+                width: 160px;
+            }
             
             img {
                 height: 96px;

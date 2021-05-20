@@ -55,4 +55,12 @@
     #takePhoto {
         margin-bottom: 30px;
     }
+
+    label[for=takePhoto] {
+
+        .fa-camera {
+            padding-right: 15px;
+        }
+
+    }
 }

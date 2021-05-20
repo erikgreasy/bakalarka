@@ -6,6 +6,7 @@ import ShowHill from './views/hills/ShowHill.vue';
 import Users from './views/users/Users.vue';
 import ShowUser from './views/users/ShowUser.vue';
 import EditUser from './views/users/EditUser.vue';
+import MyProfile from './views/users/MyProfile.vue';
 
 import Trips from './views/trips/Trips.vue';
 import ShowTrip from './views/trips/ShowTrip.vue';
@@ -39,7 +40,7 @@ export default [
     {
         path: '/my-profile',
         name: 'My profile',
-        component: ShowUser
+        component: MyProfile
     },
     {
         path: '/user/:id',

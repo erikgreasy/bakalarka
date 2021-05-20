@@ -4,3 +4,20 @@
         margin-top: 30px;
     }
 }
+
+.user-edit {
+
+    .inputs {
+        width: 80%;
+    }
+
+    label[for=avatar] {
+        color: $primary;
+
+        .fa-camera {
+            padding-right: 15px;
+            color: $grey;
+        }
+
+    }
+}

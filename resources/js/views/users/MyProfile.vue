@@ -11,31 +11,19 @@
                     </div>
                 </div>
 
-                <statistics-tab v-if="user.distance && user.numOfTrips && user.time" :data="[
-                    {name: 'kilometrov', value: user.distance.toFixed(2)}, 
-                    {name: 'túr', value: user.numOfTrips}, 
-                    {name: 'hodín na horách', value: (user.time/3600).toFixed(2)}
-                ]"></statistics-tab>
+            <statistics-tab v-if="user.distance && user.numOfTrips && user.time" :data="[
+                {name: 'kilometrov', value: user.distance.toFixed(2)}, 
+                {name: 'túr', value: user.numOfTrips}, 
+                {name: 'hodín na horách', value: (user.time/3600).toFixed(2)}
+            ]"></statistics-tab>
 
             <div class="container mt-5">
 
-                <!-- <section class="my-hills" v-if="user && user.id == loggedUser.id && wishlist.length">
-                    <div class="section-heading">
-                        <h2>Uložené kopce</h2>
-                    </div>
-                    <div class="wishlist-cards">
-                            <div v-for="hill in wishlist" :key="hill.id">
-                                <wishlist-hill :hill="hill"></wishlist-hill>
-                            </div>
-                    </div>
-                </section> -->
                 <wishlist-hills :wishlist="wishlist" />
             
                 <section>
                     <div class="section-heading">
                         <h2>Dobrodružstvá</h2>
-                        <!-- {{-- <a href="#">Zobraziť všetky</a> --}} -->
-                
                     </div>
 
                     <div v-if="user && user.trips && user.trips.length">
@@ -47,11 +35,6 @@
                     <div v-else>
                         Zatiaľ žiadne dobrodružstvá
                     </div>
-                    <!-- @forelse ($user->trips as $trip)
-                        @include('partials.trip-card')
-                    @empty
-                        No trips yet
-                    @endforelse -->
                 </section>
             </div>
 
@@ -89,29 +72,8 @@ export default {
         FloatBtn,
         WishlistHills
     },
-    data() {
-        return {
-            user: {},
-            wishlist: []
-        }
-    },
-    methods: {
-        getUser() {
-            axios.get( '/api/user/' + this.$route.params.id )
-                .then(data => {
-                    this.user = data.data.data
-                })
-                .catch(err => {
-
-                })
-                
-        },
-        getWishlist() {
-            axios.get('/api/wishlists')
-                .then(data => {
-                    this.wishlist = data.data
-                })
-        },        
+    
+    methods: {       
         logout() {
             axios.post('/logout')
                 .then(res => {
@@ -120,14 +82,17 @@ export default {
                 })
         }
     },
+
     computed: {
+        user() {
+            return this.$store.getters.getLoggedUser
+        },
         loggedUser() {
             return this.$store.getters.getLoggedUser
+        },
+        wishlist() {
+            return this.$store.getters.getWishlist
         }
     },
-    created() {
-        this.getUser()
-        this.getWishlist()
-    }
 }
 </script>

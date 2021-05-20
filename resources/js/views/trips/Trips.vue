@@ -31,7 +31,6 @@
                     Žiadne dobrodružstvá nevyhovujú kritériam
                 </p>
             </div>
-
         </div>
 
         <trips-filter></trips-filter>
@@ -51,7 +50,7 @@ export default {
     data() {
         return {
             filteredTrips: [],
-            filter: false
+            filter: false,
         }
     },
 
@@ -64,8 +63,9 @@ export default {
             
             axios.get( url )
                 .then( data => {
+                    console.log(data)
                     this.filter = true
-                    this.filteredTrips = data.data
+                    this.filteredTrips = data.data.data
                 } )
                 .catch(err => {
                     console.log(err)
