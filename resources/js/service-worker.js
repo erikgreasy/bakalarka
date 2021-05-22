@@ -7,7 +7,6 @@ import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { openDB } from 'idb';
 import { googleFontsCache, imageCache } from 'workbox-recipes';
-// import { googleFontsCache } from 'workbox-recipes';
 
 
 precacheAndRoute(self.__WB_MANIFEST || []);
@@ -347,6 +346,3 @@ async function createDB() {
         },
     });
 }
-
-
-registerDefaultHandler(new StaleWhileRevalidate());

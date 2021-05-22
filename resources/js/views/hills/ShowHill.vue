@@ -16,21 +16,15 @@
                     </div>
 
                         <div class="add-to-wishlist" v-if="inWishlist">
-                            <!-- <form action="/userhillwishlist/{{ $userhillwishlist->id }}" method="POST"> -->
-                                <!-- @csrf
-                                @method( 'DELETE' ) -->
-                                <!-- <input type="hidden" name="hill" value="{{ $hill->id }}"> -->
-                                <button @click.prevent="removeFromWishlist">
-                                    <i class="fas fa-star"></i>
-                                </button>
-                            <!-- </form> -->
+                            <button @click.prevent="removeFromWishlist">
+                                <i class="fas fa-star"></i>
+                            </button>
                         </div>
 
                         <div class="add-to-wishlist" v-else>
-                            
-                                <button @click.prevent="addToWishlist">
-                                    <i class="far fa-star"></i>
-                                </button>
+                            <button @click.prevent="addToWishlist">
+                                <i class="far fa-star"></i>
+                            </button>
                         </div>
 
                 
@@ -53,8 +47,13 @@
                 <div class="content-sections">
 
                     <section id="trips">
-                        <div v-for="trip in hill.trips" :key="trip.id">
-                            <trip-card :trip="trip"></trip-card>
+                        <div v-if="hill.trips">
+                            <div v-for="trip in hill.trips" :key="trip.id">
+                                <trip-card :trip="trip"></trip-card>
+                            </div>
+                        </div>
+                        <div v-else>
+                            Nepodarilo sa načítať žiadne dobrodružstvá
                         </div>
                         
                     </section>
@@ -70,7 +69,7 @@
                 </div>
             </div>
 
-            <float-btn>
+            <float-btn v-if="online">
                 <li>
                     <router-link  :to="{name: 'Track', params: {hill: hill}}">
                         Vyštartovať teraz
@@ -102,6 +101,7 @@ export default {
         return {
             hill: {},
             inWishlist: false,
+            online: true
         }
     },
     methods: {
@@ -160,6 +160,9 @@ export default {
     created() {
         this.getHill()
         this.isInWishlist()
+        if(!navigator.onLine) {
+            this.online = false;
+        }
     }
     
 }
