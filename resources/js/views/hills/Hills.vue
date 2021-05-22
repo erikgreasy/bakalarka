@@ -57,7 +57,6 @@ export default {
             });
             axios.get(url)
                 .then( data => {
-                    console.log(data.data)
                     this.filter = true
                     this.filteredHills = data.data;
                 } )

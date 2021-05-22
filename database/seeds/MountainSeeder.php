@@ -12,6 +12,20 @@ class MountainSeeder extends Seeder
      */
     public function run()
     {
-        factory(Mountain::class, 10)->create();
+        // factory(Mountain::class, 10)->create();
+        $mountains = [
+            'Tatry',
+            'Nízke Tatry',
+            'Malá Fatra',
+            'Chočské vrchy',
+        ];
+
+
+        foreach( $mountains as $mountain ) {
+            Mountain::create([
+                'name'  => $mountain,
+            ]);
+        }
+
     }
 }

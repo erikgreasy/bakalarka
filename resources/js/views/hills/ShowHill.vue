@@ -62,8 +62,8 @@
                         {{ hill.description }}
 
                         <div class="gallery">
-                            <div class="gallery-item">
-                                <!-- <img src="{{ asset($img->path) }}" alt=""> -->
+                            <div v-for="img in hill.images" :key="img.id" class="gallery-item">
+                                <img :src="img.path">
                             </div>
                         </div>
                     </section>
@@ -101,7 +101,7 @@ export default {
     data() {
         return {
             hill: {},
-            inWishlist: false
+            inWishlist: false,
         }
     },
     methods: {

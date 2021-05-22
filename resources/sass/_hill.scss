@@ -91,6 +91,10 @@
 
             .gallery-item {
                 width: 200px;
+
+                @include media-breakpoint-up(lg) {
+                    width: 350px;
+                }
                 
                 img {
                     max-width: 100%;

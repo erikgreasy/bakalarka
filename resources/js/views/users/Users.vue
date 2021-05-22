@@ -4,8 +4,7 @@
         <div class="container">
             <div class="users-page">
                 <div class="explore-heading">
-                    <!-- <h3>{{ $order_text }}</h3> -->
-                    <h3>Zatial nic</h3>
+                    <h3>Rerbríček dobrodruhov</h3>
 
                     <a href="#" @click="openFilter">
                         <i class="fas fa-filter fa-2x"></i>

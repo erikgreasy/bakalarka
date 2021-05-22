@@ -14,7 +14,7 @@
                         {{ hill.height }} m.n.m.
                     </p>
                     <p class="description">
-                        {{ hill.description }}
+                        {{ hill.description.substring(0, 100) }}...
                     </p>
                 </div>
                 

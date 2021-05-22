@@ -53,24 +53,10 @@ export default {
     },
 
     methods: {
-        getTrips() {
-            axios.get( '/api/trips' )
-                .then(data => {
-                    this.trips = data.data
-                })
-        },
-
-        getWishlist() {
-            axios.get('/api/wishlists')
-                .then(data => {
-                    console.log(data)
-                    this.wishlist = data.data
-                })
-        },
+        
         getTopUsers() {
             axios.get('/api/users/top')
                 .then(res => {
-                    console.log(res)
                     this.most_distance = res.data.most_distance
                     this.most_trips = res.data.most_trips
                     this.most_time = res.data.most_time
@@ -92,7 +78,6 @@ export default {
         }
     },
     created() {
-        // this.getWishlist()
         this.getTopUsers()
     }
     

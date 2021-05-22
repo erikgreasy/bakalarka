@@ -14,20 +14,21 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // CREATING TEST USER
-        User::create([
-            'name'              => 'Erik', 
+        $user = User::create([
+            'name'              => 'Tester', 
             'email_verified_at' => now(),
             'password'          => Hash::make('password'),
-            'email'             => 'erik.masny@gmail.com',
+            'email'             => 'tester@example.com',
             'remember_token'    => Str::random(10),
         ]);
 
-        // SEEDING DUMMY DATA
+        // SEEDING DATA
         $this->call(MountainSeeder::class);
         $this->call(HillSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(TripSeeder::class);
 
+        $user->wishlists()->attach([1, 3]);
 
 
     }
