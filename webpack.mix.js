@@ -33,6 +33,7 @@ mix.js('resources/js/app.js', 'public/js').sourceMaps()
 
         ],
         exclude: [
-            /(.*)\/webfa-solid-900.svg\?(.*)/
+            /(.*)\/webfa-solid-900.svg\?(.*)/,
+            /(.*).map(.*)/
         ]
     });

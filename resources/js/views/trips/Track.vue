@@ -78,11 +78,14 @@ export default {
             var self = this;
             this.intervalId = setInterval(function() {
                 var now = performance.now()
-                self.duration = ((now - self.startTime)/1000).toFixed(0)
+                self.duration = parseInt((now - self.startTime)/1000)
+
+                console.log(self.duration)
+
                 var time = self.duration;
-                self.hours = (time/3600).toFixed(0);
+                self.hours = parseInt(time/3600);
                 time -= (self.hours * 3600);
-                self.minutes = (time/60).toFixed(0);
+                self.minutes = parseInt(time/60)
                 time -= self.minutes * 60;
                 self.seconds = time
             }, 1000)

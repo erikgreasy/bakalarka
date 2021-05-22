@@ -78,11 +78,6 @@ const wishlistHandler = new NetworkFirst({
 registerRoute(/(.*)\/api\/wishlist/, args => {
     return wishlistHandler.handle(args).then(response => {
 
-        // if (!response) {
-        //   return caches.match('pages/offline.html');
-        // } else if (response.status === 404) {
-        //   return caches.match('pages/404.html');
-        // }
         return response;
     });
 });
