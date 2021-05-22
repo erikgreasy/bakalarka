@@ -24,7 +24,8 @@ Tento repozitár je zdrojovým kódom k bakalárskej práci na tému Využitie p
 Cieľom práce je priblížiť problematiku progresívnych webových aplikácii a základné princípy demonštrovať na ukážkovej aplikácii zameranej na horskú turistiku.
 
 ## Technická dokumentácia
-Aplikácia je postavená na frameworku Laravel, ktorý je využi
+Aplikácia je postavená na frameworku Laravel, ktorý je využitý ako REST API klient. Na frontend je použitý framework
+Vue.js a na prácu so service workermi a tvorbu PWA bol využitý nástroj Workbox.
 
 ## Test aplikácia
 Aplikácia je dostupná na adrese https://turista.greasydesign.sk.
