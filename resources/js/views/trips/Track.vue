@@ -132,12 +132,13 @@ export default {
             })
                 .then(res => {
                     console.log(res);
+                this.$router.push('/trip/' + this.trip_id);
+
                 })
                 .catch(err => {
                     console.log(err)
                 })
            
-            this.$router.push('/trip/' + this.trip_id);
         },
 
         
