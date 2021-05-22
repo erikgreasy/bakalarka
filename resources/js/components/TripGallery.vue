@@ -1,16 +1,8 @@
 <template>
     <div class="trip-images">
-        <!-- <slick ref="slick" :options="slickOptions"> -->
-            <!-- <div>
-                caw
-            </div>
-            <div>
-                asdaw
-            </div> -->
-            <slick ref="slick" :options="slickOptions">
-                <img v-for="img in images" :key="img.id" :src="img.path" class="gallery-img" />
-            </slick>  
-        <!-- </slick> -->
+        <slick ref="slick" :options="slickOptions">
+            <img v-for="img in images" :key="img.id" :src="img.path" class="gallery-img" />
+        </slick>  
     </div>
 </template>
 

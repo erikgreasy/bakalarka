@@ -44,7 +44,7 @@
 import moment from 'moment';
 
 export default {
-    // props: ['hill'],
+    props: ['hill'],
 
     data() {
         return {
@@ -59,10 +59,6 @@ export default {
             lastCoords: null,
             startTime: null,
             intervalId: null,
-            hill: {
-                id: 2,
-                name: 'asdasd'
-            },
             geoOptions: {
                 enableHighAccuracy: false,
                 timeout: 5000,
