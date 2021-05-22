@@ -111,7 +111,7 @@ export default {
         },
 
         stopTrip() {
-            navigator.geolocation.clearWatch( this.geoIdid )
+            navigator.geolocation.clearWatch( this.geoId )
             clearInterval(this.intervalId);
             
             let formData = new FormData();

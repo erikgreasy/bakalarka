@@ -16,7 +16,7 @@ class LogController extends Controller
         $log->longtitude = $request->long;
         $log->speed = $request->speed;
 
-        // $log->save();
+        $log->save();
 
         return $log;
     }
