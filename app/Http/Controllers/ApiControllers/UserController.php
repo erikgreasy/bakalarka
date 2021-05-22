@@ -15,19 +15,16 @@ class UserController extends Controller
     public function index( Request $request ) {
         $users = User::take(10);
         $order = $request->order;
-        $order_text = 'Predvolené radenie';
 
         if( isset( $order ) ) {
             switch( $order ) {
                 case 'trips':
                     $users->withCount('trips')->orderBy( 'trips_count', 'desc' );
-                    $order_text = 'Najviac dobrodružstiev';
                     break;
                 case 'distance':
                     $users->withCount(['trips as distance' => function($query) {
                         $query->select(DB::raw('sum(distance)'));
                     }])->orderBy('distance', 'DESC');
-                    $order_text = 'Najviac nachodených kilometrov';
 
                     break;
                 case 'time':
@@ -35,10 +32,12 @@ class UserController extends Controller
                         $query->select(DB::raw('sum(duration)'));
                     }])->orderBy('duration', 'DESC');
                     
-                    $order_text = 'Najviac času na horách';
                     break;
+                
             }
            
+        } else {
+            $users->withCount('trips')->orderBy( 'trips_count', 'desc' );
         }
 
         return $users->get();
