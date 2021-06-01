@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div class="loading-overlay" v-show="creatingTrip">
+
+        </div>
         <main class="trip-create">
             <div class="container">
                 <header>
@@ -66,6 +69,7 @@ export default {
     props: ['hill'],
     data() {
         return {
+            creatingTrip: false,
             errors: null,
             fields: {
                 title: '',
@@ -79,6 +83,8 @@ export default {
 
     methods: {
         createTrip() {
+            this.creatingTrip = true;
+
             let formData = new FormData();
 
             formData.append('hill_id', this.hill.id)
@@ -103,6 +109,7 @@ export default {
             })
                 .then(res => {
                     console.log(res)
+                    this.creatingTrip = false;
                     this.$store.dispatch('setTrips')
                     this.$router.push( '/trip/' + res.data.id );
                 })
@@ -128,3 +135,16 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.loading-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #fff;
+    opacity: .6;
+    z-index: 300000;
+}
+</style>
